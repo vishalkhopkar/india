@@ -1,0 +1,115 @@
+# West: Gujarat, Maharashtra, Dadra and Nagar Haveli and Daman and Diu, Goa, Karnataka,
+# Rajasthan, Madhya Pradesh.
+# Executed inside timelines.py (ref() and timeline() are in scope).
+
+ref('w_dangs', 'Dang district, India', 'Wikipedia: the 1842 forest lease with the Bhil and Kokani chiefs, made perpetual in 1862.', 'https://en.wikipedia.org/wiki/Dang_district,_India')
+ref('w_dangsmerger', '9 | Gujarat states', 'India State Story: the Dangs merged into Bombay Province by Governor-General’s order, 19 January 1948, to form a separate district under a Collector.', 'https://www.indiastatestory.in/post/9-gujarat-states')
+ref('w_dharampur', 'Dharampur State', 'Wikipedia: princely state under the Bombay Presidency’s Surat Agency, founded 1262; acceded to the Union of India, 10 June 1948.', 'https://en.wikipedia.org/wiki/Dharampur_State')
+ref('w_bansda', 'Bansda State', 'Wikipedia: princely state under the Bombay Presidency’s Surat Agency, founded 1781; acceded to the Union of India, 1948.', 'https://en.wikipedia.org/wiki/Bansda_State')
+ref('w_surgana', 'Surgana State', 'Wikipedia: the Bombay Presidency’s Nasik Agency; merged into India under the Gujarat States Merger Agreement, March 1948.', 'https://en.wikipedia.org/wiki/Surgana_State')
+ref('w_baroda', 'Baroda State', 'Wikipedia: British paramountcy after the Second Anglo-Maratha War (1803–05); merger into the Dominion of India, 1 May 1949.', 'https://en.wikipedia.org/wiki/Baroda_State')
+ref('w_songadh', 'Songadh', 'Wikipedia: Pilajirao Gaikwad occupied the hill fort in 1719.', 'https://en.wikipedia.org/wiki/Songadh')
+ref('w_khandesh', 'Khandesh district', 'Wikipedia: split into East and West Khandesh in 1906; renamed Jalgaon and Dhule districts in 1960.', 'https://en.wikipedia.org/wiki/Khandesh_district')
+ref('w_samyukta', 'Samyukta Maharashtra Samiti', 'Wikipedia: the movement for a united Marathi-speaking state, 1956–60.', 'https://en.wikipedia.org/wiki/Samyukta_Maharashtra_Samiti')
+ref('w_mahagujarat', 'Mahagujarat movement', 'Wikipedia: the movement for a separate Gujarati-speaking state, 1956–60.', 'https://en.wikipedia.org/wiki/Mahagujarat_movement')
+
+ref('w_diu', 'Diu, India', 'Wikipedia: Bahadur Shah, Sultan of Gujarat, allows the Portuguese to build Diu Fort as part of an anti-Mughal alliance, 1535.', 'https://en.wikipedia.org/wiki/Diu,_India')
+ref('w_daman', 'Portuguese conquest of Daman', 'Wikipedia: the Portuguese storm and annex Daman from the Sultanate of Gujarat’s governor, 2 February 1559.', 'https://en.wikipedia.org/wiki/Portuguese_conquest_of_Daman')
+ref('w_dnh', 'Indian annexation of Dadra and Nagar Haveli', 'Wikipedia: the 1779 treaty of friendship, the 1783 occupation and 1785 purchase, the 1954 uprising, Free Dadra and Nagar Haveli, and the 1961 merger.', 'https://en.wikipedia.org/wiki/Indian_annexation_of_Dadra_and_Nagar_Haveli')
+ref('w_icj', 'Right of Passage over Indian Territory (Portugal v. India)', 'Wikipedia: the International Court of Justice’s judgment of 12 April 1960, ruling that Portugal’s 18th-century treaty with the Marathas conferred only revenue rights, while upholding a limited right of passage to the enclaves.', 'https://en.wikipedia.org/wiki/Right_of_Passage_over_Indian_Territory_(Portugal_v._India)')
+ref('w_10amend', 'Tenth Amendment of the Constitution of India', 'Wikipedia: Dadra and Nagar Haveli made a Union Territory, merger agreement of 11 August 1961, presidential assent 16 August 1961.', 'https://en.wikipedia.org/wiki/Tenth_Amendment_of_the_Constitution_of_India')
+ref('w_12amend', 'Twelfth Amendment of the Constitution of India', 'Wikipedia: Goa, Daman and Diu made a Union Territory with effect from 20 December 1961; split into Goa state and the Daman and Diu union territory on 30 May 1987.', 'https://en.wikipedia.org/wiki/Twelfth_Amendment_of_the_Constitution_of_India')
+ref('w_vijay', 'Annexation of Goa', 'Wikipedia: Operation Vijay, 17–19 December 1961, ends Portuguese rule in Goa, Daman and Diu.', 'https://en.wikipedia.org/wiki/Annexation_of_Goa')
+ref('w_palghar', 'Palghar district', 'Wikipedia: created 1 August 2014 from the northern talukas of Thane district, including Talasari and Dahanu, which border Dadra and Nagar Haveli.', 'https://en.wikipedia.org/wiki/Palghar_district')
+
+ref('w_velhas', 'Velhas Conquistas', 'Wikipedia: Tiswadi, Bardez, Salsete and Mormugao, acquired by the Portuguese from 1510 into the following decades — the original core of Portuguese Goa.', 'https://en.wikipedia.org/wiki/Velhas_Conquistas')
+ref('w_novas', 'Novas Conquistas', 'Wikipedia: the seven talukas added to Goa in the 18th century — Pernem, Bicholim and Sattari ceded by Sawantwadi in 1783 (the rest of Pernem in 1788), and Ponda, Sanguem, Quepem and Canacona from the Raja of Sonda from 1764.', 'https://en.wikipedia.org/wiki/Novas_Conquistas')
+ref('w_sawantwadi', 'Sawantwadi State', 'Wikipedia: Maratha Bhonsale-Sawant state founded 1554, repeatedly at war with Portuguese Goa, acceded to India in 1948.', 'https://en.wikipedia.org/wiki/Sawantwadi_State')
+ref('w_sonda', 'Sundem (Sondekar dynasty)', 'Wikipedia: the Nayakas of Sonda, ruling Sonda in Uttara Kannada together with Ponda, Sanguem, Canacona and Quepem in Goa; sought Portuguese protection in 1763 under pressure from Hyder Ali, formalised by treaty on 17 January 1791.', 'https://en.wikipedia.org/wiki/Sundem')
+ref('w_poll', '1967 Goa status referendum', 'Wikipedia: the Goa Opinion Poll of 16 January 1967, in which 54.2% voted to keep Goa separate against 43.5% for merger with Maharashtra.', 'https://en.wikipedia.org/wiki/Goa_Opinion_Poll')
+ref('w_ncanara', 'North Canara', 'Wikipedia: transferred from Madras to the Bombay Presidency in 1862; its southern portion added to Mysore State in 1956.', 'https://en.wikipedia.org/wiki/North_Canara')
+ref('w_karnataka1973', 'Mysore State', 'Wikipedia: renamed Karnataka on 1 November 1973 under the Mysore State (Alteration of Name) Act.', 'https://en.wikipedia.org/wiki/Mysore_State')
+
+ref('w_idar', 'Idar State', 'Wikipedia: founded 1257, captured in 1729 by brothers of the Maharaja of Jodhpur, ruled under the Bombay Presidency’s Mahi Kantha Agency; merged into India 10 June 1948.', 'https://en.wikipedia.org/wiki/Idar_State')
+ref('w_sirohi', 'Sirohi State', 'Wikipedia: founded 1311 by the Deora Chauhans, a Rajputana Agency state from an 1823 treaty; merged into Bombay in 1949, transferred to Rajasthan in 1950.', 'https://en.wikipedia.org/wiki/Sirohi_State')
+ref('w_sirohidist', 'Sirohi district', 'Wikipedia: the 25 January 1950 partition of 787 km² (Abu Road tehsil and part of Delwara tehsil) to Bombay, and its return to Sirohi district, Rajasthan, on 1 November 1956.', 'https://en.wikipedia.org/wiki/Sirohi_district')
+ref('w_wisa', 'Western India States Agency', 'Wikipedia: formed 10 October 1924 from the Kathiawar, Cutch and Palanpur agencies; in 1933 Danta and Palanpur states were instead placed under the Rajputana Agency even though they lay on the Gujarat side.', 'https://en.wikipedia.org/wiki/Western_India_States_Agency')
+
+ref('w_jhabua', 'Jhabua State', 'Wikipedia: founded 1584, a Bhopawar Agency state of the Central India Agency; acceded to India 15 June 1948 and joined Madhya Bharat, merged into Madhya Pradesh in 1956.', 'https://en.wikipedia.org/wiki/Jhabua_State')
+ref('w_alirajpur', 'Alirajpur State', 'Wikipedia: a Bhopawar Agency state of the Central India Agency, under British rule from 1817; acceded to India in 1947 and joined Madhya Bharat, which became part of Madhya Pradesh on 1 November 1956.', 'https://en.wikipedia.org/wiki/Alirajpur_State')
+ref('w_panchmahals', 'Bombay Presidency', 'Wikipedia: the Bombay Presidency was enlarged by “the lease of the Panch Mahals from Scindia (1853)” — the Godhra, Dahod, Halol, Kalol and Jhalod mahals, later a district of its Gujarat Division.', 'https://en.wikipedia.org/wiki/Bombay_Presidency')
+ref('w_madhyabharat', 'Madhya Bharat', 'Wikipedia: formed 28 May 1948 from twenty-five former Central India Agency states; merged with Vindhya Pradesh and Bhopal State into Madhya Pradesh on 1 November 1956.', 'https://en.wikipedia.org/wiki/Madhya_Bharat')
+
+timeline('Gujarat|Maharashtra',
+    ('1719–1803', 'The Gaekwads of Baroda push into south Gujarat — Pilaji Gaekwad occupies the Songadh hill fort in 1719 — reaching a belt of small hill states that still separates Gujarat’s coastal plain from Maharashtra’s Sahyadri interior: the Rajput state of Dharampur (from 1262), Bansda (from 1781), the Koli state of Surgana, and the Dangs’ Bhil and Kokani chiefdoms.', ['w_songadh', 'w_dharampur', 'w_bansda', 'w_surgana', 'w_dangs']),
+    ('1803–05', 'After the Second Anglo-Maratha War, Baroda accepts British paramountcy while keeping internal autonomy; the neighbouring hill states come under British political control too, Dharampur and Bansda through the Bombay Presidency’s Surat Agency and Surgana through its Nasik Agency, fixing this belt as the frontier between the future Surat, Thana, Baroda and Nasik districts.', ['w_baroda', 'w_dharampur', 'w_surgana']),
+    ('1842', 'The Dangs’ Bhil and Kokani chiefs lease their teak forests to the Bombay government, a lease made perpetual in 1862; a Deputy Political Agent at Ahwa administers the tract that becomes Dang district, keeping it under direct Bombay Presidency control rather than a settled district boundary.', ['w_dangs']),
+    ('19 Jan 1948', 'The Governor-General, acting under section 290 of the Government of India Act, 1935, merges the Dangs into Bombay Province as a separate district under a Collector.', ['w_dangsmerger']),
+    ('1948', 'Dharampur (10 June) and Bansda accede to the Union of India and are absorbed into Bombay Province; Surgana’s ruler signs the Gujarat States Merger Agreement in March.', ['w_dharampur', 'w_bansda', 'w_surgana']),
+    ('1 May 1949', 'Baroda State — whose outlying Navsari prant included the Songadh and Sagbara tracts abutting West Khandesh district — merges into Bombay State; the old princely edges become ordinary district boundaries between Surat, Baroda’s former territory, Thana, Nasik and West Khandesh inside one bilingual province.', ['w_baroda', 'w_khandesh']),
+    ('1956–60', 'The States Reorganisation Act keeps Bombay State one bilingual unit while the Samyukta Maharashtra and Mahagujarat movements campaign for separate Marathi- and Gujarati-speaking states.', ['m2', 'w_samyukta', 'w_mahagujarat']),
+    ('1 May 1960', 'The Bombay Reorganisation Act splits Bombay State into Gujarat and Maharashtra along the existing district lines; its First Schedule fixes the new border village by village, dividing Umbergaon taluka between a new Umbergaon taluka in Surat district and Dahanu taluka in Thana district, with further lists for Songadh and Sagbara.', ['m4']),
+)
+
+timeline('Dadra and Nagar Haveli and Daman and Diu|Gujarat',
+    ('1535', 'Bahadur Shah, Sultan of Gujarat, allows the Portuguese to build a fort at Diu as part of a defensive alliance against the Mughals; the island off Gujarat’s Kathiawar coast becomes a Portuguese enclave.', ['w_diu']),
+    ('2 Feb 1559', 'The Portuguese storm and annex Daman, till then held by a governor of the Sultanate of Gujarat, creating a second enclave surrounded by Gujarat’s Surat coastal tract.', ['w_daman']),
+    ('17 Dec 1779 – 1785', 'By a treaty of friendship the Maratha Peshwa grants the Portuguese revenue rights over the 72 villages of Dadra and Nagar Haveli, in compensation for a seized frigate; Portuguese troops occupy Nagar Haveli in 1783 and buy Dadra outright in 1785, adding a third enclave against Gujarat and Maharashtra.', ['w_dnh']),
+    ('12 Apr 1960', 'The International Court of Justice, in Right of Passage over Indian Territory, rules that the 1779 grant gave Portugal only revenue rights and not sovereignty, while upholding a limited Portuguese right of civilian passage across Indian territory to the enclaves.', ['w_icj']),
+    ('22 Jul – 11 Aug 1954', 'Pro-India volunteers overwhelm the small Portuguese garrisons and take Dadra and Nagar Haveli, which is afterwards run as the separate “Free Dadra and Nagar Haveli.”', ['w_dnh']),
+    ('11 Aug 1961', 'Dadra and Nagar Haveli’s administration formally merges with India; the Tenth Amendment (assented 16 August, backdated to the 11th) makes it a Union Territory bordering Gujarat along the edge of the old Maratha grant.', ['w_10amend']),
+    ('19–20 Dec 1961', 'Operation Vijay: Indian forces take Goa, Daman and Diu, ending Portuguese rule; the Twelfth Amendment of 1962 makes them a Union Territory with effect from 20 December 1961, fixing Daman’s and Diu’s borders with Gujarat at their colonial extent.', ['w_12amend', 'w_vijay']),
+    ('30 May 1987', 'Goa becomes a state under the Goa, Daman and Diu Reorganisation Act; Daman and Diu remain a separate Union Territory bordering Gujarat.', ['m32']),
+    ('26 Jan 2020', 'The Union Territories of Dadra and Nagar Haveli and of Daman and Diu merge into a single Union Territory, Dadra and Nagar Haveli and Daman and Diu, whose scattered pieces still meet Gujarat along the same Portuguese-era lines.', ['m33']),
+)
+
+timeline('Dadra and Nagar Haveli and Daman and Diu|Maharashtra',
+    ('17 Dec 1779 – 1785', 'By a treaty of friendship the Maratha Peshwa grants the Portuguese revenue rights over the 72 villages of Dadra and Nagar Haveli, in compensation for a seized frigate; Portuguese troops occupy Nagar Haveli in 1783 and buy Dadra outright in 1785, creating an enclave wedged between the Bombay Presidency’s Surat and Thana districts — the origin of today’s Maharashtra side of the territory.', ['w_dnh']),
+    ('12 Apr 1960', 'The International Court of Justice, in Right of Passage over Indian Territory, rules that the 1779 grant conferred only revenue rights, not sovereignty, while upholding a limited Portuguese right of civilian passage across the surrounding Indian territory.', ['w_icj']),
+    ('22 Jul – 11 Aug 1954', 'Pro-India volunteers, some organised from across the Thana district border, force the Portuguese out of Dadra and Nagar Haveli, which becomes the separate “Free Dadra and Nagar Haveli.”', ['w_dnh']),
+    ('1 May 1960', 'Bombay State is split and Maharashtra is created on the far side of the enclave from Gujarat, its Thana district still fixing the eastern edge of the future Union Territory.', ['m4']),
+    ('11 Aug 1961', 'Dadra and Nagar Haveli formally merges with India under the Tenth Amendment (backdated to 11 August), becoming a Union Territory whose boundary with Maharashtra runs along the edge of the 1783–85 Maratha grant.', ['w_10amend']),
+    ('1 Aug 2014', 'Palghar district is carved out of Thane, taking with it the Talasari and Dahanu talukas that face Dadra and Nagar Haveli across this line.', ['w_palghar']),
+    ('26 Jan 2020', 'Dadra and Nagar Haveli merges with Daman and Diu into a single Union Territory; its Nagar Haveli portion continues to meet Maharashtra along the same eighteenth-century line.', ['m33']),
+)
+
+timeline('Goa|Maharashtra',
+    ('1510–1540s', 'The Portuguese conquer Tiswadi, Bardez, Salsete and Mormugao — the Velhas Conquistas — forming the core of Portuguese Goa.', ['w_velhas']),
+    ('1554', 'The Maratha Bhonsale-Sawant state of Sawantwadi is founded just north of Goa; its rulers fight repeated wars with the Portuguese over the next two centuries.', ['w_sawantwadi']),
+    ('1783–1788', 'Sawantwadi cedes parts of Pernem, Bicholim and Sattari in 1783, and the remainder of Pernem (with Terekhol fort) in 1788; these become Goa’s northern Novas Conquistas, fixing the line against the rest of Sawantwadi’s territory.', ['w_novas', 'w_sawantwadi']),
+    ('1948', 'Sawantwadi accedes to the Union of India and its territory is merged into Bombay Province; the old cession line becomes an ordinary Bombay–Portuguese-Goa frontier.', ['w_sawantwadi']),
+    ('1 May 1960', 'Bombay State is split under the Bombay Reorganisation Act; the former Sawantwadi tract, by then in Ratnagiri district, becomes part of Maharashtra, still facing Goa along the eighteenth-century cession line.', ['m4']),
+    ('19–20 Dec 1961', 'Operation Vijay ends Portuguese rule in Goa; the Twelfth Amendment makes Goa, with Daman and Diu, a Union Territory of India with effect from 20 December 1961, turning the old international frontier into an internal one against Maharashtra.', ['w_12amend', 'w_vijay']),
+    ('16 Jan 1967', 'In the Goa Opinion Poll, 54.2% of voters choose to keep Goa a separate territory rather than merge it into Maharashtra, settling the question of whether the border would survive.', ['w_poll']),
+    ('30 May 1987', 'The Goa, Daman and Diu Reorganisation Act makes Goa a state, while Daman and Diu become a separate union territory; the Goa–Maharashtra line becomes an ordinary interstate boundary.', ['m32']),
+)
+
+timeline('Goa|Karnataka',
+    ('By 1715', 'The Nayakas of Sonda rule a kingdom straddling Sonda in Uttara Kannada together with the Ponda, Sanguem, Canacona and Quepem tracts that lie south and east of Portuguese Goa, as feudatories of Vijayanagara, Bijapur and later the Marathas.', ['w_sonda']),
+    ('1763–1791', 'Under pressure from Hyder Ali, the Sonda Raja seeks Portuguese protection in 1763 and cedes Ponda, Sanguem, Canacona and Quepem, a cession formalised by treaty on 17 January 1791; these become Goa’s southern Novas Conquistas, splitting the old Sonda kingdom between Portuguese territory and the Kanara coast.', ['w_sonda', 'w_novas']),
+    ('1862', 'The British transfer North Canara, immediately south and east of the new Novas Conquistas, from Madras to the Bombay Presidency, fixing the far side of the line as a British Indian district.', ['w_ncanara']),
+    ('1 Nov 1956', 'The States Reorganisation Act moves North Canara from Bombay State to Mysore State, so the Goa frontier now faces a Kannada-majority state rather than a bilingual one.', ['m2', 'w_ncanara']),
+    ('19–20 Dec 1961', 'Operation Vijay ends Portuguese rule in Goa; the Twelfth Amendment makes Goa a Union Territory of India with effect from 20 December 1961, and the old international frontier becomes an internal Indian one against Mysore State.', ['w_12amend', 'w_vijay']),
+    ('1 Nov 1973', 'Mysore State is renamed Karnataka under the Mysore State (Alteration of Name) Act.', ['w_karnataka1973']),
+    ('30 May 1987', 'The Goa, Daman and Diu Reorganisation Act makes Goa a state; its border with Karnataka, running along the old Sonda cession, becomes an ordinary interstate line.', ['m32']),
+)
+
+timeline('Gujarat|Rajasthan',
+    ('1257–1729', 'Idar, founded in 1257 by Rao Sonag, is captured in 1729 by brothers of the Maharaja of Jodhpur; it becomes a Rathore-ruled state of the Bombay Presidency’s Mahi Kantha Agency, keeping dynastic ties to Marwar even as it sits on the Gujarat side of the line.', ['w_idar']),
+    ('1311', 'Sirohi is founded by the Deora Chauhans in the Aravalli hills, including Mount Abu, and grows into the south-easternmost Rajputana state, facing the Mahi Kantha and Palanpur agency states of Gujarat across the range.', ['w_sirohi']),
+    ('1818–1823', 'The British treaties of 1818 bring the Rajputana states under a separate Rajputana Agency; Sirohi’s own treaty follows in 1823, formalising the agency line against the Gujarat-side agencies to its west.', ['rajtreaties', 'w_sirohi']),
+    ('10 Oct 1924', 'The Western India States Agency is formed from the Kathiawar, Cutch and Palanpur agencies, grouping the Gujarat-side princely states opposite the Rajputana Agency.', ['w_wisa']),
+    ('1933', 'Danta and Palanpur states, though lying on the Gujarat side of the range, are placed under the Rajputana Agency instead, showing the agency boundary never quite matched the later linguistic one.', ['w_wisa']),
+    ('10 Jun 1948', 'Idar’s Maharaja Himmat Singh merges his state into the Union of India; it is absorbed into Bombay State.', ['w_idar']),
+    ('15 Jan 1949 – 25 Jan 1950', 'Bombay State takes over the administration of Sirohi; on 25 January 1950 Sirohi is partitioned, with Abu Road tehsil and part of Delwara tehsil (787 km²) going to Bombay and the rest merging into Rajasthan the next day.', ['w_sirohi', 'w_sirohidist']),
+    ('1 Nov 1956', 'The States Reorganisation Act returns the Abu Road tract, including Mount Abu, from Bombay State to Sirohi district, Rajasthan, fixing today’s line — which is why Mount Abu is administratively Rajasthani despite sitting on Gujarat’s side of the Aravallis.', ['m2', 'w_sirohidist']),
+)
+
+timeline('Gujarat|Madhya Pradesh',
+    ('1584', 'Jhabua, a Bhil-country Rajput state later placed in the Central India Agency’s Bhopawar Agency, is founded by Kesho Das under a grant from the Mughal emperor Akbar.', ['w_jhabua']),
+    ('1817', 'Neighbouring Alirajpur comes under British rule and is likewise administered through the Bhopawar Agency of the Central India Agency, east of the future Gujarat line.', ['w_alirajpur']),
+    ('1853', 'Sindhia of Gwalior leases the Panch Mahals — the Godhra, Dahod, Halol, Kalol and Jhalod mahals — to the Bombay Presidency; as a district of its Gujarat Division, Panch Mahals now directly abuts the Bhopawar Agency states of Jhabua and Alirajpur, fixing the line close to its present course.', ['w_panchmahals']),
+    ('15 Jun 1948', 'Jhabua’s ruler accedes to India; Alirajpur’s accedes the same year. Both join the new United State of Gwalior, Indore and Malwa, or Madhya Bharat, formed on 28 May 1948 from twenty-five former Central India Agency states.', ['w_jhabua', 'w_alirajpur', 'w_madhyabharat']),
+    ('1 Nov 1956', 'The States Reorganisation Act merges Madhya Bharat, along with Vindhya Pradesh and Bhopal State, into the new Madhya Pradesh, while Panch Mahals stays part of the enlarged, bilingual Bombay State: the old agency edge becomes the Bombay–Madhya Pradesh border.', ['m2', 'w_madhyabharat']),
+    ('1 May 1960', 'The Bombay Reorganisation Act splits Bombay State and creates Gujarat; Panch Mahals becomes a Gujarat district, so the line settles along the edge of the old 1853 Sindhia cession against Jhabua and Alirajpur, now in Madhya Pradesh.', ['m4']),
+)

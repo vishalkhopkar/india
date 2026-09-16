@@ -12,8 +12,7 @@ _build/rivers/ref_rivers.json
 _build/rivers/preview_*.png
 _build/rivers/preview_*.html
 
-# One-off research/debug scripts from the border-timeline research phase
-# (their output is already merged into india-border-provenance-matrix-sourced.html and timelines.py)
-_build/tl_*.py
+# Scratch files with no effect on the build (NOTE: _build/tl_*.py are NOT here — timelines.py
+# execs them at build time, they are required, not disposable)
 _build/check_region.py
 _build/_todo.txt
