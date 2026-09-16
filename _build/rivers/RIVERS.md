@@ -172,3 +172,46 @@ been used or deliberately excluded (see per-system git history / agent reports f
 reasoning). Caches that were empty and skipped: `ajay`, `arkavathi`, `budhabalanga`, `kadam`,
 `munneru`, `north_koel`, `rapti`, `rupnarayan`, `rushikulya`, `vaitarna`. Anything further needs a
 fresh `python river_tool.py osm KEY --wikidata Q... ` (or `--name`) call.
+
+## Round 3 (2026-09-16): show transboundary rivers at full length
+
+The user asked: rivers that originate or flow outside India (Brahmaputra/Tsangpo, Ganga, Indus,
+Sutlej, etc.) should show their complete length, clipped only to however much fits the map's own
+frame (same idea as the coastline extension) — not just the small land-border margin `india_clip()`
+adds. Rivers with nothing to do with India (Irrawaddy) stay untouched, i.e. never drawn.
+
+**`extend_transboundary.py`** handles the rivers Natural Earth's global 10m river centre-lines
+(`data/ne_10m_rivers_lake_centerlines.geojson`, already cached, no network calls) carry at or near
+their true full length: Indus, Sutlej, Jhelum, Chenab, Ravi, Ganga, Gandak, Ghaghra, Kosi, and
+Brahmaputra (merging the NE features `Yarlung`, `Maquan`, `Brahmaputra` and `Dihang`, which
+together trace it from Tibet, through India, into Bangladesh). Clips to the map's own lon/lat frame
+(the four SVG viewBox corners inverted through `projection_fit.json`, same method as
+`extend_coastline.py`) instead of `india_clip()`.
+
+**`reclip_transboundary.py`** does the same for rivers only available via already-cached OSM data
+(no new fetches): Shyok, Ghaggar, Raidak, Sankosh, Jaldhaka, Barak, Subansiri, plus Torsa (fetched
+separately since it uses a Wikidata-relation cache, `wikidata Q2066287`, safer to trust than a
+loose name match given its unusually high way count).
+
+**Fresh OSM fetches** for three rivers with no cache or too narrow a cache: `kishanganga_wide`
+(widened bbox to Muzaffarabad; 50 km → 281 km), `bagmati` (Kathmandu valley to the Bihar border;
+278 km → 539 km), `mahakali_nepal` (Mahakali/Sharda's Nepal source; matched only `Mahakali River`
+and `Sharda`, avoiding the generic `Kali` contamination risk by keeping the bbox tight to the
+Nepal–Uttarakhand border strip).
+
+**Bug found along the way:** Gandak, Kosi and Sharda (Mahakali) — three of the original 61
+reference-file rivers — had absurdly long pre-existing lengths (2601 km, 2577 km and 833 km; no
+real candidate exceeds ~950 km). The Natural Earth / fresh-OSM replacements above came out at
+723 km, 856 km and 337 km respectively, all close to their real-world figures — so this round fixed
+a latent data-quality bug in the original extraction, not just extended these three.
+
+**Rivers deliberately left alone:** everything with no international border in its real course
+(the whole Yamuna/Godavari/Krishna/southern-peninsula/east-central systems, Narmada/Tapi/
+Sabarmati/etc.), and tributaries that join a transboundary river before it leaves India (Beas,
+Zanskar, Suru, Dras, Nubra, Bhaga, Chandra, Spiti, Tawi, Lidder, Alaknanda, Bhagirathi, Ramganga,
+Hooghly) — extending the trunk river already covers the transboundary story; extending a
+domestic tributary that never itself crosses a border would be wrong.
+
+Verified with `python river_tool.py preview SYSTEM` for indus, ganga_north, brahmaputra and west,
+plus the usual `python build.py` + `python build_rivers.py` + `node hovertest.mjs` (105/105 borders
+still reachable, 0 JS errors — this only ever touches river paths, never border geometry).
