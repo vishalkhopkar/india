@@ -8,6 +8,9 @@ ref('e_santhalparganas', 'Santhal Pargana district', 'Wikipedia: the Sonthal Par
 ref('e_biharwb1956act', 'The Bihar and West Bengal (Transfer of Territories) Act, 1956', 'Indian Kanoon: full text — transfer of the Purulia sub-division of Manbhum (excluding Chas and Chandil thanas and Patamda police station) and the part of Kishanganj sub-division east of the boundary line to West Bengal.', 'https://indiankanoon.org/doc/1439808/')
 ref('e_purnia', 'Purnia district', 'Wikipedia: in Mughal times the area lay in the sarkars of Purania and Tajpur, Bengal Subah, separated by the Mahananda river; the modern district was formed by the East India Company on 14 February 1770.', 'https://en.wikipedia.org/wiki/Purnia_district')
 ref('e_partition1905', 'Partition of Bengal (1905)', 'Wikipedia: Bengal is split into an eastern province and a western province joined with Bihar and Orissa; the partition is reversed at the Delhi Durbar, 12 December 1911, when Assam, Bihar and Orissa are again separated from a reunited Bengal.', 'https://en.wikipedia.org/wiki/Partition_of_Bengal_(1905)')
+ref('e_bengalsubah', 'Bengal Subah', 'Wikipedia: the province covered modern Bangladesh and West Bengal and parts of today’s Bihar, Jharkhand and Odisha.', 'https://en.wikipedia.org/wiki/Bengal_Subah')
+ref('e_teliagarhi', 'Teliagarhi', 'Wikipedia: the pass between the Rajmahal hills and the Ganga in today’s Sahibganj district, the main gateway for armies marching into Bengal from the 13th century onwards.', 'https://en.wikipedia.org/wiki/Teliagarhi')
+ref('e_khokhra', 'Khokhra Chieftaincy', 'Wikipedia: the Nagvanshi chieftaincy on the Chota Nagpur plateau; Shahbaz Khan Kamboh is sent against Madhukar Rai in 1585, and Ibrahim Khan Fath-i-Jang annexes Khokhra in 1615, imprisoning Durjan Shah for at least three years.', 'https://en.wikipedia.org/wiki/Khokhra_Chieftaincy')
 ref('e_junglemahals', 'Jungle Mahals', 'Wikipedia: formed 1805 under Regulation XVIII from parts of Birbhum, Burdwan and Midnapore, including the Manbhum pargana; mostly absorbed into Manbhum district when the South-West Frontier Agency was created in 1833.', 'https://en.wikipedia.org/wiki/Jungle_Mahals')
 ref('e_purulia_hist', 'Purulia district — history', 'Government of West Bengal, Purulia district page: Manbhum’s headquarters moved from Manbazar to Purulia in 1838; the district was partitioned in 1956 and Purulia was born on 1 November 1956.', 'https://purulia.gov.in/history/')
 ref('e_bhasaandolon', 'Bhasa Andolon', 'Government of West Bengal, Purulia district page: the Bengali-language movement in Manbhum against Hindi imposition after 1947, led by the Lok Sevak Sangha from 14 June 1948, feeding into the States Reorganisation Commission’s recommendation for a separate Purulia district.', 'https://purulia.gov.in/bhasa-andolon/')
@@ -26,6 +29,7 @@ ref('e_tinbigha', 'Tin Bigha Corridor', 'Wikipedia: Bangladesh’s Dahagram–An
 ref('e_indbdenclaves', 'India–Bangladesh enclaves', 'Wikipedia: the 1974 Land Boundary Agreement, the September 2011 Additional Protocol under Manmohan Singh and Sheikh Hasina, and the Constitution (100th Amendment) Act, 2015 (passed 7 May, assented 28 May, ratified during Modi’s 6 June 2015 visit to Dhaka) — India received 51 enclaves (7,110 acres) and transferred 111 (17,160 acres), effective 31 July 2015.', 'https://en.wikipedia.org/wiki/India%E2%80%93Bangladesh_enclaves')
 
 timeline('Bihar|Jharkhand',
+    ('1585–1615', 'The Mughals treat the Chota Nagpur plateau as tributary country rather than regular revenue territory: it is not one of Bihar Subah’s plains sarkars but the chieftaincy of Khokhra under the Nagvanshi rajas. Shahbaz Khan Kamboh is sent against Madhukar Rai in 1585, and Ibrahim Khan Fath-i-Jang annexes Khokhra in 1615, imprisoning Durjan Shah — a plains-versus-plateau distinction, not yet a line, but the one the British later harden and which this border follows in 2000.', ['e_khokhra']),
     ('1765', 'The Diwani granted after the Treaty of Allahabad puts Bengal, Bihar and Orissa under one East India Company administration; the Chota Nagpur plateau is still a patchwork of tributary chiefdoms on its south-western fringe.', ['e_allahabad1765']),
     ('1833', 'After the Kol uprising of 1831–32, Regulation XIII of 1833 creates the South-West Frontier Agency over Manbhum, Lohardaga and Hazaribagh; Singhbhum is added in 1837.', ['e_swfa']),
     ('1854', 'Act XX of 1854 renames the agency the Chota Nagpur Division, a non-regulation division of the Bengal Presidency headquartered at Ranchi.', ['e_chotanagpur']),
@@ -36,7 +40,7 @@ timeline('Bihar|Jharkhand',
 )
 
 timeline('Bihar|West Bengal',
-    ('Mughal era', 'In the Kishanganj–Purnea sector the area lies in the sarkars of Purania and Tajpur of Bengal Subah, separated by the Mahananda river — the earliest traceable line close to today’s boundary here.', ['e_purnia']),
+    ('Mughal era', 'Bihar Subah’s eastern neighbour is Bengal Subah, and in the Kishanganj–Purnea sector the ground lies in Bengal’s sarkars of Purania and Tajpur, separated by the Mahananda — the earliest traceable line close to today’s boundary here. Purnea sits on the Bengal side of that divide and only becomes Bihar territory later, so this stretch of the line moves east over the centuries.', ['e_purnia', 'biharsubah1575']),
     ('1765', 'The Diwani granted after the Treaty of Allahabad puts Bengal, Bihar and Orissa under one East India Company administration.', ['e_allahabad1765']),
     ('14 Feb 1770', 'The Company forms Purnea as a British district, administered from within Bengal up to the Mahananda.', ['e_purnia']),
     ('1905', 'The Partition of Bengal joins Bihar and Orissa with the western Bengali districts in one province, reducing Bengali speakers there to a minority.', ['e_partition1905']),
@@ -47,6 +51,7 @@ timeline('Bihar|West Bengal',
 )
 
 timeline('Jharkhand|West Bengal',
+    ('Mughal era', 'Bengal Subah reaches west into what is now Jharkhand — Sahibganj, Pakur and Dumka — so the Mughal provincial divide lies well west of this border rather than along it. The frontier zone is the Teliagarhi pass between the Rajmahal hills and the Ganga, the gap through which armies had entered Bengal since the 13th century.', ['e_bengalsubah', 'e_teliagarhi']),
     ('1805', 'Regulation XVIII of 1805 creates the Jungle Mahals, an area drawn from Birbhum, Burdwan and Midnapore that includes the Manbhum pargana — the earliest traceable administrative root of this frontier.', ['e_junglemahals']),
     ('1833', 'Regulation XIII of 1833 dissolves the Jungle Mahals into the new South-West Frontier Agency; most of its territory, including Manbhum, is consolidated into Manbhum district, with headquarters at Manbazar.', ['e_junglemahals', 'e_swfa']),
     ('1838', 'Manbhum’s headquarters moves to Purulia.', ['e_purulia_hist']),

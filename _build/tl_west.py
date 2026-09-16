@@ -2,6 +2,10 @@
 # Rajasthan, Madhya Pradesh.
 # Executed inside timelines.py (ref() and timeline() are in scope).
 
+ref('w_gujaratsubah', 'Gujarat Subah', 'Wikipedia: the Mughal province of Gujarat, running from Jalore in the north to Daman in the south, with tributary (peshkashi) sarkars including Ramnagar, Dungarpur, Banswara and Sirohi.', 'https://en.wikipedia.org/wiki/Gujarat_Subah')
+ref('w_ajmersubah', 'Ajmer Subah', 'Wikipedia: the Mughal province covering most of Rajputana, its sarkars including Ajmer, Jodhpur, Chittor, Ranthambhor, Nagor, Sirohi and Bikaner.', 'https://en.wikipedia.org/wiki/Ajmer_Subah')
+ref('w_baglana', 'Baglana', 'Wikipedia: an independent Rathore principality until Aurangzeb’s siege of Mulher; the raja submits in 1638 and Baglana is annexed to the province of Khandesh, not Gujarat.', 'https://en.wikipedia.org/wiki/Baglana')
+ref('w_dahod', 'History of Dahod', 'Government of Gujarat, Dahod district: the town’s name is read as “two boundaries”, marking the Gujarat–Malwa divide on the road between them; Aurangzeb was born in Dahod in 1618.', 'https://dahod.nic.in/history/')
 ref('w_dangs', 'Dang district, India', 'Wikipedia: the 1842 forest lease with the Bhil and Kokani chiefs, made perpetual in 1862.', 'https://en.wikipedia.org/wiki/Dang_district,_India')
 ref('w_dangsmerger', '9 | Gujarat states', 'India State Story: the Dangs merged into Bombay Province by Governor-General’s order, 19 January 1948, to form a separate district under a Collector.', 'https://www.indiastatestory.in/post/9-gujarat-states')
 ref('w_dharampur', 'Dharampur State', 'Wikipedia: princely state under the Bombay Presidency’s Surat Agency, founded 1262; acceded to the Union of India, 10 June 1948.', 'https://en.wikipedia.org/wiki/Dharampur_State')
@@ -41,6 +45,7 @@ ref('w_panchmahals', 'Bombay Presidency', 'Wikipedia: the Bombay Presidency was 
 ref('w_madhyabharat', 'Madhya Bharat', 'Wikipedia: formed 28 May 1948 from twenty-five former Central India Agency states; merged with Vindhya Pradesh and Bhopal State into Madhya Pradesh on 1 November 1956.', 'https://en.wikipedia.org/wiki/Madhya_Bharat')
 
 timeline('Gujarat|Maharashtra',
+    ('1573–1638', 'Gujarat Subah’s southern extremity is Daman, on the Damanganga, with the tributary sarkar of Ramnagar (Dharampur, in today’s Valsad district) inside it and Khandesh Subah beyond. Baglana, further south, is an independent Rathore principality until Aurangzeb’s siege of Mulher forces its submission in 1638, after which it is attached to Khandesh rather than Gujarat — so the Mughal limit here runs close to the line the Bombay Reorganisation Act, 1960 later draws on linguistic grounds.', ['w_gujaratsubah', 'w_baglana']),
     ('1719–1803', 'The Gaekwads of Baroda push into south Gujarat — Pilaji Gaekwad occupies the Songadh hill fort in 1719 — reaching a belt of small hill states that still separates Gujarat’s coastal plain from Maharashtra’s Sahyadri interior: the Rajput state of Dharampur (from 1262), Bansda (from 1781), the Koli state of Surgana, and the Dangs’ Bhil and Kokani chiefdoms.', ['w_songadh', 'w_dharampur', 'w_bansda', 'w_surgana', 'w_dangs']),
     ('1803–05', 'After the Second Anglo-Maratha War, Baroda accepts British paramountcy while keeping internal autonomy; the neighbouring hill states come under British political control too, Dharampur and Bansda through the Bombay Presidency’s Surat Agency and Surgana through its Nasik Agency, fixing this belt as the frontier between the future Surat, Thana, Baroda and Nasik districts.', ['w_baroda', 'w_dharampur', 'w_surgana']),
     ('1842', 'The Dangs’ Bhil and Kokani chiefs lease their teak forests to the Bombay government, a lease made perpetual in 1862; a Deputy Political Agent at Ahwa administers the tract that becomes Dang district, keeping it under direct Bombay Presidency control rather than a settled district boundary.', ['w_dangs']),
@@ -95,6 +100,7 @@ timeline('Goa|Karnataka',
 )
 
 timeline('Gujarat|Rajasthan',
+    ('1580s', 'Akbar’s subah scheme sets Ajmer Subah, with Sirohi among its sarkars, against Gujarat Subah across this zone, with Palanpur, Danta and Idar on the Gujarat side. The Mughal grouping is looser than the modern line and in places cuts across it: Dungarpur and Banswara are tributary sarkars of Gujarat Subah but go to Rajasthan after independence, and Sirohi is claimed on both sides in Mughal times as it is again in 1948–56.', ['w_gujaratsubah', 'w_ajmersubah']),
     ('1257–1729', 'Idar, founded in 1257 by Rao Sonag, is captured in 1729 by brothers of the Maharaja of Jodhpur; it becomes a Rathore-ruled state of the Bombay Presidency’s Mahi Kantha Agency, keeping dynastic ties to Marwar even as it sits on the Gujarat side of the line.', ['w_idar']),
     ('1311', 'Sirohi is founded by the Deora Chauhans in the Aravalli hills, including Mount Abu, and grows into the south-easternmost Rajputana state, facing the Mahi Kantha and Palanpur agency states of Gujarat across the range.', ['w_sirohi']),
     ('1818–1823', 'The British treaties of 1818 bring the Rajputana states under a separate Rajputana Agency; Sirohi’s own treaty follows in 1823, formalising the agency line against the Gujarat-side agencies to its west.', ['rajtreaties', 'w_sirohi']),
@@ -106,7 +112,7 @@ timeline('Gujarat|Rajasthan',
 )
 
 timeline('Gujarat|Madhya Pradesh',
-    ('1584', 'Jhabua, a Bhil-country Rajput state later placed in the Central India Agency’s Bhopawar Agency, is founded by Kesho Das under a grant from the Mughal emperor Akbar.', ['w_jhabua']),
+    ('1573–84', 'Sarkar Godhra is Gujarat Subah’s eastern frontier against Malwa Subah, its border town Dohad — read as “two boundaries” — commanding the road between the two provinces; Aurangzeb is born there in 1618. Jhabua, a Bhil-country Rajput state later placed in the Central India Agency’s Bhopawar Agency, is founded on the Malwa side in 1584 by Kesho Das under a grant from the Mughal emperor Akbar, and that same divide survives as the Bhopawar line and then this border.', ['w_jhabua', 'w_gujaratsubah', 'w_dahod']),
     ('1817', 'Neighbouring Alirajpur comes under British rule and is likewise administered through the Bhopawar Agency of the Central India Agency, east of the future Gujarat line.', ['w_alirajpur']),
     ('1853', 'Sindhia of Gwalior leases the Panch Mahals — the Godhra, Dahod, Halol, Kalol and Jhalod mahals — to the Bombay Presidency; as a district of its Gujarat Division, Panch Mahals now directly abuts the Bhopawar Agency states of Jhabua and Alirajpur, fixing the line close to its present course.', ['w_panchmahals']),
     ('15 Jun 1948', 'Jhabua’s ruler accedes to India; Alirajpur’s accedes the same year. Both join the new United State of Gwalior, Indore and Malwa, or Madhya Bharat, formed on 28 May 1948 from twenty-five former Central India Agency states.', ['w_jhabua', 'w_alirajpur', 'w_madhyabharat']),
