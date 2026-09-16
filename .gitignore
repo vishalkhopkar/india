@@ -1,8 +1,9 @@
 # Claude Code session/config data — not part of the project
 .claude/
 
-# Reference map used only to extract river geometry (already baked into _build/rivers/*.json)
+# Reference maps used only for research (not part of the build)
 India_rivers_and_lakes_map.svg
+Hindoostan,_divided_into_Soubahs_according_to_the_Ayin_Acbaree,*.jpg
 
 # Build caches and intermediate artifacts
 __pycache__/

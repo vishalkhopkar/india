@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>India's external borders and rivers</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23fff'/%3E%3Crect width='30' height='6.5' fill='%23FF9933'/%3E%3Crect y='13.5' width='30' height='6.5' fill='%23138808'/%3E%3Ccircle cx='15' cy='10' r='2.6' fill='none' stroke='%23000080' stroke-width='0.35'/%3E%3Cpath d='M15 10L15 7.4M15 10L15.67 7.49M15 10L16.3 7.75M15 10L16.84 8.16M15 10L17.25 8.7M15 10L17.51 9.33M15 10L17.6 10M15 10L17.51 10.67M15 10L17.25 11.3M15 10L16.84 11.84M15 10L16.3 12.25M15 10L15.67 12.51M15 10L15 12.6M15 10L14.33 12.51M15 10L13.7 12.25M15 10L13.16 11.84M15 10L12.75 11.3M15 10L12.49 10.67M15 10L12.4 10M15 10L12.49 9.33M15 10L12.75 8.7M15 10L13.16 8.16M15 10L13.7 7.75M15 10L14.33 7.49' stroke='%23000080' stroke-width='0.3'/%3E%3Ccircle cx='15' cy='10' r='0.45' fill='%23000080'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Palette: saffron, marigold, indigo, peacock green and terracotta on ivory. */
+    --saffron: #e8811c;
+    --marigold: #f2a93b;
+    --indigo: #283a80;
+    --peacock: #137a5a;
+    --terracotta: #a84d2a;
+    --ivory: #fbf6ec;
+    --sand: #e8d9bc;
+    --ink: #2a2238;
+    --muted: #6d6275;
+    --display: "Rozha One", Georgia, "Times New Roman", serif;
+    --body: "Mukta", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    /* Page column: fit the viewport height, but never so small that labels crowd the map. */
+    --page-w: min(100%, 1028px, max(720px, calc((100vh - 170px) * 1028 / 1152.3)));
+  }
+
+  html, body { margin: 0; }
+  body {
+    /* Column layout so the footer ribbon sits at the bottom of short pages. */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 0 16px 0;
+    color: var(--ink);
+    font: 15px/1.45 var(--body);
+    background-color: var(--ivory);
+    /* Jaali lattice of overlapping circles. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cg fill='none' stroke='%23c9a86a' stroke-opacity='.22' stroke-width='1'%3E%3Ccircle cx='0' cy='0' r='22'/%3E%3Ccircle cx='44' cy='0' r='22'/%3E%3Ccircle cx='0' cy='44' r='22'/%3E%3Ccircle cx='44' cy='44' r='22'/%3E%3Ccircle cx='22' cy='22' r='22'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* ------------------------------------------------------------ header */
+  .tricolour {
+    height: 6px;
+    margin: 0 -16px;
+    background: linear-gradient(90deg, var(--saffron) 0 33.3%, #fffaf0 33.3% 66.6%, var(--peacock) 66.6%);
+  }
+  .site-header {
+    width: var(--page-w);
+    margin: 0 auto;
+    padding: 18px 0 0;
+    text-align: center;
+  }
+  .site-header .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .site-header svg { flex: none; }
+  .site-header h1 {
+    margin: 0;
+    font: 400 clamp(26px, 4.2vw, 40px)/1.1 var(--display);
+    letter-spacing: .01em;
+    color: var(--indigo);
+  }
+  .site-header h1 span { color: var(--saffron); }
+  @media (max-width: 560px) {
+    .site-header .brand { gap: 8px; }
+    .site-header .brand svg { width: 30px; height: 30px; }
+    .site-header .brand svg:last-child { display: none; }
+  }
+
+  /* Toran: a string of marigolds and mango leaves. */
+  .toran {
+    height: 26px;
+    margin: 10px auto 14px;
+    width: var(--page-w);
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='26'%3E%3Cpath d='M0 3 Q18 7 36 3' fill='none' stroke='%23a84d2a' stroke-width='1.2'/%3E%3Cpath d='M9 5 C4 11 5 18 9 23 C13 18 14 11 9 5Z' fill='%23137a5a'/%3E%3Cpath d='M9 7 L9 21' stroke='%230c5a41' stroke-width='.7'/%3E%3Ccircle cx='27' cy='11' r='6' fill='%23f2a93b'/%3E%3Ccircle cx='27' cy='11' r='3.6' fill='%23e8811c'/%3E%3Ccircle cx='27' cy='11' r='1.4' fill='%23a84d2a'/%3E%3C/svg%3E") repeat-x center top;
+  }
+
+  .map {
+    position: relative;
+    margin: 0 auto;
+    width: var(--page-w);
+  }
+  .map > svg:not(.corner) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1028 / 1152.3;
+    border-radius: 4px;
+    /* A mount: white gap, marigold hairline, soft shadow. */
+    box-shadow: 0 0 0 6px #fff, 0 0 0 7px var(--marigold), 0 0 0 11px #fff, 0 0 0 12px var(--sand), 0 14px 40px rgba(90, 60, 20, .16);
+    /* Screen px expressed in SVG user units; kept up to date by the script. */
+    --px: 1px;
+    /* This page has no hover interaction; the drawn map never takes the mouse. */
+    pointer-events: none;
+  }
+  /* Rangoli rosettes at the corners of the mount. */
+  .map .corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+  }
+  .map .corner.tl { top: -21px; left: -21px; }
+  .map .corner.tr { top: -21px; right: -21px; }
+  .map .corner.bl { bottom: -21px; left: -21px; }
+  .map .corner.br { bottom: -21px; right: -21px; }
+
+  /* Rivers: drawn under the borders, shown by default (this page's primary content). */
+  .map .rivers { pointer-events: none; }
+  .map .river { fill: none; stroke: #3f88c9; stroke-width: calc(var(--px) * 1.1); stroke-linecap: round; stroke-linejoin: round; opacity: .8; }
+  .map .river.r2 { stroke-width: calc(var(--px) * .85); opacity: .72; }
+  .map .river.r3 { stroke-width: calc(var(--px) * .65); opacity: .62; }
+
+  /* State / UT borders: off by default, shown behind the toggle below. No hover variant. */
+  .map .internal-layer { display: none; }
+  .map.show-internal .internal-layer { display: block; }
+  .map .internal-layer path {
+    stroke: #8f8f8f;
+    stroke-width: calc(var(--px) * 1.9);
+    stroke-dasharray: 0 calc(var(--px) * 3.6);
+  }
+
+  /* Bottom-right slider that shows/hides the state/UT border layer. */
+  .map .layer-toggle {
+    position: absolute;
+    right: 1.5%;
+    bottom: 1.5%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 11px;
+    background: rgba(255, 251, 243, .95);
+    border: 1px solid var(--sand);
+    border-top: 3px solid var(--peacock);
+    border-radius: 8px;
+    font-size: 12px;
+    color: #4d4458;
+    cursor: pointer;
+    user-select: none;
+    pointer-events: auto;
+  }
+  .map .layer-toggle input {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; border: 0; padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+  .map .layer-toggle .switch {
+    position: relative;
+    flex: none;
+    width: 32px;
+    height: 18px;
+    background: #cfd6de;
+    border-radius: 999px;
+    transition: background .15s;
+  }
+  .map .layer-toggle .switch::before {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 14px; height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    transition: transform .15s;
+  }
+  .map .layer-toggle input:checked + .switch { background: var(--peacock); }
+  .map .layer-toggle input:checked + .switch::before { transform: translateX(14px); }
+  .map .layer-toggle input:focus-visible + .switch { outline: 2px solid var(--indigo); outline-offset: 2px; }
+
+  /* ------------------------------------------------------------ labels */
+  .labels text {
+    font-family: var(--body);
+    font-size: calc(var(--px) * 12);
+    text-anchor: middle;
+    dominant-baseline: central;
+    paint-order: stroke;
+    stroke: #fff;
+    stroke-width: calc(var(--px) * 3);
+    stroke-linejoin: round;
+  }
+  .labels .state   { fill: #2a2238; font-weight: 600; }
+  .labels .ut      { fill: #34408f; font-weight: 600; font-style: italic; }
+  .labels .sub     { fill: #6b6fae; font-style: italic; font-size: calc(var(--px) * 10.5); }
+  .labels .country {
+    fill: #a0785a; font-weight: 600; text-transform: uppercase;
+    letter-spacing: calc(var(--px) * 1.8); font-size: calc(var(--px) * 12);
+  }
+  .labels .end { text-anchor: end; }
+  .labels .start { text-anchor: start; }
+  .labels .leader {
+    fill: none;
+    stroke: #b9a88f;
+    stroke-width: calc(var(--px) * .8);
+  }
+  .labels .leader-dot { fill: #b9a88f; }
+
+  /* ------------------------------------------------------------ legend */
+  .legend {
+    position: absolute;
+    top: 1.5%;
+    right: 1.5%;
+    padding: 9px 12px 8px;
+    background: rgba(255, 251, 243, .95);
+    border: 1px solid var(--sand);
+    border-top: 3px solid var(--marigold);
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: #4d4458;
+    pointer-events: none;
+  }
+  .legend div { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+  .legend svg { flex: none; }
+  /* On narrow screens the legend would cover the map: move it below, drop the corner rosettes. */
+  @media (max-width: 560px) {
+    .legend { position: static; margin-top: 20px; }
+    .map .corner { display: none; }
+  }
+
+  /* ------------------------------------------------------------ footer */
+  .site-footer {
+    width: var(--page-w);
+    margin: auto auto 0;
+    padding: 26px 0;
+    text-align: center;
+    color: var(--muted);
+  }
+  .site-footer .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .site-footer .divider::before,
+  .site-footer .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--marigold), transparent);
+  }
+  .site-footer p { margin: 0; font-size: 15px; letter-spacing: .02em; }
+  .site-footer p strong { font: 400 17px var(--display); color: var(--indigo); letter-spacing: .01em; }
+  .site-footer + .tricolour { margin-top: 0; }
+</style>
+</head>
+<body>
+<!-- Rangoli rosette used in the header and at the map's corners. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="petal-outer" d="M0 -41 C11 -31 11 -18 0 -12 C-11 -18 -11 -31 0 -41Z"/>
+    <path id="petal-inner" d="M0 -29 C6 -23 6 -15 0 -11 C-6 -15 -6 -23 0 -29Z"/>
+    <circle id="bead" cx="0" cy="-46" r="3"/>
+    <symbol id="rangoli" viewBox="-50 -50 100 100">
+      <g fill="#e8811c">
+        <use href="#petal-outer"/><use href="#petal-outer" transform="rotate(45)"/>
+        <use href="#petal-outer" transform="rotate(90)"/><use href="#petal-outer" transform="rotate(135)"/>
+        <use href="#petal-outer" transform="rotate(180)"/><use href="#petal-outer" transform="rotate(225)"/>
+        <use href="#petal-outer" transform="rotate(270)"/><use href="#petal-outer" transform="rotate(315)"/>
+      </g>
+      <g fill="#137a5a">
+        <use href="#petal-inner" transform="rotate(22.5)"/><use href="#petal-inner" transform="rotate(67.5)"/>
+        <use href="#petal-inner" transform="rotate(112.5)"/><use href="#petal-inner" transform="rotate(157.5)"/>
+        <use href="#petal-inner" transform="rotate(202.5)"/><use href="#petal-inner" transform="rotate(247.5)"/>
+        <use href="#petal-inner" transform="rotate(292.5)"/><use href="#petal-inner" transform="rotate(337.5)"/>
+      </g>
+      <g fill="#f2a93b">
+        <use href="#bead" transform="rotate(22.5)"/><use href="#bead" transform="rotate(67.5)"/>
+        <use href="#bead" transform="rotate(112.5)"/><use href="#bead" transform="rotate(157.5)"/>
+        <use href="#bead" transform="rotate(202.5)"/><use href="#bead" transform="rotate(247.5)"/>
+        <use href="#bead" transform="rotate(292.5)"/><use href="#bead" transform="rotate(337.5)"/>
+      </g>
+      <circle r="10" fill="#fffaf0" stroke="#283a80" stroke-width="3"/>
+      <circle r="4.5" fill="#a84d2a"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="tricolour"></div>
+<header class="site-header">
+  <div class="brand">
+    <svg width="46" height="46" aria-hidden="true"><use href="#rangoli"/></svg>
+    <h1>Every Indian border <span>mapped</span></h1>
+    <svg width="46" height="46" aria-hidden="true"><use href="#rangoli"/></svg>
+  </div>
+</header>
+<div class="toran" aria-hidden="true"></div>
+
+<div class="map">
+  <svg class="corner tl" aria-hidden="true"><use href="#rangoli"/></svg>
+  <svg class="corner tr" aria-hidden="true"><use href="#rangoli"/></svg>
+  <svg class="corner bl" aria-hidden="true"><use href="#rangoli"/></svg>
+  <svg class="corner br" aria-hidden="true"><use href="#rangoli"/></svg>
+<!--SVG-->
+  <div class="legend" aria-hidden="true">
+    <div><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#000" stroke-width="2.4" stroke-linecap="round"/></svg>International border</div>
+    <div><svg width="26" height="8"><line x1="2" y1="4" x2="25" y2="4" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="0.1 5"/></svg>De facto lines (LoC, LAC)</div>
+    <div><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#1f6fd0" stroke-width="1.2" stroke-linecap="round"/></svg>Coastline</div>
+    <div><svg width="26" height="8"><path d="M1 5 Q7 1 13 4 T25 3" fill="none" stroke="#3f88c9" stroke-width="1.5" stroke-linecap="round"/></svg>River</div>
+    <div><svg width="26" height="8"><line x1="2" y1="4" x2="25" y2="4" stroke="#8f8f8f" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="0 3.6"/></svg>State / UT border (toggle below)</div>
+  </div>
+  <label class="layer-toggle">
+    <span>State / UT borders</span>
+    <input type="checkbox" id="internal-toggle">
+    <span class="switch" aria-hidden="true"></span>
+  </label>
+</div>
+<footer class="site-footer">
+  <div class="divider" aria-hidden="true"><svg width="26" height="26"><use href="#rangoli"/></svg></div>
+  <p>An ongoing project of <strong>Vishal Khopkar</strong></p>
+</footer>
+<div class="tricolour"></div>
+<script>
+const DATA = /*DATA*/null;
+
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.querySelector('.map > svg:not(.corner)');
+
+  function el(name, attrs) {
+    const node = document.createElementNS(NS, name);
+    for (const k in attrs) node.setAttribute(k, attrs[k]);
+    return node;
+  }
+
+  // Layers in india-borders.svg, identified by their stroke styling:
+  //   #9a9a9a                  state / UT borders
+  //   #1f6fd0                  coastlines
+  //   #000000                  international borders
+  //   #000000 + dasharray      Line of Control / Line of Actual Control
+  function kindOf(layer) {
+    const stroke = layer.getAttribute('stroke');
+    if (stroke === '#9a9a9a') return 'internal';
+    if (stroke === '#000000') return layer.hasAttribute('stroke-dasharray') ? 'loc-lac' : 'external';
+    return 'coastline';
+  }
+
+  // State / UT border paths are stored as many two-point segments ("M a L b M b L c …").
+  // Join segments that continue from the previous one, so a dotted pattern runs evenly
+  // instead of restarting at every vertex.
+  function joinSegments(d) {
+    const runs = [];
+    for (const sub of d.split(/(?=M)/)) {
+      const pts = sub.match(/-?[\d.]+ -?[\d.]+/g);
+      if (!pts) continue;
+      const run = runs[runs.length - 1];
+      if (run && run[run.length - 1] === pts[0]) run.push(...pts.slice(1));
+      else runs.push(pts);
+    }
+    return runs.map(run => 'M' + run.join('L')).join('');
+  }
+
+  // External borders, LoC/LAC and the coastline render as drawn. The internal
+  // (state/UT) layer is tagged so it can be toggled, and its dashes joined up.
+  for (const layer of svg.querySelectorAll(':scope > g')) {
+    const kind = kindOf(layer);
+    if (kind !== 'internal') continue;
+    layer.classList.add('internal-layer');
+    for (const path of layer.querySelectorAll('path')) {
+      path.setAttribute('d', joinSegments(path.getAttribute('d')));
+    }
+  }
+
+  // Rivers go just above the white background, beneath every border line.
+  const riverLayer = el('g', { class: 'rivers' });
+  for (const r of DATA.rivers) {
+    riverLayer.append(el('path', { class: `river r${r.r}`, d: r.d }));
+  }
+  svg.querySelector(':scope > rect').after(riverLayer);
+
+  const internalToggle = document.getElementById('internal-toggle');
+  internalToggle.addEventListener('change', () => {
+    document.querySelector('.map').classList.toggle('show-internal', internalToggle.checked);
+  });
+
+  // Names of states, union territories and neighbouring countries.
+  const labelLayer = el('g', { class: 'labels' });
+  const leaders = [];
+  for (const lab of DATA.labels) {
+    // Labels with a leader line sit beside the place they name, anchored at the
+    // side nearest to it: "end" = text left of the place, "mid" = centred,
+    // otherwise text to the right.
+    const classes = lab.cls.split(' ');
+    if (classes.includes('lead') && !classes.includes('end') && !classes.includes('mid')) classes.push('start');
+    const text = el('text', { class: classes.filter(c => c !== 'lead' && c !== 'mid').join(' '), x: lab.x, y: lab.y });
+    const rows = lab.text.split('\n');
+    rows.forEach((row, i) => {
+      const tspan = el('tspan', { x: lab.x, dy: i === 0 ? (-(rows.length - 1) * 0.55) + 'em' : '1.1em' });
+      tspan.textContent = row;
+      text.append(tspan);
+    });
+    for (const [lx, ly] of lab.leads) {
+      const line = el('line', { class: 'leader', x1: lx, y1: ly, x2: lx, y2: ly });
+      labelLayer.append(line, el('circle', { class: 'leader-dot', cx: lx, cy: ly, r: 1.3 }));
+      leaders.push({ line, text, lx, ly });
+    }
+    labelLayer.append(text);
+  }
+  svg.append(labelLayer);
+
+  // Stroke widths and label sizes are in SVG user units, and the map is scaled
+  // to fit the window, so keep "1 screen px" in user units up to date.
+  function updateScale() {
+    const ctm = svg.getScreenCTM();
+    if (!ctm || !ctm.a) return;
+    svg.style.setProperty('--px', (1 / ctm.a) + 'px');
+    // Label size just changed: end each leader line at the nearest edge of its label.
+    for (const { line, text, lx, ly } of leaders) {
+      const box = text.getBBox();
+      line.setAttribute('x2', Math.max(box.x, Math.min(lx, box.x + box.width)));
+      line.setAttribute('y2', Math.max(box.y, Math.min(ly, box.y + box.height)));
+    }
+  }
+  updateScale();
+  addEventListener('resize', updateScale);
+  if ('ResizeObserver' in window) new ResizeObserver(updateScale).observe(svg);
+})();
+</script>
+</body>
+</html>
