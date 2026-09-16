@@ -41,6 +41,7 @@ ref('rannaward', 'Indo-Pakistan Western Boundary (Rann of Kutch) Award, 19 Febru
 ref('kutch', 'Cutch State', 'Wikipedia: accession 1947, Part C state 1950, merged with Bombay State 1956.', 'https://en.wikipedia.org/wiki/Cutch_(princely_state)')
 ref('indpak', 'India–Pakistan border', 'Wikipedia.', 'https://en.wikipedia.org/wiki/India%E2%80%93Pakistan_border')
 ref('miani', 'Battle of Miani', 'Wikipedia: British conquest of Sindh, 1843.', 'https://en.wikipedia.org/wiki/Battle_of_Miani')
+ref('nw_thatta', 'Thatta Subah', 'Wikipedia: a sarkar of Multan Subah until 1629, when Shah Jahan made it a subah of its own, bordered to the south by Gujarat Subah and the Arabian Sea.', 'https://en.wikipedia.org/wiki/Thatta_Subah')
 ref('rajtreaties', 'British treaties with the Rajputana states', 'RajRAS: the treaties of 1818 and the Rajputana Agency (1832).', 'https://rajras.in/ras/mains/paper-1/rajasthan-history/british-treaty-with-rajputana-states/')
 ref('bahawalpur', 'Bahawalpur (princely state)', 'Wikipedia: treaties of 1833 and 1838; accession to Pakistan in October 1947.', 'https://en.wikipedia.org/wiki/Bahawalpur_(princely_state)')
 
@@ -228,6 +229,7 @@ timeline('Pakistan|Rajasthan',
 )
 
 timeline('Gujarat|Pakistan',
+    ('1629', 'Thatta, a sarkar of Multan Subah until now, is made a subah of its own under Shah Jahan, bordered to the south by Gujarat Subah. The Rann lies between them, and stays the frontier under the Kutch rulers and the British: this border still runs through that zone, though the line within it is not fixed until 1968.', ['nw_thatta']),
     ('17 Feb 1843', 'The British conquer Sindh, which borders the princely state of Kutch across the Rann.', ['miani']),
     ('1913–14', 'A dispute over Sind’s southern limit is settled: the “green line” up Sir Creek, then a line due east. The Government of India approves it on 11 November 1913.', ['ibs86']),
     ('1923–24', 'Part of the Kutch–Sind boundary is demarcated with 134 pillars.', ['ibs86']),

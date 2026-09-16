@@ -68,6 +68,7 @@ ref('nx_lba', 'India–Bangladesh enclaves', 'Wikipedia: the Indira–Mujib Land
 ref('nx_tripurastate', 'Tripura (princely state)', 'Wikipedia: the Chakla Roshnabad zamindari in the Comilla/Noakhali/Sylhet plains, British protectorate status from 1809, recognition of the Rajas as sovereigns in 1838, and inclusion in Eastern Bengal and Assam as ‘Hill Tippera’ from 1905.', 'https://en.wikipedia.org/wiki/Tripura_(princely_state)')
 ref('nx_tripuramerger', 'Tripura Merger Agreement', 'Wikipedia: signed 9 September 1949 by Regent Maharani Kanchan Prava Devi, effective 15 October 1949.', 'https://en.wikipedia.org/wiki/Tripura_Merger_Agreement')
 ref('nx_khasijaintia', 'Khasi and Jaintia Hills', 'Wikipedia: organised as a district of Assam from 1912 to 1947, immediately north of the Sylhet plains.', 'https://en.wikipedia.org/wiki/Khasi_and_Jaintia_Hills')
+ref('nx_jaintia', 'Jaintia Kingdom', 'Wikipedia: the Mughal campaign that brought the Jaintia raja back under imperial control after his revolt of the 1670s, and the British annexation of the kingdom on 15 March 1835.', 'https://en.wikipedia.org/wiki/Jaintia_Kingdom')
 ref('nx_meghstate', 'Meghalaya’s journey from “state within a state” to full statehood', 'PolSci Institute: the autonomous state of Meghalaya formed 2 April 1970 under the Assam Reorganisation (Meghalaya) Act, 1969, and full statehood on 21 January 1972 under the North-Eastern Areas (Reorganisation) Act, 1971.', 'https://polsci.institute/india-political-process/meghalaya-journey-to-full-statehood/')
 
 timeline('Assam|Bangladesh',
@@ -80,6 +81,7 @@ timeline('Assam|Bangladesh',
 )
 
 timeline('Bangladesh|Meghalaya',
+    ('Mughal era', 'Mughal Bengal reaches only the foot of the hills. The Jaintia raja’s plains territory is brought back under imperial control after his revolt of the 1670s, but the Khasi, Jaintia and Garo hills above are never administered as Mughal territory — a plains–hills divide the British inherit, annexing the Jaintia kingdom separately on 15 March 1835.', ['nx_jaintia']),
     ('1874', 'Sylhet is transferred from Bengal to the new Assam province; the Khasi and Jaintia Hills, already under British administration, sit immediately north of the Sylhet and Mymensingh plains.', ['nx_sylhet', 'nx_khasijaintia']),
     ('1912', 'The Khasi and Jaintia Hills and the Garo Hills are organised as districts of Assam; their southern limits against Sylhet and Mymensingh become the line later inherited by Meghalaya.', ['nx_khasijaintia']),
     ('17 Aug 1947', 'The Radcliffe Bengal Boundary Commission’s award places Sylhet and Mymensingh in East Bengal, fixing the hills–plains district line as an international border.', ['m13']),
