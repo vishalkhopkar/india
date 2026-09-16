@@ -15,6 +15,8 @@ ref('bihup1968', 'Bihar and Uttar Pradesh (Alteration of Boundaries) Act, 1968',
 ref('faizabad1775', 'Treaty of Faizabad, 1775', 'Britannica: Benares ceded to the East India Company.', 'https://www.britannica.com/event/Treaty-of-Faizabad')
 ref('biharorissa', 'Bihar and Orissa Province', 'Wikipedia: separated from Bengal on 22 March 1912, divided on 1 April 1936.', 'https://en.wikipedia.org/wiki/Bihar_and_Orissa_Province')
 ref('companyrule1772', 'Company rule in India', 'Wikipedia: the 1765 Diwani grant after Buxar, and the 1772 shift under Warren Hastings to the Company collecting revenue directly, with a Board of Revenue at Calcutta and Patna.', 'https://en.wikipedia.org/wiki/Company_rule_in_India')
+ref('biharsubah1575', 'Bihar Subah', 'Wikipedia: formed in 1575 with its seat at Patna, bordered by the subas of Illahabad and Awadh to the west and Bengal Subah to the east.', 'https://en.wikipedia.org/wiki/Bihar_Subah')
+ref('karmanasa', 'Karmanasa River', 'Wikipedia: rises in the Kaimur Range and forms part of today’s Uttar Pradesh–Bihar border (Sonbhadra, Chandauli, Varanasi and Ghazipur on the UP side; Kaimur and Buxar on the Bihar side) before joining the Ganga near Chausa, site of the 1539 battle between Sher Shah and Humayun.', 'https://en.wikipedia.org/wiki/Karmanasa_River')
 
 timeline('Nepal|Uttarakhand',
     ('1791–1815', 'The Gorkhas rule Kumaon (Almora taken 1791) and Garhwal (by 1804).', ['ukhistory']),
@@ -69,6 +71,7 @@ timeline('China|Uttarakhand',
 )
 
 timeline('Bihar|Uttar Pradesh',
+    ('1575', 'Akbar’s provincial reorganisation creates Bihar Subah, seated at Patna, with the subas of Illahabad and Awadh on its western side — the ancestor of this border. In its southern stretch the line already runs the Karmanasa, which still separates Uttar Pradesh’s Sonbhadra, Chandauli, Varanasi and Ghazipur districts from Bihar’s Kaimur and Buxar today; further north and east, the shifting channels of the Ganga and Ghaghra (Saryu) mark it instead, which is why those rivers keep unsettling the line in later centuries.', ['biharsubah1575', 'karmanasa']),
     ('1765', 'After the Company’s victory at Buxar (1764), the Treaty of Allahabad has Mughal emperor Shah Alam II grant it the Diwani — the right to collect revenue — over Bengal, Bihar and Odisha; day-to-day administration stays with the existing Mughal machinery, so the Company is not yet Bihar’s direct ruler.', ['companyrule1772']),
     ('1772', 'Governor Warren Hastings ends that arrangement: the Company takes over revenue collection itself, setting up a Board of Revenue at Calcutta and Patna and moving the Mughal revenue records there from Murshidabad. The Company becomes Bihar’s direct ruler for the first time.', ['companyrule1772']),
     ('1775', 'The Treaty of Faizabad cedes Benares to the Company, bringing British rule up to Bihar’s western edge.', ['faizabad1775']),
