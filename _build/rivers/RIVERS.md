@@ -215,3 +215,10 @@ domestic tributary that never itself crosses a border would be wrong.
 Verified with `python river_tool.py preview SYSTEM` for indus, ganga_north, brahmaputra and west,
 plus the usual `python build.py` + `python build_rivers.py` + `node hovertest.mjs` (105/105 borders
 still reachable, 0 JS errors — this only ever touches river paths, never border geometry).
+
+**Follow-up (same day):** the initial Barak extension (via its own Wikidata relation,
+`osm_barak.json`) stopped right at the India–Bangladesh border, since that relation only covers
+the Barak proper. Fetched `Surma|Kushiyara|Meghna` separately (`osm_meghna_system.json`, 40 ways,
+cleanly named — no contamination) and merged it in: Barak now continues under Bangladesh's names
+for the same river all the way into the Ganges–Brahmaputra delta, matching how Ganga and
+Brahmaputra already carry their own Bangladesh-side name changes.
