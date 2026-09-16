@@ -1,0 +1,19 @@
+# Claude Code session/config data — not part of the project
+.claude/
+
+# Reference map used only to extract river geometry (already baked into _build/rivers/*.json)
+India_rivers_and_lakes_map.svg
+
+# Build caches and intermediate artifacts
+__pycache__/
+_build/rivers/data/
+_build/rivers/ref_fit.json
+_build/rivers/ref_rivers.json
+_build/rivers/preview_*.png
+_build/rivers/preview_*.html
+
+# One-off research/debug scripts from the border-timeline research phase
+# (their output is already merged into india-border-provenance-matrix-sourced.html and timelines.py)
+_build/tl_*.py
+_build/check_region.py
+_build/_todo.txt
