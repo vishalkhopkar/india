@@ -24,6 +24,12 @@
     --body: "Mukta", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     /* Page column: fit the viewport height, but never so small that labels crowd the map. */
     --page-w: min(100%, 1028px, max(720px, calc((100vh - 170px) * 1028 / 1152.3)));
+    /* Same formula as --page-w, expressed in height rather than width, so both maps
+       below render at the same size as india-borders.html's map: that page's --page-w
+       is a *width*, so its "100%" term means 100% of the (unnested) page column, i.e.
+       the viewport minus the body's 32px of side padding — reproduced here with vw
+       since these maps sit in narrower flex columns, not the page column itself. */
+    --map-h: min(calc((100vw - 32px) * 1152.3 / 1028), 1152.3px, max(calc(720px * 1152.3 / 1028), calc(100vh - 170px)));
   }
 
   html, body { margin: 0; }
@@ -86,7 +92,10 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 28px;
-    width: min(97%, 1360px);
+    /* Wide enough for both maps at their largest (main maxes out at 1028px wide,
+       the inset at its own ratio's ~666px, plus the gap) so they never wrap onto
+       separate lines above the dedicated stacked layout at 900px and below. */
+    width: min(97%, 1750px);
     margin: 0 auto;
   }
   .map-col { display: flex; flex-direction: column; align-items: center; }
@@ -100,11 +109,13 @@
 
   /* Both maps share the same height, not the same width — the inset's crop is a
      taller/narrower shape than the main map, so matching width would make it loom
-     far larger on the page than the main map even though neither map "grew". */
+     far larger on the page than the main map even though neither map "grew". The
+     height itself matches india-borders.html's own map: var(--page-w) is the same
+     expression that page uses for its map's width, at the same 1028:1152.3 ratio. */
   .map {
     position: relative;
     --ratio: 1028 / 1152.3;
-    height: min(64vh, 760px);
+    height: var(--map-h);
   }
   .map--inset { --ratio: 341 / 590; }
   .map > svg:not(.corner) {
