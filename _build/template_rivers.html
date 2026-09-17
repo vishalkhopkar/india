@@ -71,6 +71,9 @@
     .site-header .brand svg { width: 30px; height: 30px; }
     .site-header .brand svg:last-child { display: none; }
   }
+  @media (max-width: 900px) {
+    .map-col--main, .map-col--inset { flex-basis: 100%; max-width: 460px; }
+  }
 
   /* Toran: a string of marigolds and mango leaves. */
   .toran {
@@ -80,16 +83,39 @@
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='26'%3E%3Cpath d='M0 3 Q18 7 36 3' fill='none' stroke='%23a84d2a' stroke-width='1.2'/%3E%3Cpath d='M9 5 C4 11 5 18 9 23 C13 18 14 11 9 5Z' fill='%23137a5a'/%3E%3Cpath d='M9 7 L9 21' stroke='%230c5a41' stroke-width='.7'/%3E%3Ccircle cx='27' cy='11' r='6' fill='%23f2a93b'/%3E%3Ccircle cx='27' cy='11' r='3.6' fill='%23e8811c'/%3E%3Ccircle cx='27' cy='11' r='1.4' fill='%23a84d2a'/%3E%3C/svg%3E") repeat-x center top;
   }
 
+  /* Row holding the main map and the "West coast zoomed" inset side by side. */
+  .map-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    width: min(97%, 1360px);
+    margin: 0 auto;
+  }
+  .map-col { display: flex; flex-direction: column; }
+  .map-col--main { flex: 1 1 620px; max-width: 700px; }
+  .map-col--inset { flex: 0 1 300px; max-width: 320px; }
+  .map-heading {
+    margin: 0 0 10px;
+    text-align: center;
+    font: 400 clamp(17px, 2.4vw, 21px)/1.2 var(--display);
+    color: var(--indigo);
+    letter-spacing: .01em;
+  }
+
   .map {
     position: relative;
     margin: 0 auto;
-    width: var(--page-w);
+    width: 100%;
+    --ratio: 1028 / 1152.3;
   }
+  .map--inset { --ratio: 341 / 590; }
   .map > svg:not(.corner) {
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 1028 / 1152.3;
+    aspect-ratio: var(--ratio);
     border-radius: 4px;
     /* A mount: white gap, marigold hairline, soft shadow. */
     box-shadow: 0 0 0 6px #fff, 0 0 0 7px var(--marigold), 0 0 0 11px #fff, 0 0 0 12px var(--sand), 0 14px 40px rgba(90, 60, 20, .16);
@@ -120,6 +146,14 @@
   .map .internal-layer { display: none; }
   .map.show-internal .internal-layer { display: block; }
   .map .internal-layer path {
+    stroke: #8f8f8f;
+    stroke-width: calc(var(--px) * 1.9);
+    stroke-dasharray: 0 calc(var(--px) * 3.6);
+  }
+
+  /* The inset always shows state/UT borders — it has no toggle of its own. */
+  .map .inset-borders { display: block; }
+  .map .inset-borders path {
     stroke: #8f8f8f;
     stroke-width: calc(var(--px) * 1.9);
     stroke-dasharray: 0 calc(var(--px) * 3.6);
@@ -196,6 +230,8 @@
      are visible; country names stay put since the external layer is always shown. */
   .labels .state, .labels .ut, .labels .sub { display: none; }
   .map.show-internal .labels .state, .map.show-internal .labels .ut, .map.show-internal .labels .sub { display: inline; }
+  /* The inset's own label layer is always on, independent of the main map's toggle. */
+  .map--inset .labels .state, .map--inset .labels .ut { display: inline; }
   .labels .end { text-anchor: end; }
   .labels .start { text-anchor: start; }
   .labels .leader {
@@ -296,24 +332,35 @@
 </header>
 <div class="toran" aria-hidden="true"></div>
 
-<div class="map">
-  <svg class="corner tl" aria-hidden="true"><use href="#rangoli"/></svg>
-  <svg class="corner tr" aria-hidden="true"><use href="#rangoli"/></svg>
-  <svg class="corner bl" aria-hidden="true"><use href="#rangoli"/></svg>
-  <svg class="corner br" aria-hidden="true"><use href="#rangoli"/></svg>
+<div class="map-row">
+  <div class="map-col map-col--main">
+    <h2 class="map-heading">Major rivers</h2>
+    <div class="map">
+      <svg class="corner tl" aria-hidden="true"><use href="#rangoli"/></svg>
+      <svg class="corner tr" aria-hidden="true"><use href="#rangoli"/></svg>
+      <svg class="corner bl" aria-hidden="true"><use href="#rangoli"/></svg>
+      <svg class="corner br" aria-hidden="true"><use href="#rangoli"/></svg>
 <!--SVG-->
-  <div class="legend" aria-hidden="true">
-    <div><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#000" stroke-width="2.4" stroke-linecap="round"/></svg>International border</div>
-    <div><svg width="26" height="8"><line x1="2" y1="4" x2="25" y2="4" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="0.1 5"/></svg>De facto lines (LoC, LAC)</div>
-    <div><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#1f6fd0" stroke-width="1.2" stroke-linecap="round"/></svg>Coastline</div>
-    <div><svg width="26" height="8"><path d="M1 5 Q7 1 13 4 T25 3" fill="none" stroke="#3f88c9" stroke-width="1.5" stroke-linecap="round"/></svg>River</div>
-    <div><svg width="26" height="8"><line x1="2" y1="4" x2="25" y2="4" stroke="#8f8f8f" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="0 3.6"/></svg>State / UT border (toggle below)</div>
+      <div class="legend" aria-hidden="true">
+        <div><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#000" stroke-width="2.4" stroke-linecap="round"/></svg>International border</div>
+        <div><svg width="26" height="8"><line x1="2" y1="4" x2="25" y2="4" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="0.1 5"/></svg>De facto lines (LoC, LAC)</div>
+        <div><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#1f6fd0" stroke-width="1.2" stroke-linecap="round"/></svg>Coastline</div>
+        <div><svg width="26" height="8"><path d="M1 5 Q7 1 13 4 T25 3" fill="none" stroke="#3f88c9" stroke-width="1.5" stroke-linecap="round"/></svg>River</div>
+        <div><svg width="26" height="8"><line x1="2" y1="4" x2="25" y2="4" stroke="#8f8f8f" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="0 3.6"/></svg>State / UT border (toggle below)</div>
+      </div>
+      <label class="layer-toggle">
+        <span>State / UT borders</span>
+        <input type="checkbox" id="internal-toggle">
+        <span class="switch" aria-hidden="true"></span>
+      </label>
+    </div>
   </div>
-  <label class="layer-toggle">
-    <span>State / UT borders</span>
-    <input type="checkbox" id="internal-toggle">
-    <span class="switch" aria-hidden="true"></span>
-  </label>
+  <div class="map-col map-col--inset">
+    <h2 class="map-heading">West coast zoomed</h2>
+    <div class="map map--inset">
+      <svg class="inset-svg"></svg>
+    </div>
+  </div>
 </div>
 <footer class="site-footer">
   <div class="divider" aria-hidden="true"><svg width="26" height="26"><use href="#rangoli"/></svg></div>
@@ -325,7 +372,7 @@ const DATA = /*DATA*/null;
 
 (function () {
   const NS = 'http://www.w3.org/2000/svg';
-  const svg = document.querySelector('.map > svg:not(.corner)');
+  const svg = document.querySelector('.map-col--main .map > svg:not(.corner)');
 
   function el(name, attrs) {
     const node = document.createElementNS(NS, name);
@@ -360,9 +407,14 @@ const DATA = /*DATA*/null;
     return runs.map(run => 'M' + run.join('L')).join('');
   }
 
+  // Snapshot the SVG's own layer groups before the rivers/labels <g>s (added below)
+  // join them as direct children — those have no stroke attribute and would otherwise
+  // be misread by kindOf() as another "coastline" layer.
+  const originalGroups = [...svg.querySelectorAll(':scope > g')];
+
   // External borders, LoC/LAC and the coastline render as drawn. The internal
   // (state/UT) layer is tagged so it can be toggled, and its dashes joined up.
-  for (const layer of svg.querySelectorAll(':scope > g')) {
+  for (const layer of originalGroups) {
     const kind = kindOf(layer);
     if (kind !== 'internal') continue;
     layer.classList.add('internal-layer');
@@ -378,57 +430,110 @@ const DATA = /*DATA*/null;
   }
   svg.querySelector(':scope > rect').after(riverLayer);
 
+  const mainMapEl = svg.closest('.map');
   const internalToggle = document.getElementById('internal-toggle');
   internalToggle.addEventListener('change', () => {
-    document.querySelector('.map').classList.toggle('show-internal', internalToggle.checked);
+    mainMapEl.classList.toggle('show-internal', internalToggle.checked);
     // State/UT and Puducherry-exclave labels were display:none at the initial updateScale()
     // call, so their leader lines got a zero-size getBBox() and need recomputing now they're
     // visible (declared below; hoisted, so it's already callable here).
     updateScale();
   });
 
-  // Names of states, union territories and neighbouring countries.
-  const labelLayer = el('g', { class: 'labels' });
-  const leaders = [];
-  for (const lab of DATA.labels) {
-    // Labels with a leader line sit beside the place they name, anchored at the
-    // side nearest to it: "end" = text left of the place, "mid" = centred,
-    // otherwise text to the right.
-    const classes = lab.cls.split(' ');
-    const category = classes[0]; // state | ut | sub | country
-    if (classes.includes('lead') && !classes.includes('end') && !classes.includes('mid')) classes.push('start');
-    const text = el('text', { class: classes.filter(c => c !== 'lead' && c !== 'mid').join(' '), x: lab.x, y: lab.y });
-    const rows = lab.text.split('\n');
-    rows.forEach((row, i) => {
-      const tspan = el('tspan', { x: lab.x, dy: i === 0 ? (-(rows.length - 1) * 0.55) + 'em' : '1.1em' });
-      tspan.textContent = row;
-      text.append(tspan);
-    });
-    for (const [lx, ly] of lab.leads) {
-      const line = el('line', { class: `leader ${category}`, x1: lx, y1: ly, x2: lx, y2: ly });
-      labelLayer.append(line, el('circle', { class: `leader-dot ${category}`, cx: lx, cy: ly, r: 1.3 }));
-      leaders.push({ line, text, lx, ly });
+  // Names of states, union territories and neighbouring countries. Shared between the
+  // main map (all labels) and the inset (a filtered subset) — see below.
+  function buildLabels(layer, labels) {
+    const leaders = [];
+    for (const lab of labels) {
+      // Labels with a leader line sit beside the place they name, anchored at the
+      // side nearest to it: "end" = text left of the place, "mid" = centred,
+      // otherwise text to the right.
+      const classes = lab.cls.split(' ');
+      const category = classes[0]; // state | ut | sub | country
+      if (classes.includes('lead') && !classes.includes('end') && !classes.includes('mid')) classes.push('start');
+      const text = el('text', { class: classes.filter(c => c !== 'lead' && c !== 'mid').join(' '), x: lab.x, y: lab.y });
+      const rows = lab.text.split('\n');
+      rows.forEach((row, i) => {
+        const tspan = el('tspan', { x: lab.x, dy: i === 0 ? (-(rows.length - 1) * 0.55) + 'em' : '1.1em' });
+        tspan.textContent = row;
+        text.append(tspan);
+      });
+      for (const [lx, ly] of lab.leads) {
+        const line = el('line', { class: `leader ${category}`, x1: lx, y1: ly, x2: lx, y2: ly });
+        layer.append(line, el('circle', { class: `leader-dot ${category}`, cx: lx, cy: ly, r: 1.3 }));
+        leaders.push({ line, text, lx, ly });
+      }
+      layer.append(text);
     }
-    labelLayer.append(text);
+    return leaders;
   }
+
+  const labelLayer = el('g', { class: 'labels' });
+  const leaders = buildLabels(labelLayer, DATA.labels);
   svg.append(labelLayer);
 
-  // Stroke widths and label sizes are in SVG user units, and the map is scaled
-  // to fit the window, so keep "1 screen px" in user units up to date.
+  // ---------------------------------------------------- inset: "West coast zoomed"
+  // Ahmedabad down to Kanyakumari: same coordinate space as the main map, just a
+  // smaller window into it, so the borders/coastline can be cloned straight across
+  // instead of redrawn. No rivers and no toggle here — the inset's whole purpose is
+  // to always show the coastline and state/UT borders for this stretch of coast.
+  const scaled = [{ svg, leaders }];
+  const insetSvg = document.querySelector('.inset-svg');
+  if (insetSvg) {
+    const VB = { x: 11, y: 521, w: 341, h: 590 };
+    insetSvg.setAttribute('viewBox', `${VB.x} ${VB.y} ${VB.w} ${VB.h}`);
+
+    insetSvg.append(svg.querySelector(':scope > rect').cloneNode(true));
+    for (const layer of originalGroups) {
+      const kind = kindOf(layer);
+      if (kind !== 'coastline' && kind !== 'internal') continue;
+      const clone = layer.cloneNode(true);
+      if (kind === 'internal') {
+        clone.classList.remove('internal-layer');
+        clone.classList.add('inset-borders');
+      }
+      insetSvg.append(clone);
+    }
+
+    // Only the state/UT labels that fall inside (or right at the edge of) the crop.
+    // A tight margin here matters: a label positioned for the full main map (like
+    // Tamil Nadu's, which sits well outside this crop) shouldn't sneak in half-clipped.
+    const MARGIN = 6;
+    const insetLabels = DATA.labels.filter(lab => {
+      const cat = lab.cls.split(' ')[0];
+      if (cat !== 'state' && cat !== 'ut') return false;
+      return lab.x >= VB.x - MARGIN && lab.x <= VB.x + VB.w + MARGIN &&
+             lab.y >= VB.y - MARGIN && lab.y <= VB.y + VB.h + MARGIN;
+    });
+    const insetLabelLayer = el('g', { class: 'labels inset-labels' });
+    const insetLeaders = buildLabels(insetLabelLayer, insetLabels);
+    insetSvg.append(insetLabelLayer);
+
+    scaled.push({ svg: insetSvg, leaders: insetLeaders });
+  }
+
+  // Stroke widths and label sizes are in SVG user units, and each map is scaled
+  // to fit its own column, so keep "1 screen px" in user units up to date per map.
   function updateScale() {
-    const ctm = svg.getScreenCTM();
-    if (!ctm || !ctm.a) return;
-    svg.style.setProperty('--px', (1 / ctm.a) + 'px');
-    // Label size just changed: end each leader line at the nearest edge of its label.
-    for (const { line, text, lx, ly } of leaders) {
-      const box = text.getBBox();
-      line.setAttribute('x2', Math.max(box.x, Math.min(lx, box.x + box.width)));
-      line.setAttribute('y2', Math.max(box.y, Math.min(ly, box.y + box.height)));
+    for (const { svg: svgEl, leaders: leaderList } of scaled) {
+      const ctm = svgEl.getScreenCTM();
+      if (!ctm || !ctm.a) continue;
+      svgEl.style.setProperty('--px', (1 / ctm.a) + 'px');
+      // Label size just changed: end each leader line at the nearest edge of its label.
+      for (const { line, text, lx, ly } of leaderList) {
+        const box = text.getBBox();
+        line.setAttribute('x2', Math.max(box.x, Math.min(lx, box.x + box.width)));
+        line.setAttribute('y2', Math.max(box.y, Math.min(ly, box.y + box.height)));
+      }
     }
   }
   updateScale();
   addEventListener('resize', updateScale);
-  if ('ResizeObserver' in window) new ResizeObserver(updateScale).observe(svg);
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(updateScale);
+    ro.observe(svg);
+    if (insetSvg) ro.observe(insetSvg);
+  }
 })();
 </script>
 </body>
