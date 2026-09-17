@@ -71,10 +71,6 @@
     .site-header .brand svg { width: 30px; height: 30px; }
     .site-header .brand svg:last-child { display: none; }
   }
-  @media (max-width: 900px) {
-    .map-col--main, .map-col--inset { flex-basis: 100%; max-width: 460px; }
-  }
-
   /* Toran: a string of marigolds and mango leaves. */
   .toran {
     height: 26px;
@@ -93,8 +89,7 @@
     width: min(97%, 1360px);
     margin: 0 auto;
   }
-  .map-col { display: flex; flex-direction: column; }
-  .map-col--main, .map-col--inset { flex: 1 1 620px; max-width: 700px; }
+  .map-col { display: flex; flex-direction: column; align-items: center; }
   .map-heading {
     margin: 0 0 10px;
     text-align: center;
@@ -103,17 +98,19 @@
     letter-spacing: .01em;
   }
 
+  /* Both maps share the same height, not the same width — the inset's crop is a
+     taller/narrower shape than the main map, so matching width would make it loom
+     far larger on the page than the main map even though neither map "grew". */
   .map {
     position: relative;
-    margin: 0 auto;
-    width: 100%;
     --ratio: 1028 / 1152.3;
+    height: min(64vh, 760px);
   }
   .map--inset { --ratio: 341 / 590; }
   .map > svg:not(.corner) {
     display: block;
-    width: 100%;
-    height: auto;
+    height: 100%;
+    width: auto;
     aspect-ratio: var(--ratio);
     border-radius: 4px;
     /* A mount: white gap, marigold hairline, soft shadow. */
@@ -261,6 +258,13 @@
   @media (max-width: 560px) {
     .legend { position: static; margin-top: 20px; }
     .map .corner { display: none; }
+  }
+  /* Below this width, stack the two maps instead of fitting both to one height. */
+  @media (max-width: 900px) {
+    .map-row { flex-direction: column; align-items: center; }
+    .map-col { width: 100%; align-items: center; }
+    .map { height: auto; width: min(100%, 460px); margin: 0 auto; }
+    .map > svg:not(.corner) { height: auto; width: 100%; }
   }
 
   /* ------------------------------------------------------------ footer */
