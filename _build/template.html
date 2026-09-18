@@ -20,6 +20,10 @@
     --sand: #e8d9bc;
     --ink: #2a2238;
     --muted: #6d6275;
+    --brown: #3c2a1c;
+    --brown-dark: #2c1e14;
+    --brown-light: #6b4a30;
+    --cream: #f4e9da;
     --display: "Rozha One", Georgia, "Times New Roman", serif;
     --body: "Mukta", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     /* Page column: fit the viewport height, but never so small that labels crowd the map. */
@@ -245,13 +249,14 @@
   }
 
   /* ------------------------------------------------------------ hover box */
+  /* Deliberately minimal: kind, the two territories, and a nudge to click for more. */
   .tip {
     position: fixed;
     z-index: 10;
     left: 0;
     top: 0;
-    max-width: 360px;
-    padding: 12px 13px 10px;
+    max-width: 280px;
+    padding: 10px 13px 9px;
     /* Saffron-to-green ribbon along the top edge. */
     background: linear-gradient(90deg, var(--saffron), var(--marigold) 45%, var(--peacock)) top / 100% 4px no-repeat, #fffdf8;
     border: 1px solid var(--sand);
@@ -274,38 +279,114 @@
   }
   .tip-kind svg { flex: none; }
   .tip-title { margin: 2px 0 6px; font: 400 18px/1.2 var(--display); color: var(--indigo); }
-  .tip-note {
-    margin: 0 0 6px;
-    padding: 5px 7px;
-    background: #f4f6f9;
-    border-radius: 5px;
-    font-size: 12px;
-    color: #4a5466;
+  .tip-hint { font-size: 11.5px; font-style: italic; color: var(--terracotta); }
+
+  /* ------------------------------------------------------------ full-history modal */
+  .modal-backdrop[hidden] { display: none; }
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    background: rgba(20, 12, 6, .55);
+    box-sizing: border-box;
+    overflow-y: auto;
   }
-  .tip .revision { color: #0b63ce; }
-  .tip sup.ref { font-size: 9.5px; color: #5c4d91; }
-  .tip sup.ref a { color: inherit; text-decoration: none; }
-  .tip-source { margin-top: 6px; font-size: 11px; color: #7b8798; }
-  .tip-from { margin-bottom: 2px; font-size: 11px; color: #7b8798; }
-  .tip-foot { margin-top: 4px; font-size: 11px; color: #0b63ce; }
-  .tip.wide { max-width: min(580px, calc(100vw - 16px)); }
-  .tip-timeline-head {
-    margin-top: 8px;
-    padding-top: 7px;
-    border-top: 1px solid #e3e8ef;
-    font-size: 10.5px;
+  .modal {
+    position: relative;
+    width: 100%;
+    max-width: 620px;
+    max-height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 26px 26px 24px;
+    background: linear-gradient(90deg, var(--saffron), var(--marigold) 45%, var(--peacock)) top / 100% 5px no-repeat, var(--brown);
+    color: var(--cream);
+    border-radius: 12px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .45);
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, .1);
+    color: var(--cream);
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .modal-close:hover { background: rgba(255, 255, 255, .2); }
+  .modal-kind {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: .06em;
+    letter-spacing: .07em;
     text-transform: uppercase;
-    color: #6b7587;
+    color: var(--marigold);
+    padding-right: 34px;
   }
-  .tip-timeline { list-style: none; margin: 4px 0 0; padding: 0; font-size: 11.5px; line-height: 1.38; }
-  .tip-timeline li { display: grid; grid-template-columns: 76px 1fr; gap: 8px; padding: 2px 0; }
-  .tip-timeline b { color: #2b3445; }
-  .tip sup.ref { line-height: 0; white-space: nowrap; }
-  .tip.wide.split { max-width: min(1040px, calc(100vw - 16px)); }
-  .tip.split .tip-timeline { columns: 2; column-gap: 22px; }
-  .tip.split .tip-timeline li { break-inside: avoid; }
+  .modal-kind svg { flex: none; }
+  .modal-title { margin: 4px 46px 10px 0; font: 400 26px/1.2 var(--display); color: var(--cream); }
+  .modal-note {
+    margin: 0 0 12px;
+    padding: 8px 11px;
+    background: rgba(255, 255, 255, .09);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--cream);
+  }
+  .modal .revision { color: #9fd3ff; }
+  .modal sup.ref { font-size: 10px; color: var(--marigold); line-height: 0; white-space: nowrap; }
+  .modal sup.ref a { color: inherit; text-decoration: none; }
+  .modal-from { margin-bottom: 4px; font-size: 12px; color: #d8c5b0; }
+  .modal-text { font-size: 15px; line-height: 1.55; }
+  .modal-source { margin-top: 10px; font-size: 12px; color: #d8c5b0; }
+  .modal-foot { margin-top: 8px; font-size: 12px; color: #9fd3ff; }
+  .modal-timeline-head {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, .18);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--marigold);
+  }
+  .modal-timeline { list-style: none; margin: 10px 0 0; padding: 0; }
+  .modal-timeline li {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 16px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .modal-timeline li:first-child { border-top: none; padding-top: 4px; }
+  .modal-timeline b {
+    color: var(--marigold);
+    font: 400 15px/1.35 var(--display);
+    letter-spacing: .01em;
+  }
+  /* Below this, a left-hand date column crowds the text: stack date over description. */
+  @media (max-width: 560px) {
+    .modal { padding: 22px 18px 20px; border-radius: 10px; }
+    .modal-title { margin-right: 40px; font-size: 22px; }
+    .modal-timeline li { grid-template-columns: 1fr; gap: 3px; }
+  }
 
   /* ------------------------------------------------------------ references */
   .refs {
@@ -405,7 +486,7 @@
     <div><svg width="26" height="8"><line x1="2" y1="4" x2="25" y2="4" stroke="#8f8f8f" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="0 3.6"/></svg>State / UT border</div>
     <div><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#1f6fd0" stroke-width="1.2" stroke-linecap="round"/></svg>Coastline</div>
     <div><svg width="26" height="8"><path d="M1 5 Q7 1 13 4 T25 3" fill="none" stroke="#7fa8d6" stroke-width="1.3" stroke-linecap="round"/></svg>River (toggle below)</div>
-    <div class="hint">Hover over a border to see its history</div>
+    <div class="hint">Hover over a border, then click it for its full history</div>
   </div>
   <label class="river-toggle">
     <span>Rivers</span>
@@ -414,6 +495,12 @@
   </label>
 </div>
 <div class="tip" role="tooltip" hidden></div>
+<div class="modal-backdrop" id="modal-backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+    <button class="modal-close" type="button" id="modal-close" aria-label="Close">&times;</button>
+    <div class="modal-body"></div>
+  </div>
+</div>
 <details class="refs">
   <summary>References (numbers in the hover boxes)</summary>
   <!--REFS-->
@@ -579,22 +666,57 @@ const DATA = /*DATA*/null;
   };
   const name = n => NAMES[n] || n;
 
+  // Hover box: deliberately minimal — just what kind of border this is, the two
+  // territories it separates, and a nudge to click for the full history.
   function renderTip(b) {
     const [kindLabel, swatch] = KIND[b.kind];
+    const simple = b.kind === 'internal' ? 'Internal border' : 'External border';
     tip.innerHTML =
-      `<div class="tip-kind"><svg width="18" height="8" aria-hidden="true">${swatch}</svg>${b.tag || kindLabel}</div>` +
+      `<div class="tip-kind"><svg width="18" height="8" aria-hidden="true">${swatch}</svg>${simple}</div>` +
       `<div class="tip-title">${b.title || name(b.a) + ' – ' + name(b.b)}</div>` +
-      (b.note ? `<div class="tip-note">${b.note}</div>` : '') +
-      (b.from ? `<div class="tip-from">From the matrix entry for ${b.from.replace(/ \(UT\)| \(NCT\)/g, '')}:</div>` : '') +
-      `<div class="tip-text">${b.text}</div>` +
-      (b.source ? `<div class="tip-source">${b.source}</div>` : '') +
+      `<div class="tip-hint">Click to know more</div>`;
+  }
+
+  // Full-history modal: everything the old hover box used to show, laid out as a
+  // reading page instead of a cursor-following box, with the timeline as a proper
+  // two-column (date, description) list.
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const modalBody = document.querySelector('.modal-body');
+  let lastFocused = null;
+
+  function renderModal(b) {
+    const [kindLabel, swatch] = KIND[b.kind];
+    modalBody.innerHTML =
+      `<div class="modal-kind"><svg width="18" height="8" aria-hidden="true">${swatch}</svg>${b.tag || kindLabel}</div>` +
+      `<div class="modal-title" id="modal-title">${b.title || name(b.a) + ' – ' + name(b.b)}</div>` +
+      (b.note ? `<div class="modal-note">${b.note}</div>` : '') +
+      (b.from ? `<div class="modal-from">From the matrix entry for ${b.from.replace(/ \(UT\)| \(NCT\)/g, '')}:</div>` : '') +
+      `<div class="modal-text">${b.text}</div>` +
+      (b.source ? `<div class="modal-source">${b.source}</div>` : '') +
       (b.timeline
-        ? `<div class="tip-timeline-head">Timeline</div><ol class="tip-timeline">` +
+        ? `<div class="modal-timeline-head">Timeline</div><ol class="modal-timeline">` +
           b.timeline.map(([when, what]) => `<li><b>${when}</b><span>${what}</span></li>`).join('') + '</ol>'
         : '') +
-      (b.text.includes('class="revision"') ? `<div class="tip-foot">Blue text: correction or update added in the matrix</div>` : '');
-    tip.classList.toggle('wide', Boolean(b.timeline));
+      (b.text.includes('class="revision"') ? `<div class="modal-foot">Blue text: correction or update added in the matrix</div>` : '');
   }
+
+  function openModal(b) {
+    renderModal(b);
+    lastFocused = document.activeElement;
+    modalBackdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.querySelector('.modal').scrollTop = 0;
+    document.getElementById('modal-close').focus();
+  }
+  function closeModal() {
+    if (modalBackdrop.hidden) return;
+    modalBackdrop.hidden = true;
+    document.body.style.overflow = '';
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
   function placeTip(x, y) {
     const gap = 16, margin = 8;
@@ -606,7 +728,7 @@ const DATA = /*DATA*/null;
     tip.style.transform = `translate(${left}px, ${top}px)`;
   }
 
-  // 5. Thicken whichever border the pointer is over and show its history.
+  // 5. Thicken whichever border the pointer is over and show its (minimal) hover box.
   let current = null;
   function setHovered(line) {
     if (line === current) return;
@@ -617,11 +739,6 @@ const DATA = /*DATA*/null;
       renderTip(info.get(current));
     }
     tip.hidden = !current;
-    // A long timeline can be taller than a short window: lay it out in two columns.
-    tip.classList.remove('split');
-    if (current && tip.querySelector('.tip-timeline') && tip.offsetHeight > innerHeight - 16) {
-      tip.classList.add('split');
-    }
   }
   function onPointer(e) {
     const border = e.target.dataset && e.target.dataset.border;
@@ -631,6 +748,14 @@ const DATA = /*DATA*/null;
   svg.addEventListener('pointerover', onPointer);
   svg.addEventListener('pointermove', onPointer);
   svg.addEventListener('pointerleave', () => setHovered(null));
+
+  // Clicking (or tapping) a border opens its full history in the modal.
+  svg.addEventListener('click', (e) => {
+    const border = e.target.dataset && e.target.dataset.border;
+    if (border === undefined) return;
+    tip.hidden = true;
+    openModal(info.get(lines[border]));
+  });
 
   // 6. Stroke widths and label sizes are in SVG user units, and the map is scaled
   //    to fit the window, so keep "1 screen px" in user units up to date.
