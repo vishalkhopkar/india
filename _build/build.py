@@ -173,12 +173,14 @@ data_json = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace(
 
 # ---------------------------------------------------- data files loaded by the page
 # The HTML holds only markup; the border/timeline/label/river data, the references
-# list, and the styling each live in their own file, written straight into ROOT
-# alongside india-borders.html (edit the _build/ source and rebuild to update them).
+# list, the styling and the page's own script each live in their own file, written
+# straight into ROOT alongside india-borders.html (edit the _build/ source and
+# rebuild to update them).
 open(ROOT + 'data.js', 'w', encoding='utf-8', newline='\n').write(f'const DATA = {data_json};\n')
 refs_json = json.dumps(refs, ensure_ascii=False).replace('</', '<\\/')
 open(ROOT + 'references.js', 'w', encoding='utf-8', newline='\n').write(f'const REFS_HTML = {refs_json};\n')
 shutil.copyfile(HERE + 'styles.css', ROOT + 'styles.css')
+shutil.copyfile(HERE + 'app.js', ROOT + 'app.js')
 
 page = open(HERE + 'template.html', encoding='utf-8').read()
 page = page.replace('<!--SVG-->', svg)
