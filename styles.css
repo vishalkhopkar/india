@@ -1,0 +1,421 @@
+  :root {
+    /* Palette: saffron, marigold, indigo, peacock green and terracotta on ivory. */
+    --saffron: #e8811c;
+    --marigold: #f2a93b;
+    --indigo: #283a80;
+    --peacock: #137a5a;
+    --terracotta: #a84d2a;
+    --ivory: #fbf6ec;
+    --sand: #e8d9bc;
+    --ink: #2a2238;
+    --muted: #6d6275;
+    --brown: #3c2a1c;
+    --brown-dark: #2c1e14;
+    --brown-light: #6b4a30;
+    --cream: #f4e9da;
+    --display: "Rozha One", Georgia, "Times New Roman", serif;
+    --body: "Mukta", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    /* Page column: fit the viewport height, but never so small that labels crowd the map. */
+    --page-w: min(100%, 1028px, max(720px, calc((100vh - 170px) * 1028 / 1152.3)));
+  }
+
+  html, body { margin: 0; }
+  body {
+    /* Column layout so the footer ribbon sits at the bottom of short pages. */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 0 16px 0;
+    color: var(--ink);
+    font: 15px/1.45 var(--body);
+    background-color: var(--ivory);
+    /* Jaali lattice of overlapping circles. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cg fill='none' stroke='%23c9a86a' stroke-opacity='.22' stroke-width='1'%3E%3Ccircle cx='0' cy='0' r='22'/%3E%3Ccircle cx='44' cy='0' r='22'/%3E%3Ccircle cx='0' cy='44' r='22'/%3E%3Ccircle cx='44' cy='44' r='22'/%3E%3Ccircle cx='22' cy='22' r='22'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* ------------------------------------------------------------ header */
+  .tricolour {
+    height: 6px;
+    margin: 0 -16px;
+    background: linear-gradient(90deg, var(--saffron) 0 33.3%, #fffaf0 33.3% 66.6%, var(--peacock) 66.6%);
+  }
+  .site-header {
+    width: var(--page-w);
+    margin: 0 auto;
+    padding: 18px 0 0;
+    text-align: center;
+  }
+  .site-header .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .site-header svg { flex: none; }
+  .site-header h1 {
+    margin: 0;
+    font: 400 clamp(26px, 4.2vw, 40px)/1.1 var(--display);
+    letter-spacing: .01em;
+    color: var(--indigo);
+  }
+  .site-header h1 span { color: var(--saffron); }
+  @media (max-width: 560px) {
+    .site-header .brand { gap: 8px; }
+    .site-header .brand svg { width: 30px; height: 30px; }
+    .site-header .brand svg:last-child { display: none; }
+  }
+
+  /* Toran: a string of marigolds and mango leaves. */
+  .toran {
+    height: 26px;
+    margin: 10px auto 14px;
+    width: var(--page-w);
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='26'%3E%3Cpath d='M0 3 Q18 7 36 3' fill='none' stroke='%23a84d2a' stroke-width='1.2'/%3E%3Cpath d='M9 5 C4 11 5 18 9 23 C13 18 14 11 9 5Z' fill='%23137a5a'/%3E%3Cpath d='M9 7 L9 21' stroke='%230c5a41' stroke-width='.7'/%3E%3Ccircle cx='27' cy='11' r='6' fill='%23f2a93b'/%3E%3Ccircle cx='27' cy='11' r='3.6' fill='%23e8811c'/%3E%3Ccircle cx='27' cy='11' r='1.4' fill='%23a84d2a'/%3E%3C/svg%3E") repeat-x center top;
+  }
+
+  .map {
+    position: relative;
+    margin: 0 auto;
+    width: var(--page-w);
+  }
+  .map > svg:not(.corner) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1028 / 1152.3;
+    border-radius: 4px;
+    /* A mount: white gap, marigold hairline, soft shadow. */
+    box-shadow: 0 0 0 6px #fff, 0 0 0 7px var(--marigold), 0 0 0 11px #fff, 0 0 0 12px var(--sand), 0 14px 40px rgba(90, 60, 20, .16);
+    /* Screen px expressed in SVG user units; kept up to date by the script. */
+    --px: 1px;
+  }
+  /* Rangoli rosettes at the corners of the mount. */
+  .map .corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+  }
+  .map .corner.tl { top: -21px; left: -21px; }
+  .map .corner.tr { top: -21px; right: -21px; }
+  .map .corner.bl { bottom: -21px; left: -21px; }
+  .map .corner.br { bottom: -21px; right: -21px; }
+
+  /* The drawn map never takes the mouse; invisible hit areas on top do. */
+  .map rect,
+  .map .coastline,
+  .map .border-line,
+  .map .labels { pointer-events: none; }
+
+  .map .hit {
+    stroke: transparent;
+    pointer-events: stroke;
+    cursor: pointer;
+  }
+  .map .hit-on   { stroke-width: calc(var(--w) + var(--px) * 1); }
+  .map .hit-near { stroke-width: calc(var(--w) + var(--px) * 6); }
+
+  .map .border-line.is-hovered {
+    stroke-width: calc(var(--w) + var(--px) * 2);
+  }
+  /* Rivers: drawn under the borders, on their own toggleable layer; never take the mouse. */
+  .map .rivers { pointer-events: none; display: none; }
+  .map.show-rivers .rivers { display: block; }
+  /* Light and thin, so they read as background context rather than competing with the borders. */
+  .map .river { fill: none; stroke: #7fa8d6; stroke-width: calc(var(--px) * 1.05); stroke-linecap: round; stroke-linejoin: round; opacity: .65; }
+  .map .river.r2 { stroke-width: calc(var(--px) * .8); opacity: .58; }
+  .map .river.r3 { stroke-width: calc(var(--px) * .62); opacity: .5; }
+
+  /* Bottom-right slider that shows/hides the river layer. */
+  .map .river-toggle {
+    position: absolute;
+    right: 1.5%;
+    bottom: 1.5%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 11px;
+    background: rgba(255, 251, 243, .95);
+    border: 1px solid var(--sand);
+    border-top: 3px solid var(--peacock);
+    border-radius: 8px;
+    font-size: 12px;
+    color: #4d4458;
+    cursor: pointer;
+    user-select: none;
+  }
+  .map .river-toggle input {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; border: 0; padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+  .map .river-toggle .switch {
+    position: relative;
+    flex: none;
+    width: 32px;
+    height: 18px;
+    background: #cfd6de;
+    border-radius: 999px;
+    transition: background .15s;
+  }
+  .map .river-toggle .switch::before {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 14px; height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    transition: transform .15s;
+  }
+  .map .river-toggle input:checked + .switch { background: var(--peacock); }
+  .map .river-toggle input:checked + .switch::before { transform: translateX(14px); }
+  .map .river-toggle input:focus-visible + .switch { outline: 2px solid var(--indigo); outline-offset: 2px; }
+
+  /* State / UT borders: grey dots at rest, the original solid line (2px thicker) on hover. */
+  .map .border-line.internal {
+    stroke: #8f8f8f;
+    stroke-width: calc(var(--px) * 1.9);
+    stroke-dasharray: 0 calc(var(--px) * 3.6);
+  }
+  .map .border-line.internal.is-hovered {
+    stroke: #9a9a9a;
+    stroke-width: calc(var(--w) + var(--px) * 2);
+    stroke-dasharray: none;
+  }
+
+  /* ------------------------------------------------------------ labels */
+  .labels text {
+    font-family: var(--body);
+    font-size: calc(var(--px) * 12);
+    text-anchor: middle;
+    dominant-baseline: central;
+    paint-order: stroke;
+    stroke: #fff;
+    stroke-width: calc(var(--px) * 3);
+    stroke-linejoin: round;
+  }
+  .labels .state   { fill: #2a2238; font-weight: 600; }
+  .labels .ut      { fill: #34408f; font-weight: 600; font-style: italic; }
+  .labels .sub     { fill: #6b6fae; font-style: italic; font-size: calc(var(--px) * 10.5); }
+  .labels .country {
+    fill: #a0785a; font-weight: 600; text-transform: uppercase;
+    letter-spacing: calc(var(--px) * 1.8); font-size: calc(var(--px) * 12);
+  }
+  .labels .end { text-anchor: end; }
+  .labels .start { text-anchor: start; }
+  .labels .leader {
+    fill: none;
+    stroke: #b9a88f;
+    stroke-width: calc(var(--px) * .8);
+  }
+  .labels .leader-dot { fill: #b9a88f; }
+
+  /* ------------------------------------------------------------ legend */
+  .legend {
+    position: absolute;
+    top: 1.5%;
+    right: 1.5%;
+    padding: 9px 12px 8px;
+    background: rgba(255, 251, 243, .95);
+    border: 1px solid var(--sand);
+    border-top: 3px solid var(--marigold);
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: #4d4458;
+    pointer-events: none;
+  }
+  .legend div { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+  .legend svg { flex: none; }
+  .legend .hint { margin-top: 6px; color: var(--terracotta); font-style: italic; }
+  /* On narrow screens the legend would cover the map: move it below, drop the corner rosettes. */
+  @media (max-width: 560px) {
+    .legend { position: static; margin-top: 20px; }
+    .map .corner { display: none; }
+  }
+
+  /* ------------------------------------------------------------ hover box */
+  /* Deliberately minimal: kind, the two territories, and a nudge to click for more. */
+  .tip {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    max-width: 280px;
+    padding: 10px 13px 9px;
+    /* Saffron-to-green ribbon along the top edge. */
+    background: linear-gradient(90deg, var(--saffron), var(--marigold) 45%, var(--peacock)) top / 100% 4px no-repeat, #fffdf8;
+    border: 1px solid var(--sand);
+    border-radius: 8px;
+    box-shadow: 0 8px 28px rgba(70, 45, 15, .2);
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--ink);
+    pointer-events: none;
+  }
+  .tip-kind {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #6b7587;
+  }
+  .tip-kind svg { flex: none; }
+  .tip-title { margin: 2px 0 6px; font: 400 18px/1.2 var(--display); color: var(--indigo); }
+  .tip-hint { font-size: 11.5px; font-style: italic; color: var(--terracotta); }
+
+  /* ------------------------------------------------------------ full-history modal */
+  .modal-backdrop[hidden] { display: none; }
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    background: rgba(20, 12, 6, .55);
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+  .modal {
+    position: relative;
+    width: 100%;
+    max-width: 620px;
+    max-height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 26px 26px 24px;
+    background: linear-gradient(90deg, var(--saffron), var(--marigold) 45%, var(--peacock)) top / 100% 5px no-repeat, var(--brown);
+    color: var(--cream);
+    border-radius: 12px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .45);
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, .1);
+    color: var(--cream);
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .modal-close:hover { background: rgba(255, 255, 255, .2); }
+  .modal-kind {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--marigold);
+    padding-right: 34px;
+  }
+  .modal-kind svg { flex: none; }
+  .modal-title { margin: 4px 46px 10px 0; font: 400 26px/1.2 var(--display); color: var(--cream); }
+  .modal-note {
+    margin: 0 0 12px;
+    padding: 8px 11px;
+    background: rgba(255, 255, 255, .09);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--cream);
+  }
+  .modal .revision { color: #9fd3ff; }
+  .modal sup.ref { font-size: 10px; color: var(--marigold); line-height: 0; white-space: nowrap; }
+  .modal sup.ref a { color: inherit; text-decoration: none; }
+  .modal-from { margin-bottom: 4px; font-size: 12px; color: #d8c5b0; }
+  .modal-text { font-size: 15px; line-height: 1.55; }
+  .modal-source { margin-top: 10px; font-size: 12px; color: #d8c5b0; }
+  .modal-foot { margin-top: 8px; font-size: 12px; color: #9fd3ff; }
+  .modal-timeline-head {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, .18);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--marigold);
+  }
+  .modal-timeline { list-style: none; margin: 10px 0 0; padding: 0; }
+  .modal-timeline li {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 16px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .modal-timeline li:first-child { border-top: none; padding-top: 4px; }
+  .modal-timeline b {
+    color: var(--marigold);
+    font: 400 15px/1.35 var(--display);
+    letter-spacing: .01em;
+  }
+  /* Below this, a left-hand date column crowds the text: stack date over description. */
+  @media (max-width: 560px) {
+    .modal { padding: 22px 18px 20px; border-radius: 10px; }
+    .modal-title { margin-right: 40px; font-size: 22px; }
+    .modal-timeline li { grid-template-columns: 1fr; gap: 3px; }
+  }
+
+  /* ------------------------------------------------------------ references */
+  .refs {
+    margin: 30px auto 0;
+    width: var(--page-w);
+    box-sizing: border-box;
+    padding: 12px 16px;
+    background: #fffdf8;
+    border: 1px solid var(--sand);
+    border-left: 4px solid var(--saffron);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .refs summary { cursor: pointer; font: 400 17px/1.3 var(--display); color: var(--indigo); }
+  .refs ol { margin: 10px 0 4px; padding-left: 28px; }
+  .refs li { margin: 0 0 6px; }
+  .refs li::marker { color: var(--terracotta); font-weight: 600; }
+  .refs a { color: var(--peacock); overflow-wrap: anywhere; }
+
+  /* ------------------------------------------------------------ footer */
+  .site-footer {
+    width: var(--page-w);
+    margin: auto auto 0;
+    padding: 26px 0;
+    text-align: center;
+    color: var(--muted);
+  }
+  .site-footer .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .site-footer .divider::before,
+  .site-footer .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--marigold), transparent);
+  }
+  .site-footer p { margin: 0; font-size: 15px; letter-spacing: .02em; }
+  .site-footer p strong { font: 400 17px var(--display); color: var(--indigo); letter-spacing: .01em; }
+  .site-footer + .tricolour { margin-top: 0; }

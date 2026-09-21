@@ -1,5 +1,5 @@
 """Build india-borders.html: the SVG inlined verbatim + border history + labels."""
-import re, json, html
+import re, json, html, shutil
 
 import os
 HERE = os.path.dirname(os.path.abspath(__file__)).replace(os.sep, '/') + '/'   # this _build folder
@@ -171,7 +171,16 @@ assert not missing, missing
 data = {'borders': borders, 'labels': label_data(), 'rivers': load_rivers(HERE + 'rivers/')}
 data_json = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 
+# ---------------------------------------------------- data files loaded by the page
+# The HTML holds only markup; the border/timeline/label/river data, the references
+# list, and the styling each live in their own file, written straight into ROOT
+# alongside india-borders.html (edit the _build/ source and rebuild to update them).
+open(ROOT + 'data.js', 'w', encoding='utf-8', newline='\n').write(f'const DATA = {data_json};\n')
+refs_json = json.dumps(refs, ensure_ascii=False).replace('</', '<\\/')
+open(ROOT + 'references.js', 'w', encoding='utf-8', newline='\n').write(f'const REFS_HTML = {refs_json};\n')
+shutil.copyfile(HERE + 'styles.css', ROOT + 'styles.css')
+
 page = open(HERE + 'template.html', encoding='utf-8').read()
-page = page.replace('<!--SVG-->', svg).replace('/*DATA*/null', data_json).replace('<!--REFS-->', refs)
+page = page.replace('<!--SVG-->', svg)
 open(ROOT + 'india-borders.html', 'w', encoding='utf-8', newline='\n').write(page)
 print('ok', len(page))
