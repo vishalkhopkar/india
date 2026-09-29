@@ -236,6 +236,9 @@
   @media (max-width: 560px) {
     .legend { position: static; margin-top: 20px; }
     .map .corner { display: none; }
+    /* Place names (and their leader lines) crowd a phone-sized map: the lines
+       themselves are what this view is for, so drop the names and keep them. */
+    .map .labels { display: none; }
   }
 
   /* ------------------------------------------------------------ hover box */
