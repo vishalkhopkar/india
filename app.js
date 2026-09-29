@@ -1,7 +1,69 @@
-document.getElementById('refs-list').innerHTML = REFS_HTML;
+// ------------------------------------------------------------------ timelines
+// The timelines and the references they cite are hand-edited data files in
+// timelines/, read by the page as they are. Merging them, numbering the
+// references and rendering the citation links used to happen in the build; doing
+// it here is what lets a timeline be changed by editing a file and reloading.
+(function () {
+  const refs = new Map();       // ref key -> [title, description, url], in definition order
+  const timelines = new Map();  // "Region A|Region B" (names sorted) -> [[when, what, [ref keys]]]
+
+  for (const region of TIMELINE_REGIONS) {
+    const data = TIMELINES[region];
+    if (!data) { console.warn(`timelines: region "${region}" did not load`); continue; }
+    for (const [key, ref] of Object.entries(data.refs || {})) {
+      if (refs.has(key)) console.warn(`timelines: reference "${key}" is defined twice`);
+      else refs.set(key, ref);
+    }
+    for (const [pair, items] of Object.entries(data.timelines || {})) {
+      const key = pair.split('|').map(s => s.trim()).sort().join('|');
+      if (timelines.has(key)) console.warn(`timelines: "${key}" has two timelines`);
+      else timelines.set(key, items);
+    }
+  }
+
+  // Reference numbers: "m1".."m35" are the matrix's own list; every other cited
+  // reference is numbered after it, from 36, in the order the files define them.
+  const cited = new Set();
+  for (const items of timelines.values())
+    for (const [, , keys] of items) for (const key of keys) cited.add(key);
+  const number = new Map();
+  for (const key of cited) if (/^m[0-9]+$/.test(key)) number.set(key, +key.slice(1));
+  let next = 36;
+  for (const key of refs.keys()) if (cited.has(key)) number.set(key, next++);
+  for (const key of cited) if (!number.has(key)) console.warn(`timelines: cited reference "${key}" is not defined`);
+
+  const cite = keys => '<sup class="ref">' +
+    [...new Set(keys.map(key => number.get(key)))].filter(n => n !== undefined).sort((a, b) => a - b)
+      .map(n => `<a href="#ref-${n}">[${n}]</a>`).join('') + '</sup>';
+
+  // Hand each border its timeline. A border can be drawn as several paths (a long
+  // line cut into parts); each part carries the same pair of names, so each gets it.
+  const used = new Set();
+  for (const border of Object.values(DATA.borders).flat(2)) {
+    const key = [border.a, border.b].sort().join('|');
+    const items = timelines.get(key);
+    if (!items) continue;
+    used.add(key);
+    border.timeline = items.map(([when, what, keys]) => [when, keys.length ? `${what} ${cite(keys)}` : what]);
+  }
+  for (const key of timelines.keys()) if (!used.has(key)) console.warn(`timelines: "${key}" matches no border on the map`);
+
+  // The references list: the matrix's own <ol>, plus every reference cited above.
+  const extra = [...refs].filter(([key]) => number.has(key)).map(([key, [title, desc, url]]) =>
+    `<li id="ref-${number.get(key)}"><strong>${title}</strong> — ${desc} ` +
+    `<a href="${url}" rel="noopener noreferrer" target="_blank">Source</a></li>`).join('');
+  document.getElementById('refs-list').innerHTML = REFS_HTML.replace('</ol>', () => extra + '</ol>');
+})();
 
 (function () {
   const NS = 'http://www.w3.org/2000/svg';
+
+  // The drawn map is india-borders.svg, kept out of the page and handed over as
+  // markup in map.js. Put it in the frame's placeholder, keeping its position
+  // between the corner rosettes and the legend, and everything below works on
+  // the SVG exactly as if the page had carried it all along.
+  document.getElementById('map-svg').outerHTML = MAP_SVG;
+
   const svg = document.querySelector('.map > svg:not(.corner)');
   const tip = document.querySelector('.tip');
 
@@ -171,11 +233,13 @@ document.getElementById('refs-list').innerHTML = REFS_HTML;
   const modalBody = document.querySelector('.modal-body');
   let lastFocused = null;
 
-  function renderModal(b) {
+  // The history block, shared by the modal and the data view. titleId is the modal's
+  // aria-labelledby target; the data view passes none, so the id stays unique.
+  function historyHTML(b, titleId) {
     const [kindLabel, swatch] = KIND[b.kind];
-    modalBody.innerHTML =
+    return (
       `<div class="modal-kind"><svg width="18" height="8" aria-hidden="true">${swatch}</svg>${b.tag || kindLabel}</div>` +
-      `<div class="modal-title" id="modal-title">${b.title || name(b.a) + ' – ' + name(b.b)}</div>` +
+      `<div class="modal-title"${titleId ? ` id="${titleId}"` : ''}>${b.title || name(b.a) + ' – ' + name(b.b)}</div>` +
       (b.note ? `<div class="modal-note">${b.note}</div>` : '') +
       (b.from ? `<div class="modal-from">From the matrix entry for ${b.from.replace(/ \(UT\)| \(NCT\)/g, '')}:</div>` : '') +
       `<div class="modal-text">${b.text}</div>` +
@@ -184,7 +248,11 @@ document.getElementById('refs-list').innerHTML = REFS_HTML;
         ? `<div class="modal-timeline-head">Timeline</div><ol class="modal-timeline">` +
           b.timeline.map(([when, what]) => `<li><b>${when}</b><span>${what}</span></li>`).join('') + '</ol>'
         : '') +
-      (b.text.includes('class="revision"') ? `<div class="modal-foot">Blue text: correction or update added in the matrix</div>` : '');
+      (b.text.includes('class="revision"') ? `<div class="modal-foot">Blue text: correction or update added in the matrix</div>` : ''));
+  }
+
+  function renderModal(b) {
+    modalBody.innerHTML = historyHTML(b, 'modal-title');
   }
 
   function openModal(b) {
@@ -260,4 +328,112 @@ document.getElementById('refs-list').innerHTML = REFS_HTML;
   updateScale();
   addEventListener('resize', updateScale);
   if ('ResizeObserver' in window) new ResizeObserver(updateScale).observe(svg);
+
+  // 7. The two views. The map is one way to reach a border's history; the data view
+  //    is the other, reading the same DATA.borders entries through two dropdowns.
+  const tabs = [...document.querySelectorAll('.tab')];
+  const view = tab => document.getElementById(tab.getAttribute('aria-controls'));
+  function showTab(tab) {
+    for (const t of tabs) {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      view(t).hidden = !on;
+    }
+    // The map cannot be measured while hidden, so its scale is stale on the way back.
+    if (view(tab).contains(svg)) updateScale();
+  }
+  for (const tab of tabs) {
+    tab.addEventListener('click', () => showTab(tab));
+    tab.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const step = e.key === 'ArrowRight' ? 1 : tabs.length - 1;
+      const next = tabs[(tabs.indexOf(tab) + step) % tabs.length];
+      showTab(next);
+      next.focus();
+    });
+  }
+
+  // Every border indexed by the pair it separates, and who borders whom. A pair can
+  // hold several lines (a claim line, the Line of Control beside it); lines that
+  // would read identically are folded into one.
+  const ORDER = ['internal', 'external', 'loc', 'lac', 'defacto'];
+  const pairKey = (a, b) => [a, b].sort().join('|');
+  const pairs = new Map();
+  const partners = new Map();
+  const indian = new Set();
+  for (const border of Object.values(DATA.borders).flat(2)) {
+    const key = pairKey(border.a, border.b);
+    if (!pairs.has(key)) pairs.set(key, []);
+    const lines = pairs.get(key);
+    const sig = JSON.stringify([border.kind, border.tag, border.title, border.note, border.text]);
+    if (!lines.some(l => l.sig === sig)) lines.push({ sig, border });
+    for (const [x, y] of [[border.a, border.b], [border.b, border.a]]) {
+      if (!partners.has(x)) partners.set(x, new Set());
+      partners.get(x).add(y);
+    }
+    if (border.kind === 'internal') { indian.add(border.a); indian.add(border.b); }
+  }
+  for (const lines of pairs.values()) lines.sort((p, q) => ORDER.indexOf(p.border.kind) - ORDER.indexOf(q.border.kind));
+
+  // A name that never appears on an internal border belongs to a neighbouring country.
+  const places = [...partners.keys()].sort((x, y) => name(x).localeCompare(name(y)));
+  const GROUPS = [
+    ['States and union territories', places.filter(n => indian.has(n))],
+    ['Neighbouring countries', places.filter(n => !indian.has(n))],
+  ];
+
+  const pickA = document.getElementById('pick-a');
+  const pickB = document.getElementById('pick-b');
+  const showBtn = document.getElementById('show-timeline');
+  const result = document.getElementById('data-result');
+
+  // Refill a dropdown with the places still possible, keeping its choice if it survives.
+  function fill(select, allowed) {
+    const chosen = select.value;
+    select.textContent = '';
+    select.append(new Option(allowed ? 'Choose a neighbour…' : 'Choose…', ''));
+    for (const [label, names] of GROUPS) {
+      const list = allowed ? names.filter(n => allowed.has(n)) : names;
+      if (!list.length) continue;
+      const group = document.createElement('optgroup');
+      group.label = label;
+      for (const n of list) group.append(new Option(name(n), n));
+      select.append(group);
+    }
+    select.value = [...select.options].some(o => o.value === chosen) ? chosen : '';
+  }
+
+  // The first dropdown always offers every place; the second one narrows to the
+  // places the first actually borders. (Narrowing both ways would mean a chosen
+  // neighbour could shrink the first list out from under the next question.)
+  fill(pickA, null);
+  fill(pickB, null);
+  pickA.addEventListener('change', () => {
+    fill(pickB, pickA.value ? partners.get(pickA.value) : null);
+    ready();
+  });
+  pickB.addEventListener('change', ready);
+
+  function ready() {
+    showBtn.disabled = !(pickA.value && pickB.value);
+    result.textContent = '';   // what is on screen is no longer the question being asked
+  }
+
+  showBtn.addEventListener('click', () => {
+    const lines = pairs.get(pairKey(pickA.value, pickB.value));
+    if (!lines) return;
+    const [first, ...rest] = lines;
+    const more = rest.map(({ border }) => {
+      const [kindLabel, swatch] = KIND[border.kind];
+      return '<div class="history-more-item">' +
+        `<div class="modal-kind"><svg width="18" height="8" aria-hidden="true">${swatch}</svg>${border.tag || kindLabel}</div>` +
+        (border.title ? `<div class="history-more-title">${border.title}</div>` : '') +
+        (border.note ? `<div class="modal-note">${border.note}</div>` : '') +
+        '</div>';
+    }).join('');
+    result.innerHTML = '<div class="history">' + historyHTML(first.border) +
+      (rest.length ? '<div class="history-more"><div class="history-more-head">Also drawn along this border</div>' + more + '</div>' : '') +
+      '</div>';
+  });
 })();

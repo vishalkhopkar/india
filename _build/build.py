@@ -1,4 +1,4 @@
-"""Build india-borders.html: the SVG inlined verbatim + border history + labels."""
+"""Build india-borders.html: the drawn map, border history, labels and rivers as data files."""
 import re, json, html, shutil
 
 import os
@@ -24,31 +24,9 @@ assert len(history) == 93, len(history)
 
 refs = re.search(r'<ol>.*?</ol>', matrix, flags=re.S).group(0)
 
-# ------------------------------------------ extra references and timelines
-# Timelines and their references live in timelines.py. New references are
-# numbered after the matrix's own [1]-[35], in the order they are defined there.
-from timelines import REFS, TIMELINES
-
-cited = {k for items in TIMELINES.values() for _w, _t, keys in items for k in keys}
-unknown = {k for k in cited if not re.fullmatch(r'm\d+', k) and k not in REFS}
-assert not unknown, unknown
-REF_NO = {k: 36 + i for i, k in enumerate(k for k in REFS if k in cited)}
-for k in cited:
-    if re.fullmatch(r'm\d+', k):
-        REF_NO[k] = int(k[1:])
-refs = refs.replace('</ol>', ''.join(
-    f'<li id="ref-{REF_NO[key]}"><strong>{title}</strong> — {desc} '
-    f'<a href="{url}" rel="noopener noreferrer" target="_blank">Source</a></li>'
-    for key, (title, desc, url) in REFS.items() if key in REF_NO) + '</ol>')
-
-def cite(keys):
-    nums = sorted({REF_NO[k] for k in keys})
-    return '<sup class="ref">' + ''.join(f'<a href="#ref-{n}">[{n}]</a>' for n in nums) + '</sup>'
-
-RENDERED_TIMELINES = {
-    key: [(when, f'{text} {cite(keys)}' if keys else text) for when, text, keys in items]
-    for key, items in TIMELINES.items()
-}
+# The references list is the matrix's own <ol>. The timelines, the references they
+# cite and their numbering now live in timelines/<region>.js, read by the page
+# itself (app.js), so changing a timeline needs no rebuild.
 
 # ------------------------------------------------ which pair each SVG line is
 # Paths inside each SVG layer are in alphabetical order of the pair (verified
@@ -120,8 +98,6 @@ def entry(pair, kind, part=None, tag=None, title=None, note=None, text_from=None
         e['text'] = EXTRA[src]
     if kind == 'external' and key in CLAIM_NOTE:
         e['note'] = CLAIM_NOTE[key]
-    if key in RENDERED_TIMELINES:
-        e['timeline'] = RENDERED_TIMELINES[key]
     for k, v in (('part', part), ('tag', tag), ('title', title), ('note', note)):
         if v is not None:
             e[k] = v
@@ -172,10 +148,16 @@ data = {'borders': borders, 'labels': label_data(), 'rivers': load_rivers(HERE +
 data_json = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 
 # ---------------------------------------------------- data files loaded by the page
-# The HTML holds only markup; the border/timeline/label/river data, the references
-# list, the styling and the page's own script each live in their own file, written
-# straight into ROOT alongside india-borders.html (edit the _build/ source and
-# rebuild to update them).
+# The HTML holds only the page's own frame; the drawn map, the border/timeline/label/
+# river data, the references list, the styling and the page's own script each live in
+# their own file, written straight into ROOT alongside india-borders.html (edit the
+# _build/ source and rebuild to update them).
+#
+# The map goes out as markup in a .js file rather than being fetched from
+# india-borders.svg, so the page still works opened straight from disk (file://
+# blocks fetch); app.js drops it into the frame.
+svg_json = json.dumps(svg, ensure_ascii=False).replace('</', '<\\/')
+open(ROOT + 'map.js', 'w', encoding='utf-8', newline='\n').write(f'const MAP_SVG = {svg_json};\n')
 open(ROOT + 'data.js', 'w', encoding='utf-8', newline='\n').write(f'const DATA = {data_json};\n')
 refs_json = json.dumps(refs, ensure_ascii=False).replace('</', '<\\/')
 open(ROOT + 'references.js', 'w', encoding='utf-8', newline='\n').write(f'const REFS_HTML = {refs_json};\n')
@@ -183,6 +165,5 @@ shutil.copyfile(HERE + 'styles.css', ROOT + 'styles.css')
 shutil.copyfile(HERE + 'app.js', ROOT + 'app.js')
 
 page = open(HERE + 'template.html', encoding='utf-8').read()
-page = page.replace('<!--SVG-->', svg)
 open(ROOT + 'india-borders.html', 'w', encoding='utf-8', newline='\n').write(page)
 print('ok', len(page))

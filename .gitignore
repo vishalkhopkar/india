@@ -13,7 +13,7 @@ _build/rivers/ref_rivers.json
 _build/rivers/preview_*.png
 _build/rivers/preview_*.html
 
-# Scratch files with no effect on the build (NOTE: _build/tl_*.py are NOT here — timelines.py
-# execs them at build time, they are required, not disposable)
+# Scratch files with no effect on the build (NOTE: the timeline data is NOT here — it
+# lives in timelines/*.js at the project root and is read by the page itself)
 _build/check_region.py
 _build/_todo.txt

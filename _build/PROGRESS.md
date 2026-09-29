@@ -54,10 +54,9 @@ one done (Haryana–Rajasthan).
 
 | File | Role |
 |---|---|
-| `build.py` | `python build.py` rebuilds `../india-borders.html`. It reads `../india-borders.svg`, `../india-border-provenance-matrix-sourced.html`, `template.html` and `timelines.py`. |
-| `template.html` | Page CSS and JavaScript (labels, hit areas, hover box, timeline rendering, two-column layout on short windows). Since 2026-09-14 it also holds the header ("Every Indian border mapped"), the footer ("An ongoing project of Vishal Khopkar") and the Indian theme: palette in `:root`, Rozha One and Mukta fonts from Google Fonts, jaali background, toran divider, rangoli rosette symbol `#rangoli`. The map SVG is selected with `.map > svg:not(.corner)`, because the corner rosettes are also SVGs inside `.map`. |
-| `timelines.py` | Defines `ref(key, title, desc, url)` and `timeline('A|B', (when, text, [keys]), ...)`. It runs the regional files `tl_nw.py`, `tl_north.py`, `tl_west.py`, `tl_south.py`, `tl_east.py` and `tl_ne.py` in that order, skipping any that don't exist. |
-| `tl_nw.py`, `tl_north.py` | Timelines done so far. |
+| `build.py` | `python build.py` rebuilds `../india-borders.html`. It reads `../india-borders.svg`, `../india-border-provenance-matrix-sourced.html` and `template.html`, and writes `../map.js`, `../data.js`, `../references.js`, `../app.js`, `../styles.css` and the page. It does **not** touch the timelines. |
+| `template.html` | The page's markup. Since 2026-09-29 it holds two tabbed views: **Map view** (the map, unchanged) and **Data view**, where two dropdowns — the second narrowed to the places the first borders — open the same history block the map's modal shows. Both are filled by `app.js` from `DATA.borders`. Since 2026-09-14 it also holds the header ("Every Indian border mapped"), the footer ("An ongoing project of Vishal Khopkar") and the Indian theme: palette in `:root`, Rozha One and Mukta fonts from Google Fonts, jaali background, toran divider, rangoli rosette symbol `#rangoli`. The map SVG is selected with `.map > svg:not(.corner)`, because the corner rosettes are also SVGs inside `.map`. |
+| `../timelines/*.js` | The timelines and the references they cite, one file per region: hand-edited data read straight by the page, no build step. Was `timelines.py` + `tl_*.py` until 2026-09-29; format in `../timelines/README.md`. |
 | `hovertest.mjs` | `node hovertest.mjs 1400 900` drives headless Chrome with real mouse events. It checks every border is reachable, grows 2px, shows the pointer cursor and opens its hover box; the tooltip dims print as `TIPDIMS`. |
 | `_todo.txt` | Pairs still without a timeline (regenerate with the snippet at the end of this file). |
 
@@ -108,33 +107,32 @@ Conventions:
 
 ## Done (29)
 
-- **Region file `timelines.py`:** Haryana|Rajasthan.
-- **Region file `tl_nw.py`:**
+- **Region file `timelines/nw.js`:** Haryana|Rajasthan, and:
   - Punjab: Punjab|Rajasthan, Haryana|Punjab, Pakistan|Punjab
   - Chandigarh: Chandigarh|Haryana, Chandigarh|Punjab
   - Delhi and Haryana: Delhi (NCT)|Haryana, Delhi (NCT)|Uttar Pradesh, Haryana|Uttar Pradesh, Haryana|Himachal Pradesh
   - Himachal: Himachal Pradesh|Punjab, Himachal Pradesh|Jammu and Kashmir (UT), Himachal Pradesh|Ladakh, China|Himachal Pradesh
   - J&K and Ladakh: Jammu and Kashmir (UT)|Punjab, Jammu and Kashmir (UT)|Ladakh, Jammu and Kashmir (UT)|Pakistan, Ladakh|Pakistan, China|Ladakh, Afghanistan|Ladakh
   - West: Pakistan|Rajasthan, Gujarat|Pakistan
-- **Region file `tl_north.py`:** Nepal|Uttarakhand, Nepal|Uttar Pradesh, Bihar|Nepal, Uttar Pradesh|Uttarakhand, Himachal Pradesh|Uttarakhand, China|Uttarakhand, Bihar|Uttar Pradesh.
+- **Region file `timelines/north.js`:** Nepal|Uttarakhand, Nepal|Uttar Pradesh, Bihar|Nepal, Uttar Pradesh|Uttarakhand, Himachal Pradesh|Uttarakhand, China|Uttarakhand, Bihar|Uttar Pradesh.
 
 ## 2026-09-14: parallel research run (subagents)
 
 The 66 remaining pairs were split across 9 research subagents. Each one writes only its own file,
 uses its own reference-key prefix, and validates with `python check_region.py <file>`. The
-loader in `timelines.py` already lists all these files and skips any that don't exist.
+page loads every file listed in `timelines/index.js`.
 
 | File | Prefix | Pairs |
 |---|---|---|
-| `tl_north2.py` | `n2_` | Jharkhand/Chhattisgarh/Madhya Pradesh/Rajasthan with Uttar Pradesh |
-| `tl_west.py` | `w_` | Gujarat–Maharashtra, DNH&DD with Gujarat and with Maharashtra, Goa with Maharashtra and with Karnataka, Gujarat with Rajasthan and with MP |
-| `tl_centre.py` | `c_` | MP with Rajasthan and with Maharashtra; Chhattisgarh with MP, Maharashtra, Odisha, Telangana, Jharkhand and AP |
-| `tl_south.py` | `s_` | AP with Telangana, Karnataka, TN, Odisha and Puducherry; Telangana with Maharashtra and with Karnataka |
-| `tl_south2.py` | `s2_` | Karnataka with Kerala, Maharashtra and TN; Kerala with TN and with Puducherry; Puducherry–TN |
-| `tl_east.py` | `e_` | Bihar with Jharkhand and with WB; Jharkhand with WB and with Odisha; Odisha–WB; Bangladesh–WB |
-| `tl_sikkim.py` | `h_` | Sikkim–WB, Nepal with WB and with Sikkim, Bhutan with WB and with Sikkim, China–Sikkim |
-| `tl_ne.py` | `ne_` | The Assam internal pairs (with Arunachal, Nagaland, Meghalaya, Mizoram, Manipur, Tripura, WB), Arunachal–Nagaland, Manipur with Nagaland and with Mizoram, Mizoram–Tripura |
-| `tl_ne2.py` | `nx_` | The Myanmar ×4, Bangladesh ×4 (Assam, Meghalaya, Tripura, Mizoram), Bhutan ×2 (Arunachal, Assam) and Arunachal–China pairs |
+| `timelines/north2.js` | `n2_` | Jharkhand/Chhattisgarh/Madhya Pradesh/Rajasthan with Uttar Pradesh |
+| `timelines/west.js` | `w_` | Gujarat–Maharashtra, DNH&DD with Gujarat and with Maharashtra, Goa with Maharashtra and with Karnataka, Gujarat with Rajasthan and with MP |
+| `timelines/centre.js` | `c_` | MP with Rajasthan and with Maharashtra; Chhattisgarh with MP, Maharashtra, Odisha, Telangana, Jharkhand and AP |
+| `timelines/south.js` | `s_` | AP with Telangana, Karnataka, TN, Odisha and Puducherry; Telangana with Maharashtra and with Karnataka |
+| `timelines/south2.js` | `s2_` | Karnataka with Kerala, Maharashtra and TN; Kerala with TN and with Puducherry; Puducherry–TN |
+| `timelines/east.js` | `e_` | Bihar with Jharkhand and with WB; Jharkhand with WB and with Odisha; Odisha–WB; Bangladesh–WB |
+| `timelines/sikkim.js` | `h_` | Sikkim–WB, Nepal with WB and with Sikkim, Bhutan with WB and with Sikkim, China–Sikkim |
+| `timelines/ne.js` | `ne_` | The Assam internal pairs (with Arunachal, Nagaland, Meghalaya, Mizoram, Manipur, Tripura, WB), Arunachal–Nagaland, Manipur with Nagaland and with Mizoram, Mizoram–Tripura |
+| `timelines/ne2.js` | `nx_` | The Myanmar ×4, Bangladesh ×4 (Assam, Meghalaya, Tripura, Mizoram), Bhutan ×2 (Arunachal, Assam) and Arunachal–China pairs |
 
 If a run is interrupted:
 1. Check which files exist and pass `check_region.py`.
@@ -149,18 +147,18 @@ each time, so partial research survives an interruption. Rerun on 2026-09-14 wit
 **Outcome of the retry (Sonnet agents, save-per-pair):** the usage limit hit again, but 24 pairs
 were saved and all validate. They are built into the HTML (2026-09-15).
 - **Total: 53 of 95 pairs done.**
-- Fixed one agent error in `tl_north2.py`: the SRA 1956 entry wrongly said the Act "formed Uttar
+- Fixed one agent error in `timelines/north2.js`: the SRA 1956 entry wrongly said the Act "formed Uttar
   Pradesh".
 - Saved per file:
-  - `tl_north2.py`: all 4 done.
-  - `tl_centre.py`: MP–Rajasthan, MP–Maharashtra, Chhattisgarh with MP and with Maharashtra.
-  - `tl_west.py`: Gujarat–Maharashtra.
-  - `tl_south.py`: AP with Telangana and with Karnataka.
-  - `tl_south2.py`: Karnataka with Kerala and with Maharashtra.
-  - `tl_east.py`: Bihar–Jharkhand, Bihar–WB, Jharkhand–WB.
-  - `tl_sikkim.py`: Nepal–Sikkim, Nepal–WB, Sikkim–WB.
-  - `tl_ne.py`: Arunachal–Assam.
-  - `tl_ne2.py`: the four Myanmar pairs.
+  - `timelines/north2.js`: all 4 done.
+  - `timelines/centre.js`: MP–Rajasthan, MP–Maharashtra, Chhattisgarh with MP and with Maharashtra.
+  - `timelines/west.js`: Gujarat–Maharashtra.
+  - `timelines/south.js`: AP with Telangana and with Karnataka.
+  - `timelines/south2.js`: Karnataka with Kerala and with Maharashtra.
+  - `timelines/east.js`: Bihar–Jharkhand, Bihar–WB, Jharkhand–WB.
+  - `timelines/sikkim.js`: Nepal–Sikkim, Nepal–WB, Sikkim–WB.
+  - `timelines/ne.js`: Arunachal–Assam.
+  - `timelines/ne2.js`: the four Myanmar pairs.
 - Some files define references for pairs not yet written. That's harmless, because only cited
   references are listed.
 - **Remaining 42 pairs:** see `_todo.txt`. Each belongs to the file of the same region per the
@@ -172,14 +170,14 @@ were saved and all validate. They are built into the HTML (2026-09-15).
 all files validate and the hover test passes.
 - Complete: `tl_north2`, `tl_centre`, `tl_south`, `tl_south2`, `tl_sikkim`.
 - **Remaining 10 pairs** (the usage limit hit again):
-  - `tl_west.py`: Gujarat|Madhya Pradesh
-  - `tl_east.py`: Bangladesh|West Bengal
-  - `tl_ne.py`: Arunachal Pradesh|Nagaland, Assam|West Bengal, Manipur|Mizoram, Manipur|Nagaland, Mizoram|Tripura
-  - `tl_ne2.py`: Arunachal Pradesh|Bhutan, Assam|Bhutan, Arunachal Pradesh|China
+  - `timelines/west.js`: Gujarat|Madhya Pradesh
+  - `timelines/east.js`: Bangladesh|West Bengal
+  - `timelines/ne.js`: Arunachal Pradesh|Nagaland, Assam|West Bengal, Manipur|Mizoram, Manipur|Nagaland, Mizoram|Tripura
+  - `timelines/ne2.js`: Arunachal Pradesh|Bhutan, Assam|Bhutan, Arunachal Pradesh|China
 
 ## To do (66), suggested order and research leads
 
-### North, remainder (append to `tl_north.py`)
+### North, remainder (append to `timelines/north.js`)
 - **Jharkhand|Uttar Pradesh:** not researched yet.
   - Leads: Palamau district (Chota Nagpur) vs Mirzapur and, later, Sonbhadra (1989); Chota Nagpur Division; Bihar & Orissa 1912; Bihar 1936; Bihar Reorganisation Act 2000 (`m9`).
 - **Chhattisgarh|Uttar Pradesh** (currently shows a short EXTRA text in `build.py`):
@@ -189,7 +187,7 @@ all files validate and the hover test passes.
 - **Rajasthan|Uttar Pradesh:**
   - Leads: Bharatpur, Dholpur and Karauli vs Agra and Mathura (ceded 1803 in the Surji-Anjangaon / Lake campaign); Matsya Union 1948; Rajasthan 1949.
 
-### West and centre (new file `tl_west.py`)
+### West and centre (new file `timelines/west.js`)
 - **Gujarat|Maharashtra:**
   - Leads: Bombay Presidency districts of Surat, Thana and West Khandesh; Baroda state; the Dangs; the Dharampur, Bansda and Surgana states.
   - Also: Bombay State 1956, the Samyukta Maharashtra movement, and the Bombay Reorganisation Act 1960 (`m4`) village schedules.
@@ -210,7 +208,7 @@ all files validate and the hover test passes.
   - Chhattisgarh|Madhya Pradesh, Chhattisgarh|Maharashtra, Chhattisgarh|Odisha, Chhattisgarh|Telangana, Chhattisgarh|Jharkhand, Andhra Pradesh|Chhattisgarh
   - Leads: Chhattisgarh division of the CP (1862); the Chhattisgarh Feudatory States and Eastern States Agency, merged into the CP on 1 Jan 1948; Bastar; Madhya Pradesh Reorganisation Act 2000; the 2014 transfer of the Polavaram mandals (`m10`/`m11`).
 
-### South (new file `tl_south.py`)
+### South (new file `timelines/south.js`)
 - **Andhra Pradesh pairs:** AP|Telangana, AP|Karnataka, AP|Tamil Nadu, AP|Odisha, AP|Puducherry.
   - Leads: Madras Presidency and Hyderabad; Andhra State 1 Oct 1953; the Bellary partition; AP 1 Nov 1956; Tiruttani to Madras under the 1959 alteration of boundaries Act; Telangana 2 Jun 2014 (`m10`).
   - Also: Kotia (AP–Odisha); the Orissa province of 1936 (`m24`).
@@ -221,7 +219,7 @@ all files validate and the hover test passes.
   - Leads: French India; de facto transfer 1 Nov 1954; de jure 1962 (`m20`).
 - **Maharashtra|Telangana:** Hyderabad State; Marathwada to Bombay State in 1956.
 
-### East (new file `tl_east.py`)
+### East (new file `timelines/east.js`)
 - **Bengal and Bihar pairs:** Bihar|Jharkhand, Bihar|West Bengal, Jharkhand|West Bengal, Odisha|West Bengal, Jharkhand|Odisha.
   - Leads: Bengal Presidency; 1905 partition; 1912; 1936; Seraikela and Kharsawan to Bihar in 1948; Mayurbhanj; the Bihar–WB 1956 Act (`m3`); Jharkhand 15 Nov 2000 (`m9`).
 - **Sikkim|West Bengal:** Treaty of Titalia 1817; Darjeeling grant 1835; annexation 1850; Sikkim state 1975.
@@ -230,7 +228,7 @@ all files validate and the hover test passes.
 - **China|Sikkim:** the 1890 Convention (`m35`); Doklam 2017.
 - **Bangladesh|West Bengal:** Radcliffe award (`m13`); Nehru–Noon 1958; Berubari; 1974 Land Boundary Agreement; enclave exchange 31 Jul 2015 (`m28`).
 
-### North-east (new file `tl_ne.py`)
+### North-east (new file `timelines/ne.js`)
 - **Assam's internal borders:** Arunachal Pradesh|Assam, Assam|Nagaland, Assam|Meghalaya, Assam|Mizoram, Assam|Manipur, Assam|Tripura, Assam|West Bengal.
   - Leads: Treaty of Yandabo 1826; Assam province 1874; the 1873 Inner Line; NEFA; Nagaland 1963 (`m5`); NEARA 1971 (`m7`); Mizoram 1987; the dispute pages (`m15`, `m18`, `m25`, `m30`); the Manipur merger (`m34`); Tripura's merger in 1949; Goalpara vs Cooch Behar.
 - **Hill-state borders:** Arunachal Pradesh|Nagaland, Manipur|Nagaland, Manipur|Mizoram, Mizoram|Tripura.
@@ -244,10 +242,13 @@ all files validate and the hover test passes.
 ## Snippet: regenerate `_todo.txt`
 
 ```python
-import re, sys; sys.path.insert(0, '.')
+import re, glob
 src = open('build.py', encoding='utf-8').read()
 grab = lambda n: re.findall(r"'([^']+\|[^']+)'", re.search(n + r' = \[(.*?)\n\]', src, flags=re.S).group(1))
 pairs = {'|'.join(sorted(p.split('|'))) for p in grab('INTERNAL') + grab('EXTERNAL')}
-from timelines import TIMELINES
-open('_todo.txt', 'w', encoding='utf-8').write('\n'.join(sorted(pairs - set(TIMELINES))))
+done = set()
+for fn in glob.glob('../timelines/*.js'):          # the hand-edited timeline data
+    text = open(fn, encoding='utf-8').read()
+    done |= {'|'.join(sorted(k.split('|'))) for k in re.findall(r'^    "([^"]+\|[^"]+)": \[', text, flags=re.M)}
+open('_todo.txt', 'w', encoding='utf-8').write('\n'.join(sorted(pairs - done)))
 ```

@@ -52,12 +52,21 @@
 </header>
 <div class="toran" aria-hidden="true"></div>
 
+<!-- Two ways into the same border histories: the map, and a pair of dropdowns. -->
+<div class="tabs" role="tablist" aria-label="Views">
+  <button class="tab" type="button" id="tab-map" role="tab" aria-selected="true" aria-controls="view-map">Map view</button>
+  <button class="tab" type="button" id="tab-data" role="tab" aria-selected="false" aria-controls="view-data" tabindex="-1">Data view</button>
+</div>
+
+<div class="view" id="view-map" role="tabpanel" aria-labelledby="tab-map">
 <div class="map">
   <svg class="corner tl" aria-hidden="true"><use href="#rangoli"/></svg>
   <svg class="corner tr" aria-hidden="true"><use href="#rangoli"/></svg>
   <svg class="corner bl" aria-hidden="true"><use href="#rangoli"/></svg>
   <svg class="corner br" aria-hidden="true"><use href="#rangoli"/></svg>
-<!--SVG-->
+  <!-- The map itself: india-borders.svg, handed to the page by map.js and
+       dropped in here by app.js. -->
+  <div id="map-svg"></div>
   <div class="legend" aria-hidden="true">
     <div><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#000" stroke-width="2.4" stroke-linecap="round"/></svg>International border</div>
     <div><svg width="26" height="8"><line x1="2" y1="4" x2="25" y2="4" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="0.1 5"/></svg>De facto lines (LoC, LAC)</div>
@@ -72,6 +81,29 @@
     <span class="switch" aria-hidden="true"></span>
   </label>
 </div>
+</div>
+
+<!-- Data view: pick two neighbours and read the same history the map's lines hold.
+     The dropdowns are filled from DATA.borders by app.js — no second copy of the data. -->
+<div class="view" id="view-data" role="tabpanel" aria-labelledby="tab-data" hidden>
+  <div class="picker">
+    <p class="picker-intro">Choose two neighbours to read the history of the border between them — the same entry the map shows when you click that line. Picking the first one narrows the second to the places it actually borders.</p>
+    <div class="picker-row">
+      <label class="field">
+        <span>State, UT or neighbour</span>
+        <select id="pick-a"></select>
+      </label>
+      <span class="picker-join" aria-hidden="true">and</span>
+      <label class="field">
+        <span>Its neighbour</span>
+        <select id="pick-b"></select>
+      </label>
+      <button class="picker-go" type="button" id="show-timeline" disabled>Show timeline</button>
+    </div>
+  </div>
+  <div class="data-result" id="data-result" aria-live="polite"></div>
+</div>
+
 <div class="tip" role="tooltip" hidden></div>
 <div class="modal-backdrop" id="modal-backdrop" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
@@ -88,8 +120,22 @@
   <p>An ongoing project of <strong>Vishal Khopkar</strong></p>
 </footer>
 <div class="tricolour"></div>
+<script src="map.js"></script>
 <script src="data.js"></script>
 <script src="references.js"></script>
+<!-- Timeline data: hand-edited, read as-is by app.js (see timelines/README.md). -->
+<script src="timelines/index.js"></script>
+<script src="timelines/nw.js"></script>
+<script src="timelines/north.js"></script>
+<script src="timelines/north2.js"></script>
+<script src="timelines/west.js"></script>
+<script src="timelines/centre.js"></script>
+<script src="timelines/south.js"></script>
+<script src="timelines/south2.js"></script>
+<script src="timelines/east.js"></script>
+<script src="timelines/sikkim.js"></script>
+<script src="timelines/ne.js"></script>
+<script src="timelines/ne2.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
