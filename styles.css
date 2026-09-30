@@ -61,9 +61,11 @@
   }
   .site-header h1 span { color: var(--saffron); }
   @media (max-width: 560px) {
-    .site-header .brand { gap: 8px; }
-    .site-header .brand svg { width: 30px; height: 30px; }
-    .site-header .brand svg:last-child { display: none; }
+    /* Both rosettes go: there is no room to flank the title with them, and one on
+       its own pushes it off centre. With nothing left to sit beside, the title is a
+       plain block that fills the header, so each of its lines centres on its own. */
+    .site-header .brand { display: block; }
+    .site-header .brand svg { display: none; }
   }
 
   /* Toran: a string of marigolds and mango leaves. */
@@ -239,6 +241,9 @@
     /* Place names (and their leader lines) crowd a phone-sized map: the lines
        themselves are what this view is for, so drop the names and keep them. */
     .map .labels { display: none; }
+    /* The toggle floats in the map's bottom corner on a wide screen; here that
+       corner is where the legend has moved, so let it fall into the flow below. */
+    .map .river-toggle { position: static; width: fit-content; margin: 10px 0 0 auto; }
   }
 
   /* ------------------------------------------------------------ hover box */
