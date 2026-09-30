@@ -5,5 +5,5 @@ const CONFIG = {
   showFeedbackForm: true,
   // Function URL of the feedback service's submit Lambda (see feedback-service/README.md).
   // Left empty, every submission shows the error toast.
-  feedbackEndpoint: "",
+  feedbackEndpoint: "https://gl2ui2iwfv3eabkajpgij6be2y0svcgb.lambda-url.us-east-2.on.aws/",
 };

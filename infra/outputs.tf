@@ -14,3 +14,8 @@ output "sns_topic_arn" {
 output "database_endpoint" {
   value = aws_db_instance.feedback.address
 }
+
+output "bastion_instance_id" {
+  description = "Target for connect-db.ps1; null while enable_db_access is off."
+  value       = one(aws_instance.bastion[*].id)
+}

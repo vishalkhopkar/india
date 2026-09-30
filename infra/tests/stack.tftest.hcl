@@ -33,6 +33,14 @@ mock_provider "aws" {
     target = data.aws_iam_policy_document.scheduler_assume
     values = { json = "{\"Version\":\"2012-10-17\",\"Statement\":[]}" }
   }
+  override_data {
+    target = data.aws_iam_policy_document.ec2_assume
+    values = { json = "{\"Version\":\"2012-10-17\",\"Statement\":[]}" }
+  }
+  override_data {
+    target = data.aws_ami.al2023
+    values = { id = "ami-0123456789abcdef0" }
+  }
 }
 
 mock_provider "random" {}
@@ -105,5 +113,42 @@ run "no_concurrency_headroom" {
   assert {
     condition     = aws_lambda_function.fn["submit"].reserved_concurrent_executions == -1
     error_message = "The workflow's fallback for accounts limited to 10 concurrent executions must reach the function."
+  }
+}
+
+run "db_access_off_by_default" {
+  command = plan
+
+  assert {
+    condition     = length(aws_instance.bastion) == 0 && length(aws_vpc_endpoint.db_access) == 0
+    error_message = "The bastion and its endpoints cost money and must not exist unless asked for."
+  }
+}
+
+run "db_access_on" {
+  command = apply
+
+  variables {
+    enable_db_access = true
+  }
+
+  assert {
+    condition     = length(aws_instance.bastion) == 1 && aws_instance.bastion[0].instance_type == "t4g.nano"
+    error_message = "enable_db_access must create one small bastion."
+  }
+
+  assert {
+    condition     = aws_instance.bastion[0].vpc_security_group_ids == toset([aws_security_group.lambda.id])
+    error_message = "The bastion reaches the database through the Lambda security group, with no rule changes."
+  }
+
+  assert {
+    condition     = toset(keys(aws_vpc_endpoint.db_access)) == toset(["ssm", "ssmmessages", "ec2messages"]) && alltrue([for e in aws_vpc_endpoint.db_access : e.security_group_ids == toset([aws_security_group.sns_endpoint.id])])
+    error_message = "Session Manager needs its three endpoints, behind the group the Lambda group can already reach."
+  }
+
+  assert {
+    condition     = aws_instance.bastion[0].associate_public_ip_address != true && aws_instance.bastion[0].metadata_options[0].http_tokens == "required"
+    error_message = "The bastion must have no public IP and require IMDSv2."
   }
 }

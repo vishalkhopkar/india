@@ -54,6 +54,26 @@ Free-tier credits on a new account may cover this at first.
 
 To check it works, submit feedback on the site, then run `…-digest` from the Lambda console's Test tab. You should get one email, and the row is marked sent.
 
+## Connecting psql to the database
+
+The database has a private address and no route from the internet. To reach it, the stack can add a **bastion**: a tiny instance you connect to through AWS Session Manager. The bastion has no public IP, no SSH and no inbound rules. It sits in the Lambdas' security group, which the database already accepts, so no firewall rule changes. It costs about $25 a month while it exists, so it's off by default.
+
+1. **Grant the bastion permissions** by attaching **`AmazonEC2FullAccess`** to the GitHub IAM user. `AmazonVPCFullAccess` doesn't cover launching instances.
+2. **Turn it on** by setting the repository variable **`ENABLE_DB_ACCESS`** to `true`, then running the *Feedback service* workflow.
+3. **Install the tools on your machine:** AWS CLI v2, the Session Manager plugin and `psql`.
+4. **Set up credentials** with `aws configure`. You need an identity allowed to do these things:
+   - `ssm:StartSession` on the bastion
+   - `ec2:DescribeInstances`
+   - `rds:DescribeDBInstances`
+   - `lambda:GetFunctionConfiguration`
+5. **Connect** from the repo root with `.\infra\connect-db.ps1`, or run one query with `.\infra\connect-db.ps1 -c "table feedback"`. The script:
+   - finds the bastion
+   - reads the generated password from the submit Lambda's configuration
+   - opens a tunnel to local port 5433
+   - runs `psql` with `sslmode=verify-full`
+
+When you're done, set `ENABLE_DB_ACCESS` back to `false` and rerun the workflow to stop the charges.
+
 ## Everyday changes
 
 These are all deployed by pushing to `main`:

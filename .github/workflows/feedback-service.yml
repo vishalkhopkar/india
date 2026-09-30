@@ -85,6 +85,8 @@ jobs:
     env:
       AWS_REGION: ${{ vars.AWS_REGION }}
       TF_VAR_notify_email: ${{ secrets.FEEDBACK_NOTIFY_EMAIL }}
+      # Repository variable ENABLE_DB_ACCESS=true creates the psql bastion (infra/README.md).
+      TF_VAR_enable_db_access: ${{ vars.ENABLE_DB_ACCESS == 'true' }}
       TF_IN_AUTOMATION: '1'
       TF_INPUT: '0'
     steps:

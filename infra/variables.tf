@@ -38,3 +38,9 @@ variable "log_retention_days" {
   type        = number
   default     = 90
 }
+
+variable "enable_db_access" {
+  description = "Create the Session Manager bastion for connecting psql to the database (see connect-db.ps1)."
+  type        = bool
+  default     = false
+}
