@@ -21,3 +21,9 @@ _build/_todo.txt
 # Feedback service: installed dependencies and the built Lambda zip
 feedback-service/node_modules/
 feedback-service/dist/
+
+# Terraform: provider downloads, local state and saved plans (state lives in S3)
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.*
+infra/tfplan

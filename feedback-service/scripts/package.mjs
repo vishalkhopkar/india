@@ -10,7 +10,7 @@ import { crc32, deflateRawSync } from 'node:zlib';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const OUT = join(ROOT, 'dist', 'feedback-service.zip');
-const FILES = ['submit.mjs', 'digest.mjs', 'db.mjs', 'config.mjs', 'config.json', 'global-bundle.pem', 'package.json'];
+const FILES = ['submit.mjs', 'digest.mjs', 'migrate.mjs', 'schema.sql', 'db.mjs', 'config.mjs', 'config.json', 'global-bundle.pem', 'package.json'];
 
 // Production dependencies only (pg and what it pulls in), as npm resolved them.
 const deps = execSync('npm ls --omit=dev --all --parseable', { cwd: ROOT, encoding: 'utf8' })

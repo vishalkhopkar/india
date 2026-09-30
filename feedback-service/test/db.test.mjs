@@ -2,10 +2,10 @@
 // PG* variables point at a disposable database: it drops and recreates the feedback table.
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { query, end } from '../db.mjs';
 import * as submit from '../submit.mjs';
 import * as digest from '../digest.mjs';
+import * as migrate from '../migrate.mjs';
 
 const skip = process.env.FEEDBACK_TEST_DB !== '1' && 'set FEEDBACK_TEST_DB=1 and PG* to run';
 const published = [];
@@ -15,7 +15,9 @@ before(async () => {
   // Feedback arrives in any script (Devanagari included); RDS databases are UTF8 by default.
   assert.equal((await query('SHOW server_encoding')).rows[0].server_encoding, 'UTF8', 'test database must be UTF8');
   await query('DROP TABLE IF EXISTS feedback');
-  await query(readFileSync(new URL('../schema.sql', import.meta.url), 'utf8'));
+  // The deploy's own path to the schema, run twice: it must be safe to repeat.
+  await migrate.handler();
+  await migrate.handler();
   process.env.TOPIC_ARN = 'arn:aws:sns:us-east-1:123456789012:feedback';
   digest.deps.publish = async p => { published.push(p); };
 });

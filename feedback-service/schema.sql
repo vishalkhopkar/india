@@ -1,4 +1,4 @@
-CREATE TABLE feedback (
+CREATE TABLE IF NOT EXISTS feedback (
   id         integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   -- 0 = report incorrect information, 1 = general feedback. The labels and the numbers
   -- accepted live in config.json, so a new category needs no migration.
@@ -11,4 +11,4 @@ CREATE TABLE feedback (
 );
 
 -- The nightly digest reads only unsent rows.
-CREATE INDEX feedback_unsent ON feedback (id) WHERE NOT sent;
+CREATE INDEX IF NOT EXISTS feedback_unsent ON feedback (id) WHERE NOT sent;

@@ -1,0 +1,179 @@
+# Tests the feedback service and deploys it (Terraform in infra/) to AWS.
+# Setup — repository secrets and variables — is in infra/README.md.
+name: Feedback service
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'feedback-service/**'
+      - 'infra/**'
+      - '.github/workflows/feedback-service.yml'
+  pull_request:
+    paths:
+      - 'feedback-service/**'
+      - 'infra/**'
+      - '.github/workflows/feedback-service.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Never run two deploys against the same Terraform state at once.
+concurrency:
+  group: feedback-service-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  TERRAFORM_VERSION: 1.16.4
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      FEEDBACK_TEST_DB: '1'
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+      PGSSLMODE: disable
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: feedback-service/package-lock.json
+
+      - name: Service tests (with a real PostgreSQL)
+        working-directory: feedback-service
+        run: |
+          npm ci
+          npm test
+          npm run package
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+
+      - name: Terraform format, validate and test (mocked AWS)
+        working-directory: infra
+        run: |
+          terraform fmt -check -recursive
+          terraform init -backend=false -input=false
+          terraform validate
+          terraform test
+
+  deploy:
+    needs: test
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      TF_VAR_notify_email: ${{ secrets.FEEDBACK_NOTIFY_EMAIL }}
+      TF_IN_AUTOMATION: '1'
+      TF_INPUT: '0'
+    steps:
+      - name: Check the repository is configured
+        env:
+          HAS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID != '' && secrets.AWS_SECRET_ACCESS_KEY != '' }}
+        run: |
+          missing=0
+          [ "$HAS_KEY" = true ] || { echo "::error::Add the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY repository secrets"; missing=1; }
+          [ -n "$AWS_REGION" ] || { echo "::error::Add the AWS_REGION repository variable, e.g. us-east-1"; missing=1; }
+          [ -n "$TF_VAR_notify_email" ] || { echo "::error::Add the FEEDBACK_NOTIFY_EMAIL repository secret"; missing=1; }
+          exit $missing
+
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: feedback-service/package-lock.json
+
+      - name: Build the Lambda bundle
+        working-directory: feedback-service
+        run: |
+          npm ci
+          npm run package
+
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+
+      # Terraform cannot create the bucket its own state lives in, so the first run makes it.
+      - name: Terraform state bucket
+        id: state
+        run: |
+          account=$(aws sts get-caller-identity --query Account --output text)
+          bucket="india-borders-tfstate-${account}-${AWS_REGION}"
+          if ! aws s3api head-bucket --bucket "$bucket" 2>/dev/null; then
+            if [ "$AWS_REGION" = us-east-1 ]; then
+              aws s3api create-bucket --bucket "$bucket"
+            else
+              aws s3api create-bucket --bucket "$bucket" --create-bucket-configuration "LocationConstraint=$AWS_REGION"
+            fi
+            aws s3api put-public-access-block --bucket "$bucket" --public-access-block-configuration \
+              BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+            aws s3api put-bucket-versioning --bucket "$bucket" --versioning-configuration Status=Enabled
+          fi
+          echo "bucket=$bucket" >> "$GITHUB_OUTPUT"
+
+      # AWS keeps at least 10 executions unreserved per account; new accounts have only 10 in all, so
+      # reserving any for the submit Lambda would fail the apply.
+      - name: Lambda concurrency headroom
+        run: |
+          limit=$(aws lambda get-account-settings --query AccountLimit.ConcurrentExecutions --output text)
+          if [ "$limit" -lt 12 ]; then
+            echo "TF_VAR_submit_reserved_concurrency=-1" >> "$GITHUB_ENV"
+            echo "::warning::Account Lambda concurrency is $limit, so the submit Lambda is deployed without its 2-request cap. Ask AWS for a higher limit to enable it."
+          fi
+
+      - name: Terraform init
+        working-directory: infra
+        run: terraform init -backend-config="bucket=${{ steps.state.outputs.bucket }}" -backend-config="region=$AWS_REGION"
+
+      - name: Terraform plan
+        working-directory: infra
+        run: terraform plan -out=tfplan
+
+      - name: Terraform apply
+        working-directory: infra
+        run: terraform apply tfplan
+
+      - name: Summary
+        working-directory: infra
+        run: |
+          {
+            echo "## Feedback service deployed"
+            echo
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Submit URL | \`$(terraform output -raw submit_url)\` |"
+            echo "| Digest schedule | \`$(terraform output -raw digest_schedule)\` |"
+            echo
+            echo "Put the submit URL in \`config.js\` → \`feedbackEndpoint\` (only needed once)."
+            echo "On the first deploy, confirm the SNS subscription from the email AWS sent."
+          } >> "$GITHUB_STEP_SUMMARY"
