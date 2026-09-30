@@ -65,4 +65,10 @@ TIMELINES.north2 = {
       ["15 May 1949", "The Matsya Union merges into Greater Rajasthan; the old Bharatpur–Dholpur–Karauli edge against Agra and Mathura becomes the Rajasthan–Uttar Pradesh state line.", ["matsya", "whitepaper_raj"]]
     ]
   },
+  "summaries": {
+    "Chhattisgarh|Uttar Pradesh": ["n2_surguja", "m2", "c_mpreorg2000"],
+    "Jharkhand|Uttar Pradesh": ["m9"],
+    "Madhya Pradesh|Uttar Pradesh": ["n2_bundelkhand", "n2_vindhya", "m2"],
+    "Rajasthan|Uttar Pradesh": ["n2_bharatpur", "n2_dholpur", "n2_karauli", "matsya"]
+  }
 };

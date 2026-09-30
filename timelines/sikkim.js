@@ -91,4 +91,12 @@ TIMELINES.sikkim = {
       ["Jun-Aug 2017", "The Doklam standoff, at the Sikkim-Bhutan-Tibet trijunction just west of this sector, shows the 1890 line is still read differently by China and by India and Bhutan at its southern end.", ["h_doklam"]]
     ]
   },
+  "summaries": {
+    "Bhutan|Sikkim": ["h_tumlong", "m35", "h_doklam"],
+    "Bhutan|West Bengal": ["h_sinchula", "h_duarwar", "h_alipurduar"],
+    "China|Sikkim": ["h_calcutta1890", "h_doklam", "m35"],
+    "Nepal|Sikkim": ["sugauli", "h_titalia", "h_singalila"],
+    "Nepal|West Bengal": ["sugauli", "h_titalia", "h_darjeelinggov"],
+    "Sikkim|West Bengal": ["h_darjeelinggov", "h_sinchula"]
+  }
 };

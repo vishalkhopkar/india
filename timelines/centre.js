@@ -98,4 +98,14 @@ TIMELINES.centre = {
       ["1 Nov 1956", "The States Reorganisation Act merges Madhya Bharat, Vindhya Pradesh and Bhopal into Madhya Pradesh. In the same reorganisation Sironj is transferred from Rajasthan’s Kota district to Madhya Pradesh’s Vidisha district, and Sunel-Tappa, an outlying part of Madhya Bharat’s Mandsaur district beyond Jhalawar, goes the other way to Rajasthan, straightening the line into today’s border.", ["m2", "c_vidisha", "c_sunel"]]
     ]
   },
+  "summaries": {
+    "Andhra Pradesh|Chhattisgarh": ["c_bastarstate", "m24", "m2", "c_mpreorg2000"],
+    "Chhattisgarh|Jharkhand": ["c_surguja1905", "c_chotanagpur", "c_mpreorg2000", "m9"],
+    "Chhattisgarh|Madhya Pradesh": ["c_esa", "c_mpreorg2000"],
+    "Chhattisgarh|Maharashtra": ["c_cp1861", "c_chanda", "c_bastarstate"],
+    "Chhattisgarh|Odisha": ["m24", "c_esa", "c_mysambalpur", "c_mpreorg2000"],
+    "Chhattisgarh|Telangana": ["c_adilabad", "c_cp1861", "c_bastarstate"],
+    "Madhya Pradesh|Maharashtra": ["c_cp1861", "c_vidarbha"],
+    "Madhya Pradesh|Rajasthan": ["c_ciagency", "c_vidisha", "c_sunel"]
+  }
 };

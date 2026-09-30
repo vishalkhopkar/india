@@ -67,7 +67,13 @@ TIMELINES.nw = {
     "miani": ["Battle of Miani", "Wikipedia: British conquest of Sindh, 1843.", "https://en.wikipedia.org/wiki/Battle_of_Miani"],
     "nw_thatta": ["Thatta Subah", "Wikipedia: a sarkar of Multan Subah until 1629, when Shah Jahan made it a subah of its own, bordered to the south by Gujarat Subah and the Arabian Sea.", "https://en.wikipedia.org/wiki/Thatta_Subah"],
     "rajtreaties": ["British treaties with the Rajputana states", "RajRAS: the treaties of 1818 and the Rajputana Agency (1832).", "https://rajras.in/ras/mains/paper-1/rajasthan-history/british-treaty-with-rajputana-states/"],
-    "bahawalpur": ["Bahawalpur (princely state)", "Wikipedia: treaties of 1833 and 1838; accession to Pakistan in October 1947.", "https://en.wikipedia.org/wiki/Bahawalpur_(princely_state)"]
+    "bahawalpur": ["Bahawalpur (princely state)", "Wikipedia: treaties of 1833 and 1838; accession to Pakistan in October 1947.", "https://en.wikipedia.org/wiki/Bahawalpur_(princely_state)"],
+    // Sources for border summaries
+    "nw_haryana_shah": ["Haryana", "Wikipedia: the Shah Commission under Justice J. C. Shah, set up on 23 April 1966 to divide Punjab by the languages spoken, reporting on 31 May 1966 district by district and tehsil by tehsil (Jind, Narwana, Naraingarh, Ambala and Jagadhri to Haryana).", "https://en.wikipedia.org/wiki/Haryana"],
+    "nw_parwanoo": ["Parwanoo", "Wikipedia: the Himachal town that borders Panchkula district of Haryana, beyond Pinjore and Kalka on the Chandigarh–Shimla highway.", "https://en.wikipedia.org/wiki/Parwanoo"],
+    "nw_parwanoo_tribune": ["“Himachal-Haryana border controversy awaits resolution”", "The Tribune, 8 November 2021: a Survey of India report found Himachal Pradesh in possession of land claimed by Haryana at Parwanoo (pillars 11–14, in the R-56 reserve forest), which Himachal contests from the revenue records; the issue is before the Ministry of Home Affairs.", "https://www.tribuneindia.com/news/himachal/himachal-haryana-border-controversy-awaits-resolution-335425/"],
+    "nw_sarchu": ["Sarchu", "Wikipedia: the boundary at Sarchu, marked by a pillar and recorded as following a drainage divide, disputed between Himachal Pradesh and Jammu and Kashmir; renewed interest after 2019 in having the Survey of India mark it.", "https://en.wikipedia.org/wiki/Sarchu"],
+    "nw_outlook_disputes": ["“Border Disputes Are Colonial Era Legacies Awaiting Closure”", "Outlook India (Puneet Nicholas Yadav, 6 August 2021): the Ministry of Home Affairs’ statement in Parliament of seven pending boundary disputes (Haryana–Himachal Pradesh, Ladakh–Himachal Pradesh, Maharashtra–Karnataka, Assam–Arunachal Pradesh, Assam–Nagaland, Assam–Meghalaya and Assam–Mizoram); Haryana’s claims on parts of Parwanoo; the undemarcated boundary at Sarchu.", "https://www.outlookindia.com/opinion/india-news-border-disputes-are-colonial-era-legacies-awaiting-closure-news-304862"]
   },
   "timelines": {
     "Haryana|Rajasthan": [
@@ -274,4 +280,28 @@ TIMELINES.nw = {
       ["7 Sep 1993", "India and China agree to respect the Line of Actual Control.", ["bpta1993"]]
     ]
   },
+  "summaries": {
+    "Afghanistan|Ladakh": ["wakhan", "gb", "map2019"],
+    "Chandigarh|Haryana": ["pra1966wiki"],
+    "Chandigarh|Punjab": ["pra1966wiki", "chandigarh"],
+    "China|Himachal Pradesh": ["sino1954"],
+    "China|Ladakh": ["aksaichin", "bpta1993"],
+    "Delhi (NCT)|Haryana": ["delhiadmin"],
+    "Delhi (NCT)|Uttar Pradesh": ["delhiadmin"],
+    "Gujarat|Pakistan": ["ibs86", "rannaward", "indpak"],
+    "Haryana|Himachal Pradesh": ["pra1966wiki", "nw_parwanoo", "nw_parwanoo_tribune", "nw_outlook_disputes"],
+    "Haryana|Punjab": ["nw_haryana_shah", "pra1966wiki"],
+    "Haryana|Rajasthan": ["delhi", "sirsa", "mahendragarh", "pepsu"],
+    "Haryana|Uttar Pradesh": ["delhi", "hryup1979"],
+    "Himachal Pradesh|Jammu and Kashmir (UT)": ["chamba", "amritsar1846", "lakhanpur"],
+    "Himachal Pradesh|Ladakh": ["lahaulspiti", "nw_sarchu", "nw_outlook_disputes"],
+    "Himachal Pradesh|Punjab": ["pra1966wiki"],
+    "Jammu and Kashmir (UT)|Ladakh": ["m12", "kargil"],
+    "Jammu and Kashmir (UT)|Pakistan": ["loc"],
+    "Jammu and Kashmir (UT)|Punjab": ["radcliffe_pb"],
+    "Ladakh|Pakistan": ["loc", "siachen", "tkt"],
+    "Pakistan|Punjab": ["radcliffe_pb"],
+    "Pakistan|Rajasthan": ["miani", "bahawalpur", "rajtreaties", "ibs86"],
+    "Punjab|Rajasthan": ["rajtreaties", "fazilka", "pepsu"]
+  }
 };

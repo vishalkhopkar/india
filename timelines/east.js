@@ -93,4 +93,12 @@ TIMELINES.east = {
       ["31 Jul 2015", "The Constitution (100th Amendment) Act, 2015 gives effect to the 1974 Agreement and 2011 Protocol: India transfers 111 enclaves (17,160 acres) to Bangladesh and receives 51 (7,110 acres), fixing the present West Bengal–Bangladesh boundary.", ["m28", "e_indbdenclaves"]]
     ]
   },
+  "summaries": {
+    "Bangladesh|West Bengal": ["e_berubari", "e_indbdenclaves", "e_tinbigha"],
+    "Bihar|Jharkhand": ["e_chotanagpur", "e_santhalparganas"],
+    "Bihar|West Bengal": ["e_biharwb1956act"],
+    "Jharkhand|Odisha": ["e_esa", "e_seraikela", "biharorissa", "m24"],
+    "Jharkhand|West Bengal": ["m3", "e_biharwb1956act"],
+    "Odisha|West Bengal": {"text": "The Balasore–Midnapore district line, which became the Orissa–Bengal boundary when Orissa was made a province on 1 April 1936. Odisha still disputes plots in Balasore district, notably in the Bhograi–Ramnagar I sector, and some areas of Mayurbhanj with West Bengal; a joint committee set up in 2020 has yet to settle them.", "refs": ["m24", "e_balasore_wiki", "e_odishaborderdisputes", "e_odishaborder2025"]}
+  }
 };

@@ -64,7 +64,10 @@ Conventions:
 - **Pair keys** are the two matrix names sorted alphabetically and joined with `|`, e.g.
   `'Delhi (NCT)|Haryana'`, `'Jammu and Kashmir (UT)|Pakistan'`, `'Afghanistan|Ladakh'`,
   `'Chhattisgarh|Uttar Pradesh'`.
-- **Reference keys** `m1`–`m35` point at the matrix's own reference list, for example:
+- **Reference keys** `m2`–`m35` point at the matrix's own reference list, shown on the page as
+  [1]–[34]. `m1`, the private research note the matrix was compiled from, is no longer published
+  (removed 2026-09-30 with its "§ line" locators; each border summary now cites real sources
+  from the `"summaries"` block of its region file). For example:
   - `m2` States Reorganisation Act 1956; `m3` Bihar–WB Transfer of Territories Act 1956
   - `m4` Bombay Reorganisation Act 1960; `m5` State of Nagaland Act 1962
   - `m6` Punjab Reorganisation Act 1966; `m7` North-Eastern Areas (Reorganisation) Act 1971
@@ -75,9 +78,9 @@ Conventions:
   - `m28` 100th Amendment 2015; `m29` DoPT on the 2000 reorganisation; `m30` Assam–Arunachal 2023
   - `m32` Goa, Daman and Diu Reorganisation Act 1987; `m33` DNH&DD merger 2019
   - `m34` Manipur Merger Agreement 1949; `m35` Sikkim–Tibet Convention 1890
-- **New references** are numbered from 36 in the order `ref()` is called, counting only those
-  actually cited. Keys must be unique across all regional files; `build.py` fails on an unknown or
-  duplicate key.
+- **New references** are numbered from 35 in definition order, counting only those actually
+  cited. Keys must be unique across all regional files; the page warns in the console about an
+  unknown or duplicate key.
 - **Apostrophes and HTML:** use `’` for apostrophes and `&amp;` for a literal ampersand in text.
 - **Timeline size:** keep each timeline to about 4–11 entries so the hover box fits the window.
 

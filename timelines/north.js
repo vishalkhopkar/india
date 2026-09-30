@@ -79,4 +79,13 @@ TIMELINES.north = {
       ["1968", "The Bihar and Uttar Pradesh (Alteration of Boundaries) Act fixes the boundary on the 1963–64 deep stream: about 45 sq mi move from UP to Bihar and about 64 sq mi from Bihar to UP (Saran and Shahabad vs Ballia).", ["bihup1968"]]
     ]
   },
+  "summaries": {
+    "Bihar|Nepal": ["sugauli", "nayamuluk"],
+    "Bihar|Uttar Pradesh": ["faizabad1775", "biharorissa", "karmanasa"],
+    "China|Uttarakhand": ["barahoti"],
+    "Himachal Pradesh|Uttarakhand": ["tehri", "hphistory", "ukhistory"],
+    "Nepal|Uttar Pradesh": ["sugauli", "nayamuluk"],
+    "Nepal|Uttarakhand": ["sugauli", "kalapani"],
+    "Uttar Pradesh|Uttarakhand": ["ukhistory"]
+  }
 };

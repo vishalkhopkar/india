@@ -18,11 +18,36 @@ for a, b, body in re.findall(
         r'<td class="border-cell" data-a="([^"]*)" data-b="([^"]*)" tabindex="0">(.*?)</td>', matrix, flags=re.S):
     key = '|'.join(sorted([html.unescape(a), html.unescape(b)]))
     text = re.search(r'<div class="celltext">(.*?)</div>', body, flags=re.S).group(1).strip()
-    src = re.search(r'<div class="source">(.*?)</div>', body, flags=re.S)
-    history[key] = {'text': text, 'source': src.group(1).strip() if src else ''}
+    history[key] = {'text': text}
 assert len(history) == 93, len(history)
 
 refs = re.search(r'<ol>.*?</ol>', matrix, flags=re.S).group(0)
+
+# The matrix's reference [1] is the private research note it was compiled from, which
+# readers cannot see, and each cell's grey "§ Section, line N" locator points into it.
+# Both are dropped: the real sources behind each summary are cited from
+# timelines/<region>.js ("summaries"). The remaining matrix references move up by one
+# so the list still starts at [1]; app.js maps the data files' "mN" keys to N - 1.
+def renumber(html_text):
+    html_text = html_text.replace('<a href="#ref-1">[1]</a>', '')
+    html_text = re.sub(r'<sup class="ref">\s*</sup>', '', html_text)
+    html_text = re.sub(r'#ref-(\d+)"', lambda m: f'#ref-{int(m.group(1)) - 1}"', html_text)
+    return re.sub(r'>\[(\d+)\]<', lambda m: f'>[{int(m.group(1)) - 1}]<', html_text).strip()
+
+# The matrix cites its [13], the Bengal Boundary Commission's award, on these western
+# frontiers too, but they were drawn by the Punjab commission or not by Radcliffe at all
+# (Sind went to Pakistan whole); their region files cite the right sources instead.
+NOT_BENGAL = ['Jammu and Kashmir (UT)|Punjab', 'Pakistan|Punjab', 'Gujarat|Pakistan', 'Pakistan|Rajasthan']
+for key in NOT_BENGAL:
+    assert '<a href="#ref-13">[13]</a>' in history[key]['text'], key
+    history[key]['text'] = history[key]['text'].replace('<a href="#ref-13">[13]</a>', '')
+
+for h in history.values():
+    assert '#ref-0"' not in renumber(h['text'])
+    h['text'] = renumber(h['text'])
+refs = re.sub(r'<li id="ref-1">.*?</li>', '', refs, count=1, flags=re.S)
+refs = re.sub(r'<li id="ref-(\d+)"', lambda m: f'<li id="ref-{int(m.group(1)) - 1}"', refs)
+assert '<li id="ref-0"' not in refs and 'User-supplied' not in refs
 
 # The references list is the matrix's own <ol>. The timelines, the references they
 # cite and their numbering now live in timelines/<region>.js, read by the page

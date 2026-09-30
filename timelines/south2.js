@@ -81,4 +81,12 @@ TIMELINES.south2 = {
       ["c. 2005", "Maharashtra files an original suit in the Supreme Court over Belgaum and other disputed villages — sources differ on whether this was 2004 or 2006 — while Karnataka maintains that the Mahajan report is final; the case remains pending and the 1956 line continues to apply on the ground.", ["s2_belgaumdispute"]]
     ]
   },
+  "summaries": {
+    "Karnataka|Kerala": ["s2_kasaragod"],
+    "Karnataka|Maharashtra": ["s2_belgaum", "s2_belgaumdispute"],
+    "Karnataka|Tamil Nadu": ["s2_coimbatore"],
+    "Kerala|Puducherry": ["s2_mahe", "s2_frenchindia"],
+    "Kerala|Tamil Nadu": ["s2_travancorecochin"],
+    "Puducherry|Tamil Nadu": ["s2_puducherryhist", "s2_frenchindia"]
+  }
 };

@@ -89,17 +89,17 @@ TIMELINES.ne = {
       ["21 Sep 1949", "The Manipur Merger Agreement, effective 15 October 1949, brings Manipur into the Indian Union as a Part C State under a Chief Commissioner, freezing its old princely-state limits — including the Cachar frontier — as an internal administrative line.", ["m34"]],
       ["1956", "The States Reorganisation Act makes Manipur a Union Territory administered directly by the Union.", ["ne_manipurhist"]],
       ["21 Jan 1972", "The North-Eastern Areas (Reorganisation) Act, 1971 grants Manipur statehood, turning the old Manipur–Cachar princely-state line into a full interstate boundary with Assam.", ["m7"]],
-      ["2020s", "Unlike Assam’s other neighbours, this stretch has no active territorial dispute; it remains defined by the limits frozen at the 1949 merger.", ["m1", "m34"]]
+      ["2020s", "Unlike Assam’s other neighbours, this stretch has no active territorial dispute; it remains defined by the limits frozen at the 1949 merger.", ["m34", "nw_outlook_disputes"]]
     ],
     "Assam|Tripura": [
       ["1809", "Tripura (Hill Tippera) becomes a British protectorate under subsidiary alliance; its plains estate, Chakla Roshnabad, lies in the Bengal districts of Noakhali, Sylhet and Tippera, while the hill kingdom’s northern frontier faces the Kachari kingdom of Cachar.", ["ne_tripuraps"]],
       ["14 Aug 1832", "Cachar is annexed to British India after its king dies without an heir, fixing a British-administered district immediately north of the Tripura hill state.", ["ne_cachar1832"]],
       ["1905", "Hill Tippera becomes part of the new province of Eastern Bengal and Assam, placing Tripura and Cachar under the same regional administration without merging them.", ["ne_tripuraps"]],
       ["1947", "Maharaja Bir Bikram Kishore Debbarman dies; a Council of Regency under Maharani Kanchan Prava Devi governs Tripura, released from subsidiary alliance by the Indian Independence Act, 1947.", ["ne_tripuramerger"]],
-      ["9 Sep 1949", "The Tripura Merger Agreement, effective 15 October 1949, brings the state into the Indian Union as a Part C State under a Chief Commissioner, freezing its old frontier with Cachar as an internal administrative line.", ["m1", "ne_tripuramerger"]],
+      ["9 Sep 1949", "The Tripura Merger Agreement, effective 15 October 1949, brings the state into the Indian Union as a Part C State under a Chief Commissioner, freezing its old frontier with Cachar as an internal administrative line.", ["ne_tripuramerger"]],
       ["1956", "Tripura becomes a Union Territory.", ["ne_tripuramerger"]],
       ["21 Jan 1972", "The North-Eastern Areas (Reorganisation) Act, 1971 gives Tripura statehood, turning the frozen princely-state line into a full interstate boundary with Assam.", ["m7"]],
-      ["2020s", "As with Assam’s Manipur boundary, no active territorial dispute is recorded on this frontier; it remains the line fixed at the 1949 merger.", ["m1"]]
+      ["2020s", "As with Assam’s Manipur boundary, no active territorial dispute is recorded on this frontier; it remains the line fixed at the 1949 merger.", ["nw_outlook_disputes"]]
     ],
     "Assam|West Bengal": [
       ["1822", "Goalpara district is created by David Scott out of the former Bijni kingdom, administered as part of the North-East Rangpur division.", ["ne_goalpara"]],
@@ -146,10 +146,22 @@ TIMELINES.ne = {
       ["27 Jan 1871", "A Lushai raid on the Alexandrapore tea estate in southern Assam pushes the British toward a permanent administrative solution for the Lushai country.", ["ne_lushaitripura"]],
       ["1889–90", "The British annex the Lushai country, separating the eastern portion of Hill Tipperah and joining it with the Lushai tracts of Chittagong to form the new Lushai Hills district — fixing a line against princely Tripura for the first time.", ["ne_lushaitripura", "ne_lushai"]],
       ["1891–1947", "Lushai Hills is governed as a Backward Tract, later an Excluded Area, directly under the Governor of Assam, while Hill Tipperah remains a separate princely state on the other side of the 1890 line.", ["ne_lushaiexcluded"]],
-      ["9 Sep 1949", "The Tripura Merger Agreement freezes the state’s limits, including this Lushai Hills frontier, as Tripura joins the Indian Union.", ["m1", "ne_tripuramerger"]],
+      ["9 Sep 1949", "The Tripura Merger Agreement freezes the state’s limits, including this Lushai Hills frontier, as Tripura joins the Indian Union.", ["ne_tripuramerger"]],
       ["21 Jan 1972", "The North-Eastern Areas (Reorganisation) Act, 1971 makes Lushai Hills the Union Territory of Mizoram and gives Tripura statehood, turning the 1890 line into a full interstate boundary.", ["m7"]],
       ["1997", "Ethnic clashes between Mizos and Brus (Reangs) drive more than 37,000 Bru people from Mizoram’s Mamit, Kolasib and Lunglei districts across this border into relief camps in Tripura’s Kanchanpur and Panisagar subdivisions.", ["ne_bru"]],
       ["Jan 2020", "After eight failed repatriation attempts, a quadripartite agreement between the Centre, Tripura, Mizoram and Bru representatives settles about 34,000 Bru refugees permanently in Tripura rather than returning them to Mizoram.", ["ne_bru"]]
     ]
   },
+  "summaries": {
+    "Arunachal Pradesh|Assam": ["ne_apdispute", "ne_namsai"],
+    "Arunachal Pradesh|Nagaland": ["ne_tuensang"],
+    "Assam|Meghalaya": ["ne_araa1969", "ne_langpih"],
+    "Assam|Mizoram": ["ne_innerline", "ne_lushai"],
+    "Assam|Nagaland": ["ne_1925notif", "ne_hydari", "ne_16point", "ne_neborders"],
+    "Assam|Tripura": ["ne_tripuramerger"],
+    "Assam|West Bengal": ["ne_goalpara", "ne_coochbehar"],
+    "Manipur|Mizoram": ["ne_manmizo33"],
+    "Manipur|Nagaland": ["ne_naga1866", "ne_maoangami"],
+    "Mizoram|Tripura": ["ne_lushaitripura", "ne_lushai", "ne_tripuramerger"]
+  }
 };

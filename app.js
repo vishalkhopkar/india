@@ -6,6 +6,7 @@
 (function () {
   const refs = new Map();       // ref key -> [title, description, url], in definition order
   const timelines = new Map();  // "Region A|Region B" (names sorted) -> [[when, what, [ref keys]]]
+  const summaries = new Map();  // "Region A|Region B" -> ref keys, or {text, refs}, for the border's summary
 
   for (const region of TIMELINE_REGIONS) {
     const data = TIMELINES[region];
@@ -19,16 +20,27 @@
       if (timelines.has(key)) console.warn(`timelines: "${key}" has two timelines`);
       else timelines.set(key, items);
     }
+    for (const [pair, entry] of Object.entries(data.summaries || {})) {
+      const key = pair.split('|').map(s => s.trim()).sort().join('|');
+      if (summaries.has(key)) console.warn(`timelines: "${key}" has two summaries`);
+      else summaries.set(key, Array.isArray(entry) ? { refs: entry } : entry);
+    }
   }
 
-  // Reference numbers: "m1".."m35" are the matrix's own list; every other cited
-  // reference is numbered after it, from 36, in the order the files define them.
+  // Reference numbers: "m2".."m35" are the matrix's own list, shown as [1]..[34] (its
+  // [1], the private note it was compiled from, is not published; see build.py). Every
+  // other cited reference is numbered after them, from 35, in definition order.
+  const MATRIX_REFS = 35;
   const cited = new Set();
   for (const items of timelines.values())
     for (const [, , keys] of items) for (const key of keys) cited.add(key);
+  for (const { refs: keys } of summaries.values()) for (const key of keys) cited.add(key);
   const number = new Map();
-  for (const key of cited) if (/^m[0-9]+$/.test(key)) number.set(key, +key.slice(1));
-  let next = 36;
+  for (const key of cited) {
+    const m = /^m([0-9]+)$/.exec(key);
+    if (m && +m[1] >= 2 && +m[1] <= MATRIX_REFS) number.set(key, +m[1] - 1);
+  }
+  let next = MATRIX_REFS;
   for (const key of refs.keys()) if (cited.has(key)) number.set(key, next++);
   for (const key of cited) if (!number.has(key)) console.warn(`timelines: cited reference "${key}" is not defined`);
 
@@ -36,17 +48,33 @@
     [...new Set(keys.map(key => number.get(key)))].filter(n => n !== undefined).sort((a, b) => a - b)
       .map(n => `<a href="#ref-${n}">[${n}]</a>`).join('') + '</sup>';
 
-  // Hand each border its timeline. A border can be drawn as several paths (a long
-  // line cut into parts); each part carries the same pair of names, so each gets it.
-  const used = new Set();
+  // The summary's own sources join the matrix references already cited at its end.
+  function withRefs(text, keys) {
+    const tail = /\s*<sup class="ref">(.*?)<\/sup>\s*$/.exec(text);
+    const have = tail ? [...tail[1].matchAll(/#ref-([0-9]+)"/g)].map(m => +m[1]) : [];
+    const all = [...new Set([...have, ...keys.map(key => number.get(key)).filter(n => n !== undefined)])].sort((a, b) => a - b);
+    const body = tail ? text.slice(0, tail.index) : text;
+    return all.length ? `${body} <sup class="ref">${all.map(n => `<a href="#ref-${n}">[${n}]</a>`).join('')}</sup>` : body;
+  }
+
+  // Hand each border its timeline and summary sources. A border can be drawn as several
+  // paths (a long line cut into parts); each part carries the same pair of names.
+  const used = new Set(), usedSummary = new Set();
   for (const border of Object.values(DATA.borders).flat(2)) {
     const key = [border.a, border.b].sort().join('|');
+    const textKey = border.from ? border.from.split(' – ').sort().join('|') : key;   // borrowed text
+    const summary = summaries.get(textKey);
+    if (summary && border.text) {
+      usedSummary.add(textKey);
+      border.text = withRefs(summary.text || border.text, summary.refs);
+    }
     const items = timelines.get(key);
     if (!items) continue;
     used.add(key);
     border.timeline = items.map(([when, what, keys]) => [when, keys.length ? `${what} ${cite(keys)}` : what]);
   }
   for (const key of timelines.keys()) if (!used.has(key)) console.warn(`timelines: "${key}" matches no border on the map`);
+  for (const key of summaries.keys()) if (!usedSummary.has(key)) console.warn(`timelines: summary "${key}" matches no border on the map`);
 
   // The references list: the matrix's own <ol>, plus every reference cited above.
   const extra = [...refs].filter(([key]) => number.has(key)).map(([key, [title, desc, url]]) =>
@@ -243,7 +271,6 @@
       (b.note ? `<div class="modal-note">${b.note}</div>` : '') +
       (b.from ? `<div class="modal-from">From the matrix entry for ${b.from.replace(/ \(UT\)| \(NCT\)/g, '')}:</div>` : '') +
       `<div class="modal-text">${b.text}</div>` +
-      (b.source ? `<div class="modal-source">${b.source}</div>` : '') +
       (b.timeline
         ? `<div class="modal-timeline-head">Timeline</div><ol class="modal-timeline">` +
           b.timeline.map(([when, what]) => `<li><b>${when}</b><span>${what}</span></li>`).join('') + '</ol>'

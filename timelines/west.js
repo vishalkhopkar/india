@@ -25,7 +25,7 @@ TIMELINES.west = {
     "w_icj": ["Right of Passage over Indian Territory (Portugal v. India)", "Wikipedia: the International Court of Justice’s judgment of 12 April 1960, ruling that Portugal’s 18th-century treaty with the Marathas conferred only revenue rights, while upholding a limited right of passage to the enclaves.", "https://en.wikipedia.org/wiki/Right_of_Passage_over_Indian_Territory_(Portugal_v._India)"],
     "w_10amend": ["Tenth Amendment of the Constitution of India", "Wikipedia: Dadra and Nagar Haveli made a Union Territory, merger agreement of 11 August 1961, presidential assent 16 August 1961.", "https://en.wikipedia.org/wiki/Tenth_Amendment_of_the_Constitution_of_India"],
     "w_12amend": ["Twelfth Amendment of the Constitution of India", "Wikipedia: Goa, Daman and Diu made a Union Territory with effect from 20 December 1961; split into Goa state and the Daman and Diu union territory on 30 May 1987.", "https://en.wikipedia.org/wiki/Twelfth_Amendment_of_the_Constitution_of_India"],
-    "w_vijay": ["Annexation of Goa", "Wikipedia: Operation Vijay, 17–19 December 1961, ends Portuguese rule in Goa, Daman and Diu.", "https://en.wikipedia.org/wiki/Annexation_of_Goa"],
+    "w_vijay": ["Annexation of Goa", "Wikipedia: Operation Vijay, 17–19 December 1961, ends Portuguese rule in Goa, Daman and Diu; by a treaty of 31 December 1974 Portugal recognises India’s full sovereignty over Goa, Daman, Diu, Dadra and Nagar Haveli.", "https://en.wikipedia.org/wiki/Annexation_of_Goa"],
     "w_palghar": ["Palghar district", "Wikipedia: created 1 August 2014 from the northern talukas of Thane district, including Talasari and Dahanu, which border Dadra and Nagar Haveli.", "https://en.wikipedia.org/wiki/Palghar_district"],
     "w_velhas": ["Velhas Conquistas", "Wikipedia: Tiswadi, Bardez, Salsete and Mormugao, acquired by the Portuguese from 1510 into the following decades — the original core of Portuguese Goa.", "https://en.wikipedia.org/wiki/Velhas_Conquistas"],
     "w_novas": ["Novas Conquistas", "Wikipedia: the seven talukas added to Goa in the 18th century — Pernem, Bicholim and Sattari ceded by Sawantwadi in 1783 (the rest of Pernem in 1788), and Ponda, Sanguem, Quepem and Canacona from the Raja of Sonda from 1764.", "https://en.wikipedia.org/wiki/Novas_Conquistas"],
@@ -114,4 +114,12 @@ TIMELINES.west = {
       ["1 May 1960", "The Bombay Reorganisation Act splits Bombay State and creates Gujarat; Panch Mahals becomes a Gujarat district, so the line settles along the edge of the old 1853 Sindhia cession against Jhabua and Alirajpur, now in Madhya Pradesh.", ["m4"]]
     ]
   },
+  "summaries": {
+    "Dadra and Nagar Haveli and Daman and Diu|Gujarat": ["w_daman", "w_diu", "w_dnh"],
+    "Dadra and Nagar Haveli and Daman and Diu|Maharashtra": ["w_dnh"],
+    "Goa|Karnataka": ["w_novas", "w_sonda", "w_vijay"],
+    "Goa|Maharashtra": ["w_velhas", "w_novas", "w_sawantwadi", "w_vijay"],
+    "Gujarat|Madhya Pradesh": ["w_jhabua", "w_alirajpur", "w_panchmahals"],
+    "Gujarat|Rajasthan": ["w_sirohi", "w_sirohidist", "m2"]
+  }
 };

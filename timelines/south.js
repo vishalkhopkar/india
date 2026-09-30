@@ -88,4 +88,13 @@ TIMELINES.south = {
       ["2019", "The Bidar–Kalaburagi–Yadgir–Raichur–Koppal region, long known as Hyderabad-Karnataka, is officially renamed Kalyana-Karnataka; the boundary itself does not change.", ["s_kalyanakarnataka"]]
     ]
   },
+  "summaries": {
+    "Andhra Pradesh|Karnataka": ["s_andhrastateact", "s_mysorestate", "s_hyderabadstate"],
+    "Andhra Pradesh|Odisha": ["s_orissaprovince", "s_kotia"],
+    "Andhra Pradesh|Puducherry": ["s_yanaon", "s_dejure1962"],
+    "Andhra Pradesh|Tamil Nadu": ["s_andhrastateact", "s_capitalsouthfirst"],
+    "Andhra Pradesh|Telangana": ["s_hyderabadstate", "s_apreorg2014"],
+    "Karnataka|Telangana": ["s_hyderabadstate", "s_kalyanakarnataka", "m2"],
+    "Maharashtra|Telangana": ["s_hyderabadstate", "s_marathwada", "s_bombaystate"]
+  }
 };

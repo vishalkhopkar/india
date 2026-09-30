@@ -161,4 +161,17 @@ TIMELINES.ne2 = {
       ["1972–1987", "NEFA becomes the Union Territory and then, on 20 February 1987, the state of Arunachal Pradesh; China rejects the McMahon Line, calls the state “South Tibet” and claims most of it, while India administers up to the line, which functions as the de facto Line of Actual Control in this sector.", ["nx_arunstate", "nx_mcmahon"]]
     ]
   },
+  "summaries": {
+    "Arunachal Pradesh|Bhutan": ["nx_assamduars", "nx_bhutanindiaborder"],
+    "Arunachal Pradesh|China": ["nx_simla1914", "nx_mcmahon"],
+    "Arunachal Pradesh|Myanmar": ["nx_burma1937", "nx_1967brookings"],
+    "Assam|Bangladesh": ["nx_sylhet", "nx_lba"],
+    "Assam|Bhutan": ["nx_assamduars", "nx_bhutanindiaborder"],
+    "Bangladesh|Meghalaya": ["nx_lba"],
+    "Bangladesh|Mizoram": ["nx_cht", "nx_lushaihills"],
+    "Bangladesh|Tripura": ["nx_radcliffe", "nx_lba"],
+    "Manipur|Myanmar": ["nx_pemberton", "nx_kabaw", "nx_yandabo"],
+    "Mizoram|Myanmar": ["nx_lushaihills", "nx_burma1937", "nx_1967brookings"],
+    "Myanmar|Nagaland": ["nx_nagahills", "nx_burma1937", "nx_1967brookings"]
+  }
 };
