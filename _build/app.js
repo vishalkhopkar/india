@@ -437,3 +437,40 @@
       '</div>';
   });
 })();
+
+// ---------------------------------------------------------------------------
+// 8. Feedback form — shown only while CONFIG.showFeedbackForm is true.
+//    Submitting just raises a toast for now; sending it anywhere comes later.
+// ---------------------------------------------------------------------------
+(function () {
+  const section = document.getElementById('feedback');
+  if (typeof CONFIG === 'undefined' || CONFIG.showFeedbackForm !== true) { section.remove(); return; }
+  section.hidden = false;
+
+  const form = document.getElementById('feedback-form');
+  const type = document.getElementById('feedback-type');
+  const text = document.getElementById('feedback-text');
+  const count = document.getElementById('feedback-count');
+  const submit = document.getElementById('feedback-submit');
+  const toast = document.getElementById('toast');
+  let toastTimer;
+
+  function update() {
+    count.textContent = text.value.length + ' / 1000';
+    submit.disabled = !(type.value && text.value.trim());
+  }
+  type.addEventListener('change', update);
+  text.addEventListener('input', update);
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (submit.disabled) return;
+    form.reset();
+    update();
+    toast.textContent = 'Feedback submitted';
+    toast.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.hidden = true; }, 3500);
+  });
+  update();
+})();

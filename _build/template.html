@@ -115,11 +115,34 @@
   <summary>References (numbers in the hover boxes)</summary>
   <div id="refs-list"></div>
 </details>
+<!-- Feedback form: switched by CONFIG.showFeedbackForm in config.js; app.js removes it when off.
+     Submitting does nothing yet beyond the toast. -->
+<section class="feedback" id="feedback" aria-labelledby="feedback-title" hidden>
+  <h2 id="feedback-title">Send feedback</h2>
+  <form id="feedback-form" novalidate>
+    <label class="field">
+      <span>Type of feedback</span>
+      <select id="feedback-type" required>
+        <option value="">Choose one&hellip;</option>
+        <option value="incorrect">Report incorrect information</option>
+        <option value="general">General feedback</option>
+      </select>
+    </label>
+    <label class="field">
+      <span>Your message</span>
+      <textarea id="feedback-text" rows="6" maxlength="1000" required placeholder="Tell us what you found or what you think&hellip;"></textarea>
+      <small class="feedback-count" id="feedback-count" aria-live="off">0 / 1000</small>
+    </label>
+    <button class="picker-go" type="submit" id="feedback-submit" disabled>Submit</button>
+  </form>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <footer class="site-footer">
   <div class="divider" aria-hidden="true"><svg width="26" height="26"><use href="#rangoli"/></svg></div>
   <p>An ongoing project of <strong>Vishal Khopkar</strong></p>
 </footer>
 <div class="tricolour"></div>
+<script src="config.js"></script>
 <script src="map.js"></script>
 <script src="data.js"></script>
 <script src="references.js"></script>
