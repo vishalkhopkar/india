@@ -17,3 +17,7 @@ _build/rivers/preview_*.html
 # lives in timelines/*.js at the project root and is read by the page itself)
 _build/check_region.py
 _build/_todo.txt
+
+# Feedback service: installed dependencies and the built Lambda zip
+feedback-service/node_modules/
+feedback-service/dist/

@@ -3,4 +3,7 @@
 const CONFIG = {
   // Set to false to remove the feedback form at the bottom of the page.
   showFeedbackForm: true,
+  // Function URL of the feedback service's submit Lambda (see feedback-service/README.md).
+  // Left empty, every submission shows the error toast.
+  feedbackEndpoint: "",
 };

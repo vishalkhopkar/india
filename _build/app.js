@@ -439,8 +439,8 @@
 })();
 
 // ---------------------------------------------------------------------------
-// 8. Feedback form — shown only while CONFIG.showFeedbackForm is true.
-//    Submitting just raises a toast for now; sending it anywhere comes later.
+// 8. Feedback form — shown only while CONFIG.showFeedbackForm is true. Posts to
+//    CONFIG.feedbackEndpoint, the feedback service's Function URL (feedback-service/).
 // ---------------------------------------------------------------------------
 (function () {
   const section = document.getElementById('feedback');
@@ -451,26 +451,90 @@
   const type = document.getElementById('feedback-type');
   const text = document.getElementById('feedback-text');
   const count = document.getElementById('feedback-count');
+  const email = document.getElementById('feedback-email');
+  const emailError = document.getElementById('feedback-email-error');
+  const honeypot = document.getElementById('feedback-website');
   const submit = document.getElementById('feedback-submit');
   const toast = document.getElementById('toast');
-  let toastTimer;
+  const TIMEOUT_MS = 10000;
+  // The service's own rule, stricter than the browser's: it wants a dot in the domain.
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let toastTimer, sending = false;
+
+  function emailOk() {
+    const v = email.value.trim();
+    return !v || (email.checkValidity() && EMAIL.test(v));
+  }
 
   function update() {
     count.textContent = text.value.length + ' / 1000';
-    submit.disabled = !(type.value && text.value.trim());
+    submit.disabled = sending || !(type.value && text.value.trim() && emailOk());
   }
+
+  // Flag a bad address once the reader leaves the field; clear it as soon as it is fixed.
+  function showEmailError(show) {
+    emailError.hidden = !show;
+    email.classList.toggle('is-invalid', show);
+    email.setAttribute('aria-invalid', show);
+  }
+  email.addEventListener('change', () => showEmailError(!emailOk()));
+  email.addEventListener('input', () => { if (emailOk()) showEmailError(false); update(); });
   type.addEventListener('change', update);
   text.addEventListener('input', update);
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (submit.disabled) return;
-    form.reset();
-    update();
-    toast.textContent = 'Feedback submitted';
+  function showToast(message, isError) {
+    toast.textContent = message;
+    toast.classList.toggle('is-error', !!isError);
     toast.hidden = false;
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { toast.hidden = true; }, 3500);
+    toastTimer = setTimeout(() => { toast.hidden = true; }, isError ? 6000 : 3500);
+  }
+
+  // True only on a 2xx answer; a network failure or timeout has no status at all.
+  async function send(payload) {
+    if (!CONFIG.feedbackEndpoint) { console.warn('Feedback not sent: CONFIG.feedbackEndpoint is empty'); return false; }
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), TIMEOUT_MS);
+    try {
+      const res = await fetch(CONFIG.feedbackEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: abort.signal,
+      });
+      if (!res.ok) console.warn('Feedback not sent: HTTP ' + res.status);
+      return res.ok;
+    } catch (err) {
+      console.warn('Feedback not sent:', err);
+      return false;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (submit.disabled) return;
+    sending = true;
+    submit.textContent = 'Sending…';
+    update();
+    const ok = await send({
+      category: Number(type.value),
+      message: text.value,
+      email: email.value.trim(),
+      website: honeypot.value,
+    });
+    sending = false;
+    submit.textContent = 'Submit';
+    if (ok) {
+      form.reset();
+      showEmailError(false);
+      showToast('Feedback sent successfully');
+    } else {
+      // Keep what they wrote, so trying again costs nothing.
+      showToast('There was a problem sending your feedback, please try again later', true);
+    }
+    update();
   });
   update();
 })();

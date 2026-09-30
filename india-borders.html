@@ -116,7 +116,7 @@
   <div id="refs-list"></div>
 </details>
 <!-- Feedback form: switched by CONFIG.showFeedbackForm in config.js; app.js removes it when off.
-     Submitting does nothing yet beyond the toast. -->
+     Submissions go to CONFIG.feedbackEndpoint (see feedback-service/). -->
 <section class="feedback" id="feedback" aria-labelledby="feedback-title" hidden>
   <h2 id="feedback-title">Send feedback</h2>
   <form id="feedback-form" novalidate>
@@ -124,8 +124,8 @@
       <span>Type of feedback</span>
       <select id="feedback-type" required>
         <option value="">Choose one&hellip;</option>
-        <option value="incorrect">Report incorrect information</option>
-        <option value="general">General feedback</option>
+        <option value="0">Report incorrect information</option>
+        <option value="1">General feedback</option>
       </select>
     </label>
     <label class="field">
@@ -133,6 +133,16 @@
       <textarea id="feedback-text" rows="6" maxlength="1000" required placeholder="Tell us what you found or what you think&hellip;"></textarea>
       <small class="feedback-count" id="feedback-count" aria-live="off">0 / 1000</small>
     </label>
+    <label class="field">
+      <span>Your email address (optional)</span>
+      <input type="email" id="feedback-email" maxlength="254" autocomplete="email" inputmode="email" aria-describedby="feedback-email-note feedback-email-error">
+      <small class="feedback-note" id="feedback-email-note">Only used to reply to you.</small>
+      <small class="feedback-error" id="feedback-email-error" hidden>Enter a valid email address, or leave this blank.</small>
+    </label>
+    <!-- Honeypot: off-screen, so only bots fill it; the service drops what they send. -->
+    <div class="hp" aria-hidden="true">
+      <label>Website <input type="text" id="feedback-website" name="website" tabindex="-1" autocomplete="off"></label>
+    </div>
     <button class="picker-go" type="submit" id="feedback-submit" disabled>Submit</button>
   </form>
 </section>

@@ -1,0 +1,13 @@
+{
+  "name": "india-borders-feedback",
+  "private": true,
+  "description": "Lambdas behind the site's feedback form: store submissions in RDS, email a nightly digest via SNS.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test",
+    "package": "node scripts/package.mjs"
+  },
+  "dependencies": {
+    "pg": "^8.16.0"
+  }
+}
